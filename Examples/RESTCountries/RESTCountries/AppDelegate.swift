@@ -56,11 +56,9 @@ class ZeusConfigurator {
 
     private func setupMapping() {
         let countryMapping = Country.mapping
-        modelManager.map([countryMapping]) {
-            (proxies: [MappingProxy]) in
-            for proxy in proxies {
-                
-            }
+        modelManager.map(countryMapping) {
+            countryMapping in
+            countryMapping == "api/countries"
         }
     }
 }

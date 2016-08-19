@@ -12,7 +12,6 @@ import Alamofire
 
 public typealias QueryParameters = Dictionary<String, String>
 public typealias Done = (Result) -> Void
-public typealias MappingClosure = ([MappingProxy]) -> Void
 
 public protocol Mappable {
     static var mapping: MappingProtocol{get}
@@ -55,7 +54,8 @@ public protocol ModelManagerProtocol {
     static var sharedInstance: ModelManagerProtocol!{get set}
     var managedObjectStore: DataStoreProtocol{get}
     var httpClient: Alamofire.Manager{get}
-    func map(mappings: [MappingProtocol], closure: MappingClosure)
+    func map(a: MappingProtocol, closure: (MappingProxy) -> Void)
+    func map(a: MappingProtocol, _ b: MappingProtocol, closure: (MappingProxy, MappingProxy) -> Void)
     func get(atPath path: String, queryParameters params: QueryParameters?, done: Done?)
     func post(model model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?)
 }
@@ -78,10 +78,25 @@ public class ModelManager: ModelManagerProtocol {
         print("post")
     }
 
-    public func map(mappings: [MappingProtocol], closure: MappingClosure) {
+    public func map(a: MappingProtocol, closure: (MappingProxy) -> Void) {
         let context = MappingContext()
-        closure(mappings.map{ MappingProxy(context: context, mapping: $0) })
+        closure(
+            MappingProxy(context: context, mapping: a)
+        )
     }
+
+    public func map(a: MappingProtocol, _ b: MappingProtocol, closure: (MappingProxy, MappingProxy) -> Void) {
+        let context = MappingContext()
+        closure(
+            MappingProxy(context: context, mapping: a),
+            MappingProxy(context: context, mapping: b)
+        )
+    }
+
+//    public func map(mappings: [MappingProtocol], closure: MappingClosure) {
+//        let context = MappingContext()
+//        closure(mappings.map{ MappingProxy(context: context, mapping: $0) })
+//    }
 
     //MARK: Private Methods
     private func addResponseDescriptors(fromContext context: MappingContext) {
