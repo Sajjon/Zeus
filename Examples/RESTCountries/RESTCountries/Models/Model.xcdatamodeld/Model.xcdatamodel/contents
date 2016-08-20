@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
-    <entity name="Country" representedClassName=".Country" syncable="YES">
-        <attribute name="capital" attributeType="String" syncable="YES"/>
+    <entity name="Character" representedClassName=".Character" syncable="YES">
+        <attribute name="gender" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="house" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="House" inverseName="members" inverseEntity="House" syncable="YES"/>
+        <relationship name="lordOfHouses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="House" inverseName="currentLord" inverseEntity="House" syncable="YES"/>
+    </entity>
+    <entity name="House" representedClassName=".House" syncable="YES">
+        <attribute name="coatOfArms" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="words" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="currentLord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="lordOfHouses" inverseEntity="Character" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="house" inverseEntity="Character" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Country" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Character" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="House" positionX="-63" positionY="0" width="128" height="135"/>
     </elements>
 </model>

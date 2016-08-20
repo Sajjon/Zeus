@@ -25,7 +25,7 @@ extension AppDelegate: UIApplicationDelegate {
     }
 }
 
-private let baseUrl = "https://restcountries.eu/rest/v1"
+private let baseUrl = "http://anapioficeandfire.com/api/"
 let mustOverride = "must override"
 class ZeusConfigurator {
 
@@ -56,21 +56,22 @@ class ZeusConfigurator {
     }
 
     private func setupMapping() {
-        let countryMapping = Country.mapping(store)
-        modelManager.map(countryMapping) {
-            countryMapping in
-            countryMapping == Router.Countries
+        modelManager.map(Character.mapping(store), House.mapping(store)) {
+            character, house in
+            character == Router.Characters
+            house == Router.Houses
         }
     }
 }
 
 
 enum Router: RouterProtocol {
-    case Countries
+    case Characters, Houses
     var method: HTTPMethod {
         let method: HTTPMethod
         switch self {
-        case .Countries:
+        case .Houses: fallthrough
+        case .Characters:
             method = .GET
         }
         return method
@@ -78,8 +79,10 @@ enum Router: RouterProtocol {
     var path: String {
         let path: String
         switch self {
-        case .Countries:
-            path = "countries"
+        case .Characters:
+            path = "characters"
+        case .Houses:
+            path = "houses"
         }
         return path
     }

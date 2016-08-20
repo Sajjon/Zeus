@@ -18,9 +18,11 @@ class ManagedObject: NSManagedObject, Mappable {
     class var attributeMapping: AttributeMappingProtocol { fatalError(mustOverride) }
 }
 
-class Country: ManagedObject {
-    @NSManaged var capital: String
-    @NSManaged var name: String
+class Character: ManagedObject {
+    @NSManaged var name: String?
+    @NSManaged var gender: String?
+    @NSManaged var house: House?
+    @NSManaged var lordOfHouses: NSSet?
 
     override class var idAttributeName: String {
         return "name"
@@ -29,7 +31,7 @@ class Country: ManagedObject {
     override class var attributeMapping: AttributeMappingProtocol {
         return AttributeMapping(mapping: [
             "name": "name",
-            "capital": "capital",
+            "gender": "gender"
         ])
     }
 }
