@@ -11,7 +11,7 @@
 		650124831D6609C3003BFFA6 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650124781D6609C3003BFFA6 /* Zeus.framework */; };
 		650124881D6609C3003BFFA6 /* ZeusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650124871D6609C3003BFFA6 /* ZeusTests.swift */; };
 		65A574771D67394800F4D439 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574761D67394800F4D439 /* ModelManager.swift */; };
-		66F2147A34D8F8AB7738B11F /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5252F0AC8C3D5B0439F5A8 /* Pods_Zeus.framework */; };
+		DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C5ADE56FB1FBA76507096CE /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
 		650124781D6609C3003BFFA6 /* Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6501247B1D6609C3003BFFA6 /* Zeus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zeus.h; sourceTree = "<group>"; };
 		6501247D1D6609C3003BFFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,9 +33,8 @@
 		650124871D6609C3003BFFA6 /* ZeusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeusTests.swift; sourceTree = "<group>"; };
 		650124891D6609C3003BFFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65A574761D67394800F4D439 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
-		7D5252F0AC8C3D5B0439F5A8 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE77F213D7FC5E711C6C9808 /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
-		FD63D4CE6A2A8E6EF640E15F /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
+		CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
+		F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66F2147A34D8F8AB7738B11F /* Pods_Zeus.framework in Frameworks */,
+				DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,14 +57,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E4B098D0AF0D8074268AA78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5DD7EBCC690098854A9B73A5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */,
+				2C5ADE56FB1FBA76507096CE /* Pods-Zeus.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6501246E1D6609C3003BFFA6 = {
 			isa = PBXGroup;
 			children = (
 				6501247A1D6609C3003BFFA6 /* Zeus */,
 				650124861D6609C3003BFFA6 /* ZeusTests */,
 				650124791D6609C3003BFFA6 /* Products */,
-				C406F6E5D0A58E770394E3C1 /* Pods */,
-				D113A0B9C645681DD49FA0E0 /* Frameworks */,
+				5DD7EBCC690098854A9B73A5 /* Pods */,
+				3E4B098D0AF0D8074268AA78 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,23 +113,6 @@
 			path = ZeusTests;
 			sourceTree = "<group>";
 		};
-		C406F6E5D0A58E770394E3C1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FD63D4CE6A2A8E6EF640E15F /* Pods-Zeus.debug.xcconfig */,
-				AE77F213D7FC5E711C6C9808 /* Pods-Zeus.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		D113A0B9C645681DD49FA0E0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7D5252F0AC8C3D5B0439F5A8 /* Pods_Zeus.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -131,12 +131,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6501248C1D6609C3003BFFA6 /* Build configuration list for PBXNativeTarget "Zeus" */;
 			buildPhases = (
-				813C8643EE9A37E3677BCB82 /* Check Pods Manifest.lock */,
+				BB7794808F2C72FF4B900424 /* [CP] Check Pods Manifest.lock */,
 				650124731D6609C3003BFFA6 /* Sources */,
 				650124741D6609C3003BFFA6 /* Frameworks */,
 				650124751D6609C3003BFFA6 /* Headers */,
 				650124761D6609C3003BFFA6 /* Resources */,
-				5F9520D71057DFA83B6E8C7B /* Copy Pods Resources */,
+				84877DAA5AC921334BA9A5F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,14 +219,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5F9520D71057DFA83B6E8C7B /* Copy Pods Resources */ = {
+		84877DAA5AC921334BA9A5F1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,14 +234,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Zeus/Pods-Zeus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		813C8643EE9A37E3677BCB82 /* Check Pods Manifest.lock */ = {
+		BB7794808F2C72FF4B900424 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +372,7 @@
 		};
 		6501248D1D6609C3003BFFA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD63D4CE6A2A8E6EF640E15F /* Pods-Zeus.debug.xcconfig */;
+			baseConfigurationReference = CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -391,7 +391,7 @@
 		};
 		6501248E1D6609C3003BFFA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE77F213D7FC5E711C6C9808 /* Pods-Zeus.release.xcconfig */;
+			baseConfigurationReference = 2C5ADE56FB1FBA76507096CE /* Pods-Zeus.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
