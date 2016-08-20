@@ -26,6 +26,7 @@ extension AppDelegate: UIApplicationDelegate {
 }
 
 private let baseUrl = "https://restcountries.eu/rest/v1"
+let mustOverride = "must override"
 class ZeusConfigurator {
 
     var store: DataStoreProtocol!
@@ -55,10 +56,31 @@ class ZeusConfigurator {
     }
 
     private func setupMapping() {
-        let countryMapping = Country.mapping
+        let countryMapping = Country.mapping(store)
         modelManager.map(countryMapping) {
             countryMapping in
-            countryMapping == "api/countries"
+            countryMapping == Router.Countries
         }
+    }
+}
+
+
+enum Router: RouterProtocol {
+    case Countries
+    var method: HTTPMethod {
+        let method: HTTPMethod
+        switch self {
+        case .Countries:
+            method = .GET
+        }
+        return method
+    }
+    var path: String {
+        let path: String
+        switch self {
+        case .Countries:
+            path = "countries"
+        }
+        return path
     }
 }

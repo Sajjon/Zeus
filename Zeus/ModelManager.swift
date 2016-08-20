@@ -11,19 +11,16 @@ import CoreData
 import Alamofire
 
 public typealias QueryParameters = Dictionary<String, String>
+public typealias JSONMapping = Dictionary<String, String>
 public typealias Done = (Result) -> Void
-
-public protocol Mappable {
-    static var mapping: MappingProtocol{get}
-}
 
 public struct MappingProxy {
     var context: MappingContext
     let mapping: MappingProtocol
 }
 
-public func ==(lhs: MappingProxy, rhs: String) -> ResponseDescriptorProtocol {
-    let descriptor = ResponseDescriptor(mapping: lhs.mapping, path: rhs)
+public func ==(lhs: MappingProxy, rhs: RouterProtocol) -> ResponseDescriptorProtocol {
+    let descriptor = ResponseDescriptor(mapping: lhs.mapping, route: rhs)
     lhs.context.add(responseDescriptor: descriptor)
     return descriptor
 }
@@ -152,47 +149,72 @@ public enum HTTPMethod {
     case ANY, GET, POST
 }
 
-public protocol ResponseDescriptorProtocol {
-    var mapping: MappingProtocol{get}
+public protocol RouterProtocol {
     var method: HTTPMethod{get}
     var path: String{get}
+}
+
+public protocol ResponseDescriptorProtocol {
+    var mapping: MappingProtocol{get}
+    var route: RouterProtocol{get}
 }
 
 public struct ResponseDescriptor: ResponseDescriptorProtocol {
 
     public let mapping: MappingProtocol
-    public let method: HTTPMethod
-    public let path: String
+    public let route: RouterProtocol
 
-    init(mapping: MappingProtocol, method: HTTPMethod = .ANY, path: String) {
+    public init(mapping: MappingProtocol, route: RouterProtocol) {
         self.mapping = mapping
-        self.method = method
-        self.path = path
+        self.route = route
     }
 }
 
 public protocol MappingProtocol {
+    var managedObjectContext: NSManagedObjectContext{get}
     var entity: NSManagedObject.Type{get}
+    var idAttributeName: String{get}
     var attributeMapping: AttributeMappingProtocol{get}
 }
 
 public struct Mapping: MappingProtocol {
+    public let managedObjectContext: NSManagedObjectContext
     public let entity: NSManagedObject.Type
+    public let idAttributeName: String
     public let attributeMapping: AttributeMappingProtocol
 
-    init(entity: NSManagedObject.Type, attributeMapping: AttributeMappingProtocol) {
+    public init(managedObjectContext: NSManagedObjectContext, entity: NSManagedObject.Type, idAttributeName: String, attributeMapping: AttributeMappingProtocol) {
+        self.managedObjectContext = managedObjectContext
         self.entity = entity
+        self.idAttributeName = idAttributeName
         self.attributeMapping = attributeMapping
     }
-
 }
 
 public protocol AttributeMappingProtocol {
-
+    var mapping: JSONMapping{get}
 }
 
 public struct AttributeMapping: AttributeMappingProtocol {
+    public let mapping: JSONMapping
+    public init(mapping: JSONMapping) {
+        self.mapping = mapping
+    }
+}
 
+public protocol Mappable {
+    static var entity: NSManagedObject.Type{get}
+    static var idAttributeName: String{get}
+    static var attributeMapping: AttributeMappingProtocol{get}
+    static func mapping(store: DataStoreProtocol) -> MappingProtocol
+}
+
+public extension Mappable {
+    static func mapping(store: DataStoreProtocol) -> MappingProtocol {
+        let moc = store.persistentStoreManagedObjectContext
+        let mapping = Mapping(managedObjectContext: moc, entity: entity, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
+        return mapping
+    }
 }
 
 public var documentsFolder: NSURL? {

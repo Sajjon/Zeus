@@ -14,7 +14,6 @@
 		65A5748F1D6742BD00F4D439 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A5748D1D6742BD00F4D439 /* LaunchScreen.storyboard */; };
 		65A574AD1D67678D00F4D439 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65A574AB1D67678D00F4D439 /* Model.xcdatamodeld */; };
 		65A574B01D6767BC00F4D439 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574AE1D6767BC00F4D439 /* Country.swift */; };
-		65A574B11D6767BC00F4D439 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574AF1D6767BC00F4D439 /* Country+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		65A574901D6742BD00F4D439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65A574AC1D67678D00F4D439 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		65A574AE1D6767BC00F4D439 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		65A574AF1D6767BC00F4D439 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				65A574AE1D6767BC00F4D439 /* Country.swift */,
-				65A574AF1D6767BC00F4D439 /* Country+CoreDataProperties.swift */,
 				65A574AB1D67678D00F4D439 /* Model.xcdatamodeld */,
 			);
 			path = Models;
@@ -152,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65A574B11D6767BC00F4D439 /* Country+CoreDataProperties.swift in Sources */,
 				65A574B01D6767BC00F4D439 /* Country.swift in Sources */,
 				65A574871D6742BD00F4D439 /* ViewController.swift in Sources */,
 				65A574851D6742BD00F4D439 /* AppDelegate.swift in Sources */,

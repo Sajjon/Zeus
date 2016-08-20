@@ -10,14 +10,26 @@ import Foundation
 import CoreData
 import Zeus
 
-class Country: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+class ManagedObject: NSManagedObject, Mappable {
+    class var entity: NSManagedObject.Type {
+        return self
+    }
+    class var idAttributeName: String { fatalError(mustOverride) }
+    class var attributeMapping: AttributeMappingProtocol { fatalError(mustOverride) }
 }
 
-extension Country: Mappable {
-    class var mapping: MappingProtocol {
-        fatalError()
+class Country: ManagedObject {
+    @NSManaged var capital: String
+    @NSManaged var name: String
+
+    override class var idAttributeName: String {
+        return "name"
+    }
+
+    override class var attributeMapping: AttributeMappingProtocol {
+        return AttributeMapping(mapping: [
+            "name": "name",
+            "capital": "capital",
+        ])
     }
 }
