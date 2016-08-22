@@ -10,6 +10,18 @@
 		6501247C1D6609C3003BFFA6 /* Zeus.h in Headers */ = {isa = PBXBuildFile; fileRef = 6501247B1D6609C3003BFFA6 /* Zeus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		650124831D6609C3003BFFA6 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650124781D6609C3003BFFA6 /* Zeus.framework */; };
 		650124881D6609C3003BFFA6 /* ZeusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650124871D6609C3003BFFA6 /* ZeusTests.swift */; };
+		65195B431D6B268500813E59 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B421D6B268500813E59 /* DataStore.swift */; };
+		65195B451D6B26A200813E59 /* ResponseDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B441D6B26A200813E59 /* ResponseDescriptor.swift */; };
+		65195B481D6B26CF00813E59 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B471D6B26CF00813E59 /* Mapping.swift */; };
+		65195B4A1D6B270800813E59 /* ModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B491D6B270800813E59 /* ModelMapper.swift */; };
+		65195B4D1D6B273500813E59 /* NSObject_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B4C1D6B273500813E59 /* NSObject_Extension.swift */; };
+		65195B4F1D6B275900813E59 /* MappingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B4E1D6B275900813E59 /* MappingContext.swift */; };
+		65195B521D6B27A200813E59 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B511D6B27A200813E59 /* Result.swift */; };
+		65195B541D6B27CB00813E59 /* AttributeMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B531D6B27CB00813E59 /* AttributeMapping.swift */; };
+		65195B571D6B27EC00813E59 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B561D6B27EC00813E59 /* Error.swift */; };
+		65195B591D6B282500813E59 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B581D6B282500813E59 /* Macros.swift */; };
+		65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B5A1D6B284300813E59 /* HTTPMethod.swift */; };
+		65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B5C1D6B28C100813E59 /* MappingProxy.swift */; };
 		65A574771D67394800F4D439 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574761D67394800F4D439 /* ModelManager.swift */; };
 		DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */; };
 /* End PBXBuildFile section */
@@ -32,6 +44,18 @@
 		650124821D6609C3003BFFA6 /* ZeusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZeusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		650124871D6609C3003BFFA6 /* ZeusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeusTests.swift; sourceTree = "<group>"; };
 		650124891D6609C3003BFFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65195B421D6B268500813E59 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		65195B441D6B26A200813E59 /* ResponseDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDescriptor.swift; sourceTree = "<group>"; };
+		65195B471D6B26CF00813E59 /* Mapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mapping.swift; sourceTree = "<group>"; };
+		65195B491D6B270800813E59 /* ModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMapper.swift; sourceTree = "<group>"; };
+		65195B4C1D6B273500813E59 /* NSObject_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject_Extension.swift; sourceTree = "<group>"; };
+		65195B4E1D6B275900813E59 /* MappingContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingContext.swift; sourceTree = "<group>"; };
+		65195B511D6B27A200813E59 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		65195B531D6B27CB00813E59 /* AttributeMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeMapping.swift; sourceTree = "<group>"; };
+		65195B561D6B27EC00813E59 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		65195B581D6B282500813E59 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		65195B5A1D6B284300813E59 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		65195B5C1D6B28C100813E59 /* MappingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingProxy.swift; sourceTree = "<group>"; };
 		65A574761D67394800F4D439 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,9 +121,16 @@
 		6501247A1D6609C3003BFFA6 /* Zeus */ = {
 			isa = PBXGroup;
 			children = (
-				6501247B1D6609C3003BFFA6 /* Zeus.h */,
+				65195B421D6B268500813E59 /* DataStore.swift */,
+				65195B551D6B27E100813E59 /* Enums */,
+				65195B4B1D6B272B00813E59 /* Extensions */,
 				6501247D1D6609C3003BFFA6 /* Info.plist */,
+				65195B461D6B26C600813E59 /* Mapping */,
 				65A574761D67394800F4D439 /* ModelManager.swift */,
+				65195B501D6B279B00813E59 /* Models */,
+				65195B441D6B26A200813E59 /* ResponseDescriptor.swift */,
+				6501247B1D6609C3003BFFA6 /* Zeus.h */,
+				65195B581D6B282500813E59 /* Macros.swift */,
 			);
 			path = Zeus;
 			sourceTree = "<group>";
@@ -111,6 +142,43 @@
 				650124891D6609C3003BFFA6 /* Info.plist */,
 			);
 			path = ZeusTests;
+			sourceTree = "<group>";
+		};
+		65195B461D6B26C600813E59 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				65195B531D6B27CB00813E59 /* AttributeMapping.swift */,
+				65195B471D6B26CF00813E59 /* Mapping.swift */,
+				65195B4E1D6B275900813E59 /* MappingContext.swift */,
+				65195B491D6B270800813E59 /* ModelMapper.swift */,
+			);
+			path = Mapping;
+			sourceTree = "<group>";
+		};
+		65195B4B1D6B272B00813E59 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				65195B4C1D6B273500813E59 /* NSObject_Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		65195B501D6B279B00813E59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65195B511D6B27A200813E59 /* Result.swift */,
+				65195B5C1D6B28C100813E59 /* MappingProxy.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		65195B551D6B27E100813E59 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				65195B561D6B27EC00813E59 /* Error.swift */,
+				65195B5A1D6B284300813E59 /* HTTPMethod.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +324,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65195B4A1D6B270800813E59 /* ModelMapper.swift in Sources */,
+				65195B481D6B26CF00813E59 /* Mapping.swift in Sources */,
+				65195B451D6B26A200813E59 /* ResponseDescriptor.swift in Sources */,
+				65195B4D1D6B273500813E59 /* NSObject_Extension.swift in Sources */,
 				65A574771D67394800F4D439 /* ModelManager.swift in Sources */,
+				65195B591D6B282500813E59 /* Macros.swift in Sources */,
+				65195B431D6B268500813E59 /* DataStore.swift in Sources */,
+				65195B521D6B27A200813E59 /* Result.swift in Sources */,
+				65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */,
+				65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */,
+				65195B541D6B27CB00813E59 /* AttributeMapping.swift in Sources */,
+				65195B571D6B27EC00813E59 /* Error.swift in Sources */,
+				65195B4F1D6B275900813E59 /* MappingContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

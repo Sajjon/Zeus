@@ -38,15 +38,16 @@ class ZeusConfigurator {
 
     private func setup() {
         setupCoreDataStack()
+        setupMapping()
     }
 
     private func setupCoreDataStack() {
         let model = NSManagedObjectModel.mergedModelFromBundles(nil)!
         store = DataStore(managedObjectModel: model)
-        guard let documentsFolder = documentsFolderPath else { return }
-        let path = documentsFolder + "Store.sqlite"
+        guard let documentsFolderUrl = documentsFolder else { return }
+        let storeUrl = documentsFolderUrl.URLByAppendingPathComponent("Store.sqlite")
         do {
-            try store.addPersistentStore(atPath: path)
+            try store.addPersistentStore(withUrl: storeUrl)
             DataStore.sharedInstance = store
             modelManager = ModelManager(baseUrl: baseUrl, store: store)
             ModelManager.sharedInstance = modelManager
@@ -61,6 +62,42 @@ class ZeusConfigurator {
             character == Router.Characters
             house == Router.Houses
         }
+    }
+}
+
+protocol APIClientProtocol {
+    func getHouses(queryParams queryParams: QueryParameters?, done: Done?)
+}
+
+class APIClient: APIClientProtocol {
+    static let sharedInstance: APIClientProtocol = APIClient()
+
+    private let httpClient: HTTPClientProtocol
+
+    init() {
+        self.httpClient = HTTPClient.sharedInstance
+    }
+
+    func getHouses(queryParams queryParams: QueryParameters?, done: Done?) {
+        httpClient.get(atPath: .Houses, queryParams: queryParams, done: done)
+    }
+}
+
+protocol HTTPClientProtocol {
+    func get(atPath path: Router, queryParams: QueryParameters?, done: Done?)
+}
+
+class HTTPClient: HTTPClientProtocol {
+    static let sharedInstance: HTTPClientProtocol = HTTPClient()
+
+    private let modelManager: ModelManagerProtocol
+
+    init() {
+        self.modelManager = ModelManager.sharedInstance
+    }
+
+    func get(atPath path: Router, queryParams: QueryParameters?, done: Done?) {
+        modelManager.get(atPath: path.path, queryParameters: queryParams, done: done)
     }
 }
 

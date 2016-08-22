@@ -7,19 +7,32 @@
 //
 
 import UIKit
+import Zeus
 
 class ViewController: UIViewController {
 
+    private lazy var apiClient: APIClientProtocol = {
+        let apiClient = APIClient.sharedInstance
+        return apiClient
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        fetchData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+private extension ViewController {
+    private func fetchData() {
+        apiClient.getHouses(queryParams: nil) {
+            result in
+            if let error = result.error {
+                print("Error fetching houses, error: \(error)")
+            } else if let houses = result.data as? [House] {
+                print("successfully fetched #\(houses.count) houses")
+            }
+        }
     }
-
-
 }
 
