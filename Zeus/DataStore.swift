@@ -25,10 +25,16 @@ public class DataStore: DataStoreProtocol {
     public private(set) var mainThreadManagedObjectContext: NSManagedObjectContext!
     public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 
+    public convenience init() {
+        let model = NSManagedObjectModel.mergedModelFromBundles(nil)!
+        self.init(managedObjectModel: model)
+    }
+
     public init(managedObjectModel model: NSManagedObjectModel) {
         self.managedObjectModel = model
         self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         createManagedObjectContext()
+        guard tryAddPersistentStore() else { fatalError("Failed to add persistent store") }
     }
 
     public func addPersistentStore(withUrl storeUrl: NSURL) throws -> NSPersistentStore {
@@ -41,8 +47,27 @@ public class DataStore: DataStoreProtocol {
         }
         return store
     }
+}
 
-    //MARK: Private Methods
+public var defaultStoreURL: NSURL? {
+    guard let documentsFolderUrl = documentsFolder else { return nil }
+    let storeUrl = documentsFolderUrl.URLByAppendingPathComponent("Store.sqlite")
+    return storeUrl
+}
+
+//MARK: Private Methods
+private extension DataStore {
+    private func tryAddPersistentStore() -> Bool {
+        guard let storeUrl = defaultStoreURL else { return false }
+        do {
+            print("Adding SQLite database at: \(storeUrl.absoluteString)")
+           try addPersistentStore(withUrl: storeUrl)
+        } catch {
+            print("Failed to add persistent store: \(error)")
+        }
+        return true
+    }
+
     private func createManagedObjectContext() {
         persistentStoreManagedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         persistentStoreManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator

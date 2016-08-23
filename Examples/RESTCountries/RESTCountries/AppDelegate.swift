@@ -42,19 +42,11 @@ class ZeusConfigurator {
     }
 
     private func setupCoreDataStack() {
-        let model = NSManagedObjectModel.mergedModelFromBundles(nil)!
-        store = DataStore(managedObjectModel: model)
-        guard let documentsFolderUrl = documentsFolder else { return }
-        let storeUrl = documentsFolderUrl.URLByAppendingPathComponent("Store.sqlite")
-        do {
-            try store.addPersistentStore(withUrl: storeUrl)
-            print("Adding SQLite database at: \(storeUrl.absoluteString)")
-            DataStore.sharedInstance = store
-            modelManager = ModelManager(baseUrl: baseUrl, store: store)
-            ModelManager.sharedInstance = modelManager
-        } catch {
-            print("Failed to add persistent store: \(error)")
-        }
+        store = DataStore()
+        modelManager = ModelManager(baseUrl: baseUrl, store: store)
+
+        DataStore.sharedInstance = store
+        ModelManager.sharedInstance = modelManager
     }
 
     private func setupMapping() {
