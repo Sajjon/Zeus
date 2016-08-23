@@ -48,6 +48,7 @@ class ZeusConfigurator {
         let storeUrl = documentsFolderUrl.URLByAppendingPathComponent("Store.sqlite")
         do {
             try store.addPersistentStore(withUrl: storeUrl)
+            print("Adding SQLite database at: \(storeUrl.absoluteString)")
             DataStore.sharedInstance = store
             modelManager = ModelManager(baseUrl: baseUrl, store: store)
             ModelManager.sharedInstance = modelManager

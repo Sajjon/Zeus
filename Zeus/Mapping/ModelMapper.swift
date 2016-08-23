@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-typealias JSON = [String: AnyObject]
+typealias JSON = [String: NSObject]
 typealias MappedJSON = JSON
 
 internal protocol ModelMapperProtocol {
@@ -68,6 +68,7 @@ private extension ModelMapper {
     }
 
     private func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSManagedObject? {
+        let moc = mapping.managedObjectContext
         let mappedJson = map(json: json, withMapping: mapping)
         /* Try to find an existing istance and update it using identity attribute */
         let model: NSManagedObject
@@ -75,9 +76,10 @@ private extension ModelMapper {
             print("Found existing model")
             model = existing
         } else {
-            model = NSManagedObject(entity: mapping.entity, insertIntoManagedObjectContext: mapping.managedObjectContext)
+            model = NSManagedObject(entity: mapping.entityDescription, insertIntoManagedObjectContext: moc)
         }
         model.update(withJson: mappedJson)
+        moc.saveToPersistentStore()
         return model
     }
 
@@ -100,7 +102,22 @@ private extension ModelMapper {
     }
 
     private func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSManagedObject? {
-        return nil
+        let idAttributeName = mapping.idAttributeName
+        guard let idAttributeValue = json[idAttributeName] else { return nil }
+        let fetchRequest = NSFetchRequest(entityName: mapping.entityName)
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", idAttributeName, idAttributeValue)
+
+        var existingModel: NSManagedObject?
+        do {
+            guard let objects = try mapping.managedObjectContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] else { return nil }
+            guard objects.count > 0 else { return nil }
+            guard objects.count == 1 else { fatalError("Found multiple objects for identification attribute, this should not happen") }
+            existingModel = objects.first
+        } catch let error {
+            print("Could not fetch existing objects, error: \(error)")
+        }
+
+        return existingModel
     }
 
     private func responseDescriptor(forPath path: String) -> ResponseDescriptorProtocol? {
@@ -110,7 +127,43 @@ private extension ModelMapper {
 }
 
 private extension NSManagedObject {
-    func update(withJson json: MappedJSON) {
+    private func update(withJson json: MappedJSON) {
         setValuesForKeysWithDictionary(json)
     }
 }
+
+public extension NSManagedObjectContext {
+    public func saveToPersistentStore() -> Bool {
+
+        var moc: NSManagedObjectContext! = self
+
+        while moc != nil {
+            performBlockAndWait() {
+                let newlyInsertedObjects = Array(moc.insertedObjects)
+                do {
+                    try moc.obtainPermanentIDsForObjects(newlyInsertedObjects)
+                } catch let error {
+                    print("Failed to obtain permanent ids for objects, error: \(error)")
+                }
+            }
+
+            performBlockAndWait() {
+                do {
+                    try moc.save()
+                } catch let error {
+                    print("Failed to save objects, error: \(error)")
+                }
+            }
+
+            guard moc.parentContext != nil || moc.persistentStoreCoordinator != nil else {
+                print("Called saveToPersistentStore on managedObjectContext that has no parentContext or persistentStoreCoordinator, objects are therefore not persisted")
+                return false
+            }
+
+            moc = moc.parentContext
+        }
+
+        return true
+    }
+}
+

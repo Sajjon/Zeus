@@ -11,14 +11,23 @@ import CoreData
 
 public protocol MappingProtocol {
     var managedObjectContext: NSManagedObjectContext{get}
-    var entity: NSEntityDescription{get}
+    var entityName: String {get}
     var idAttributeName: String{get}
     var attributeMapping: AttributeMappingProtocol{get}
 }
 
+public extension MappingProtocol {
+    var entityDescription: NSEntityDescription {
+        guard let entityDescription: NSEntityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext) else {
+            fatalError("There is no Entity with name \(entityName) in the managed object model")
+        }
+        return entityDescription
+    }
+}
+
 public struct Mapping: MappingProtocol {
     public let managedObjectContext: NSManagedObjectContext
-    public let entity: NSEntityDescription
+    public let entityName: String
     public let idAttributeName: String
     public let attributeMapping: AttributeMappingProtocol
 
@@ -28,19 +37,7 @@ public struct Mapping: MappingProtocol {
         idAttributeName: String,
         attributeMapping: AttributeMappingProtocol
         ) {
-        guard let entityDescription: NSEntityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext) else {
-            fatalError("There is no Entity with name \(entityName) in the managed object model")
-        }
-        self.init(entity: entityDescription, managedObjectContext: managedObjectContext, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
-    }
-
-    public init(
-        entity: NSEntityDescription,
-        managedObjectContext: NSManagedObjectContext,
-        idAttributeName: String,
-        attributeMapping: AttributeMappingProtocol
-        ) {
-        self.entity = entity
+        self.entityName = entityName
         self.managedObjectContext = managedObjectContext
         self.idAttributeName = idAttributeName
         self.attributeMapping = attributeMapping
