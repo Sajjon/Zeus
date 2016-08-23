@@ -18,40 +18,6 @@ public protocol MappingProtocol {
     func add(transformer transformer: TransformerProtocol)
 }
 
-
-public protocol TransformerProtocol {
-    var transformation: (NSObject?) -> NSObject? {get}
-    var key: String {get}
-}
-
-internal extension TransformerProtocol {
-    func transform(value value: NSObject) -> NSObject? {
-        if let array = value as? [NSObject] {
-            return transform(array: array)
-        }
-        let transformed = transformation(value)
-        return transformed
-    }
-
-    func transform(array arrayToTranform: [NSObject]) -> NSArray? {
-        var transformedArray: [NSObject] = []
-        for value in arrayToTranform {
-            guard let transformed = transformation(value) else { continue }
-            transformedArray.append(transformed)
-        }
-        return transformedArray
-    }
-}
-
-public class Transformer: TransformerProtocol {
-    public let transformation: (NSObject?) -> NSObject?
-    public let key: String
-    public init(key: String, transformation: (NSObject?) -> NSObject?) {
-        self.key = key
-        self.transformation = transformation
-    }
-}
-
 public extension MappingProtocol {
     var entityDescription: NSEntityDescription {
         guard let entityDescription: NSEntityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext) else {
