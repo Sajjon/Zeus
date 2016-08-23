@@ -1,11 +1,10 @@
 //
 //  ViewController.swift
-//  RESTCountries
+//  ApiOfIceAndFire
 //
-//  Created by Cyon Alexander (Ext. Netlight) on 19/08/16.
+//  Created by Alexander Georgii-Hemming Cyon on 20/08/16.
 //  Copyright © 2016 com.cyon. All rights reserved.
 //
-
 import UIKit
 import Zeus
 

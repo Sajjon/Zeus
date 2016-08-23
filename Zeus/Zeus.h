@@ -2,7 +2,7 @@
 //  Zeus.h
 //  Zeus
 //
-//  Created by Cyon Alexander (Ext. Netlight) on 18/08/16.
+//  Created by Cyon Alexander on 18/08/16.
 //  Copyright © 2016 com.cyon. All rights reserved.
 //
 
