@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-typealias JSON = [String: NSObject]
+typealias JSON = Dictionary<String, NSObject>
 typealias MappedJSON = JSON
 
 internal protocol ModelMapperProtocol {
