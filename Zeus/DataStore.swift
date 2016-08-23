@@ -8,9 +8,11 @@
 
 import Foundation
 import CoreData
+import SwiftyBeaver
 
 public protocol DataStoreProtocol {
     static var sharedInstance: DataStoreProtocol!{get set}
+    var logLevel: SwiftyBeaver.Level {get set}
     var managedObjectModel: NSManagedObjectModel{get}
     var persistentStoreManagedObjectContext: NSManagedObjectContext!{get}
     var mainThreadManagedObjectContext: NSManagedObjectContext!{get}
@@ -20,10 +22,25 @@ public protocol DataStoreProtocol {
 
 public class DataStore: DataStoreProtocol {
     public static var sharedInstance: DataStoreProtocol!
+
+
+    public var logLevel: SwiftyBeaver.Level {
+        set {
+            log.removeDestination(console)
+            console = consoleLogging(withLogLevel: newValue)
+            log.addDestination(console)
+        }
+        get {
+            return console.minLevel
+        }
+    }
+
     public private(set) var managedObjectModel: NSManagedObjectModel
     public private(set) var persistentStoreManagedObjectContext: NSManagedObjectContext!
     public private(set) var mainThreadManagedObjectContext: NSManagedObjectContext!
     public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
+
+    private var console: ConsoleDestination /* Logging by SwiftyBeaver */
 
     public convenience init() {
         let model = NSManagedObjectModel.mergedModelFromBundles(nil)!
@@ -33,8 +50,13 @@ public class DataStore: DataStoreProtocol {
     public init(managedObjectModel model: NSManagedObjectModel) {
         self.managedObjectModel = model
         self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+
+        console = consoleLogging(withLogLevel: .Warning)
+        log.addDestination(console)
+        log.addDestination(onlineLogging())
+
         createManagedObjectContext()
-        guard tryAddPersistentStore() else { fatalError("Failed to add persistent store") }
+        guard tryAddPersistentStore() else { let err = "Failed to add persistent store"; log.error(err); fatalError(err) }
     }
 
     public func addPersistentStore(withUrl storeUrl: NSURL) throws -> NSPersistentStore {
@@ -42,7 +64,7 @@ public class DataStore: DataStoreProtocol {
         do {
             try store = persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeUrl, options: nil)
         } catch let error {
-            print("Failed to add SQLite store, error: \(error)")
+            log.error("Failed to add SQLite store, error: \(error)")
             throw Error.AddingSQLiteStore
         }
         return store
@@ -60,11 +82,11 @@ private extension DataStore {
     private func tryAddPersistentStore() -> Bool {
         guard let storeUrl = defaultStoreURL else { return false }
         do {
-            print("Adding SQLite database at: \(storeUrl.absoluteString)")
            try addPersistentStore(withUrl: storeUrl)
         } catch {
-            print("Failed to add persistent store: \(error)")
+            log.error("Failed to add persistent store: \(error)")
         }
+        log.error("Added SQLite database at: \(storeUrl.absoluteString)")
         return true
     }
 

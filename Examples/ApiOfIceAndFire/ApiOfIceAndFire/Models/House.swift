@@ -18,6 +18,8 @@ class House: ManagedObject {
     @NSManaged var members: NSSet?
     @NSManaged var currentLord: Character?
 
+    @NSManaged var memberIds: [String]?
+
     override class var idAttributeName: String {
         return "name"
     }
@@ -27,7 +29,16 @@ class House: ManagedObject {
             "name": "name",
             "words": "words",
             "region": "region",
-            "coatOfArms": "coatOfArms"
-            ])
+            "coatOfArms": "coatOfArms",
+            "swornMembers" : "memberIds"
+        ])
     }
+
+//    override class var transformers: [TransformerProtocol]? {
+//        let memberIdTransformer = Transformer() {
+//            (from url: NSURL) in
+//
+//            url.lastPathComponent
+//        }
+//    }
 }

@@ -10,14 +10,6 @@ import Foundation
 import CoreData
 import Zeus
 
-class ManagedObject: NSManagedObject, Mappable {
-    class var entity: NSManagedObject.Type {
-        return self
-    }
-    class var idAttributeName: String { fatalError(mustOverride) }
-    class var attributeMapping: AttributeMappingProtocol { fatalError(mustOverride) }
-}
-
 class Character: ManagedObject {
     @NSManaged var name: String?
     @NSManaged var gender: String?

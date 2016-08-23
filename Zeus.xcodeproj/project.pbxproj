@@ -23,6 +23,7 @@
 		65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B5A1D6B284300813E59 /* HTTPMethod.swift */; };
 		65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B5C1D6B28C100813E59 /* MappingProxy.swift */; };
 		65A574771D67394800F4D439 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574761D67394800F4D439 /* ModelManager.swift */; };
+		65B9FAB01D6C765C008F9B99 /* Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAAF1D6C765C008F9B99 /* Zeus.swift */; };
 		DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		65195B5A1D6B284300813E59 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		65195B5C1D6B28C100813E59 /* MappingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingProxy.swift; sourceTree = "<group>"; };
 		65A574761D67394800F4D439 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		65B9FAAF1D6C765C008F9B99 /* Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zeus.swift; sourceTree = "<group>"; };
 		CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 				65195B441D6B26A200813E59 /* ResponseDescriptor.swift */,
 				6501247B1D6609C3003BFFA6 /* Zeus.h */,
 				65195B581D6B282500813E59 /* Macros.swift */,
+				65B9FAAF1D6C765C008F9B99 /* Zeus.swift */,
 			);
 			path = Zeus;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B9FAB01D6C765C008F9B99 /* Zeus.swift in Sources */,
 				65195B4A1D6B270800813E59 /* ModelMapper.swift in Sources */,
 				65195B481D6B26CF00813E59 /* Mapping.swift in Sources */,
 				65195B451D6B26A200813E59 /* ResponseDescriptor.swift in Sources */,

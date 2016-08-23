@@ -9,10 +9,7 @@
 import Foundation
 import CoreData
 import Alamofire
-
-public typealias QueryParameters = Dictionary<String, String>
-public typealias JSONMapping = Dictionary<String, String>
-public typealias Done = (Result) -> Void
+import SwiftyBeaver
 
 public protocol ModelManagerProtocol {
     static var sharedInstance: ModelManagerProtocol!{get set}
@@ -28,6 +25,7 @@ public protocol ModelManagerProtocol {
 }
 
 public class ModelManager: ModelManagerProtocol {
+
     public static var sharedInstance: ModelManagerProtocol!
     public let managedObjectStore: DataStoreProtocol
     public let httpClient: Alamofire.Manager
@@ -53,13 +51,13 @@ public class ModelManager: ModelManagerProtocol {
     }
 
     public func post(model model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?) {
-        print("post")
+        log.error("post")
     }
 
     public func map(
         a: MappingProtocol,
         closure: (MappingProxy) -> Void
-    ) {
+        ) {
         let context = MappingContext()
         closure(
             MappingProxy(context: context, mapping: a)
@@ -71,7 +69,7 @@ public class ModelManager: ModelManagerProtocol {
         a: MappingProtocol,
         _ b: MappingProtocol,
           closure: (MappingProxy, MappingProxy) -> Void
-    ) {
+        ) {
         let context = MappingContext()
         closure(
             MappingProxy(context: context, mapping: a),
@@ -135,7 +133,6 @@ public class ModelManager: ModelManagerProtocol {
 
 //MARK: Private Methods
 private extension ModelManager {
-
     private func fullPath(withPath path: String) -> String {
         let fullPath = baseUrl + path
         return fullPath
@@ -156,7 +153,7 @@ private extension ModelManager {
                 done?(Result(.ParsingJSON))
             }
         case .Failure(let error):
-            print("failed, error: \(error)")
+            log.error("failed, error: \(error)")
             done?(Result(.ParsingJSON))
         }
     }

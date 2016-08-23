@@ -9,9 +9,6 @@
 import Foundation
 import CoreData
 
-typealias JSON = Dictionary<String, NSObject>
-typealias MappedJSON = JSON
-
 internal protocol ModelMapperProtocol {
     func mapping(withJson json: JSON, fromPath path: String) -> Result
     func mapping(withJsonArray jsonArray: [JSON], fromPath path: String) -> Result
@@ -73,7 +70,7 @@ private extension ModelMapper {
         /* Try to find an existing istance and update it using identity attribute */
         let model: NSManagedObject
         if let existing = existingModel(fromJson: mappedJson, withMapping: mapping) {
-            print("Found existing model")
+            log.verbose("Found existing model")
             model = existing
         } else {
             model = NSManagedObject(entity: mapping.entityDescription, insertIntoManagedObjectContext: moc)
@@ -111,10 +108,10 @@ private extension ModelMapper {
         do {
             guard let objects = try mapping.managedObjectContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] else { return nil }
             guard objects.count > 0 else { return nil }
-            guard objects.count == 1 else { fatalError("Found multiple objects for identification attribute, this should not happen") }
+            guard objects.count == 1 else { let msg = "Found multiple objects for identification attribute, this should not happen"; log.warning(msg); fatalError(msg) }
             existingModel = objects.first
         } catch let error {
-            print("Could not fetch existing objects, error: \(error)")
+            log.error("Could not fetch existing objects, error: \(error)")
         }
 
         return existingModel
@@ -143,7 +140,7 @@ public extension NSManagedObjectContext {
                 do {
                     try moc.obtainPermanentIDsForObjects(newlyInsertedObjects)
                 } catch let error {
-                    print("Failed to obtain permanent ids for objects, error: \(error)")
+                    log.error("Failed to obtain permanent ids for objects, error: \(error)")
                 }
             }
 
@@ -151,12 +148,12 @@ public extension NSManagedObjectContext {
                 do {
                     try moc.save()
                 } catch let error {
-                    print("Failed to save objects, error: \(error)")
+                    log.error("Failed to save objects, error: \(error)")
                 }
             }
 
             guard moc.parentContext != nil || moc.persistentStoreCoordinator != nil else {
-                print("Called saveToPersistentStore on managedObjectContext that has no parentContext or persistentStoreCoordinator, objects are therefore not persisted")
+                log.error("Called saveToPersistentStore on managedObjectContext that has no parentContext or persistentStoreCoordinator, objects are therefore not persisted")
                 return false
             }
 

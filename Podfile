@@ -4,5 +4,6 @@ use_frameworks!
 
 target 'Zeus' do
     pod 'Alamofire', '~> 3.4'
+    pod 'SwiftyBeaver'
 end
 
