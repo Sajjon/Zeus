@@ -34,11 +34,17 @@ class House: ManagedObject {
         ])
     }
 
-//    override class var transformers: [TransformerProtocol]? {
-//        let memberIdTransformer = Transformer() {
-//            (from url: NSURL) in
-//
-//            url.lastPathComponent
-//        }
-//    }
+    override class var transformers: [TransformerProtocol]? {
+        let memberIdTransformer = Transformer(key: "swornMembers") {
+            (obj: NSObject?) -> NSObject? in
+
+            guard let urlString = obj as? NSString,
+                url = NSURL(string: urlString as String)
+                else { return obj}
+
+            let memberId = url.lastPathComponent
+            return memberId
+        }
+        return [memberIdTransformer]
+    }
 }

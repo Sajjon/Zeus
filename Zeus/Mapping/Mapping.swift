@@ -14,16 +14,42 @@ public protocol MappingProtocol {
     var entityName: String {get}
     var idAttributeName: String{get}
     var attributeMapping: AttributeMappingProtocol{get}
-    var transformers: [TransformerProtocol]? {get}
+    var transformers: Dictionary<String, TransformerProtocol>? {get}
     func add(transformer transformer: TransformerProtocol)
 }
 
-public protocol TransformerProtocol {
 
+public protocol TransformerProtocol {
+    var transformation: (NSObject?) -> NSObject? {get}
+    var key: String {get}
+}
+
+internal extension TransformerProtocol {
+    func transform(value value: NSObject) -> NSObject? {
+        if let array = value as? [NSObject] {
+            return transform(array: array)
+        }
+        let transformed = transformation(value)
+        return transformed
+    }
+
+    func transform(array arrayToTranform: [NSObject]) -> NSArray? {
+        var transformedArray: [NSObject] = []
+        for value in arrayToTranform {
+            guard let transformed = transformation(value) else { continue }
+            transformedArray.append(transformed)
+        }
+        return transformedArray
+    }
 }
 
 public class Transformer: TransformerProtocol {
-
+    public let transformation: (NSObject?) -> NSObject?
+    public let key: String
+    public init(key: String, transformation: (NSObject?) -> NSObject?) {
+        self.key = key
+        self.transformation = transformation
+    }
 }
 
 public extension MappingProtocol {
@@ -40,7 +66,7 @@ public class Mapping: MappingProtocol {
     public let entityName: String
     public let idAttributeName: String
     public let attributeMapping: AttributeMappingProtocol
-    public var transformers: [TransformerProtocol]?
+    public var transformers: Dictionary<String, TransformerProtocol>?
 
     public init(
         entityName: String,
@@ -56,9 +82,9 @@ public class Mapping: MappingProtocol {
 
     public func add(transformer transformer: TransformerProtocol) {
         if transformers == nil {
-            transformers = []
+            transformers = [:]
         }
-        transformers?.append(transformer)
+        transformers![transformer.key] = transformer
     }
 }
 
@@ -74,13 +100,13 @@ public extension Mappable {
     static func mapping(store: DataStoreProtocol) -> MappingProtocol {
         let moc = store.persistentStoreManagedObjectContext
         let mapping = Mapping(entityName: entity.className, managedObjectContext: moc, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
-
         if let transformers = transformers {
+            var transformerDictionary: Dictionary<String, TransformerProtocol> = [:]
             for transformer in transformers {
-                mapping.add(transformer: transformer)
+                transformerDictionary[transformer.key] = transformer
             }
+            mapping.transformers = transformerDictionary
         }
-
         return mapping
     }
 }
