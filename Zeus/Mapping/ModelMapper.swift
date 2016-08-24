@@ -82,7 +82,29 @@ private extension ModelMapper {
     }
 
     private func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
-        fatalError()
+        guard let futureConnections = mapping.futureConnections else { return }
+        for futureConnection in futureConnections {
+            make(connection: futureConnection, forModel: model, withMapping: mapping)
+        }
+    }
+
+    private func make(connection connection: FutureConnectionProtocol, forModel model: NSManagedObject, withMapping mapping: MappingProtocol) {
+        guard let
+            targetEntityName = connection.relationship.destinationEntity?.name,
+            sourceAttributeValue = model.valueForKey(connection.sourceAttributeName) as? NSObject
+            else { return }
+        let moc = mapping.managedObjectContext
+        var models: [NSManagedObject]
+        let fetchRequest = NSFetchRequest(entityName: targetEntityName)
+        fetchRequest.predicate = NSPredicate(format: "%K IN %@", connection.targetIdAttributeName, sourceAttributeValue)
+        do {
+            guard let objects = try mapping.managedObjectContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] where objects.count > 0 else { return }
+            models = objects
+        } catch let error {
+            log.error("Failed to perform fetch when making connectiong, error: \(error)")
+            fatalError()
+        }
+        log.info("Found #\(models.count) for connection")
     }
 
     private func map(json json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {
