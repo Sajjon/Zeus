@@ -145,16 +145,12 @@ private extension ModelMapper {
                 return
             }
             for fetchedModel in models {
-                guard let idArray = fetchedModel.valueForKey(targetAttribute) as? NSArray where idArray.count > 0 else {
+                guard let idArray = fetchedModel.valueForKey(targetAttribute) as? [NSObject] where idArray.count > 0 else {
                     print("not nsarray")
                     continue
                 }
                 for idArrayObject in idArray {
-                    guard let idString = idArrayObject as? NSString else {
-                        print("not string")
-                        continue
-                    }
-                    if idString == idOfObjectToMatch {
+                    if idArrayObject == idOfObjectToMatch {
                         print("found match")
                         guard let set = fetchedModel.mutableSetValueForKey(connection.relationship.name) as? NSMutableSet else {
                             print("not mutable set")
