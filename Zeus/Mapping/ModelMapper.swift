@@ -56,12 +56,25 @@ internal class ModelMapper: ModelMapperProtocol {
             add(responseDescriptor: descriptor)
         }
     }
+
+    private var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
 }
 
 //MARK: Private Methods
 private extension ModelMapper {
     private func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
         pathToDescriptorMap[descriptor.route.pathMapping] = descriptor
+        let mapping = descriptor.mapping
+        if let futureConnections = mapping.futureConnections {
+            for futureConnection in futureConnections {
+                let relationship = futureConnection.relationship
+                guard let targetEntityName = relationship.destinationEntity?.name else { continue }
+                let existingConnections = inverseFutureConnectionMap[targetEntityName]
+                var connectionsForEntity = existingConnections ?? []
+                connectionsForEntity.append(futureConnection)
+                inverseFutureConnectionMap[targetEntityName] = connectionsForEntity
+            }
+        }
     }
 
     private func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSManagedObject? {
@@ -77,28 +90,44 @@ private extension ModelMapper {
         }
         model.update(withJson: mappedJson)
         makeConnections(withMapping: mapping, forModel: model)
+        makeInverseConnections(withMapping: mapping, forModel: model)
         moc.saveToPersistentStore()
         return model
     }
 
     private func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
         guard let futureConnections = mapping.futureConnections else { return }
-        for futureConnection in futureConnections {
-            make(connection: futureConnection, forModel: model, withMapping: mapping)
+        make(futureConnections, isInverse: false, withMapping: mapping, forModel: model)
+    }
+
+    private func makeInverseConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
+        guard let inverseConnections = inverseFutureConnectionMap[mapping.entityName] else { return }
+        make(inverseConnections, isInverse: true, withMapping: mapping, forModel: model)
+    }
+
+    private func make(connections: [FutureConnectionProtocol], isInverse: Bool, withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
+        for futureConnection in connections {
+            make(connection: futureConnection, isInverse: isInverse, forModel: model, withMapping: mapping)
         }
     }
 
-    private func make(connection connection: FutureConnectionProtocol, forModel model: NSManagedObject, withMapping mapping: MappingProtocol) {
+    private func make(connection connection: FutureConnectionProtocol, isInverse: Bool, forModel model: NSManagedObject, withMapping mapping: MappingProtocol) {
+        let sourceAttribute = isInverse ? connection.targetIdAttributeName : connection.sourceAttributeName
+        let targetAttribute = isInverse ? connection.sourceAttributeName : connection.targetIdAttributeName
+
         guard let
-            targetEntityName = connection.relationship.destinationEntity?.name,
-            sourceAttributeValue = model.valueForKey(connection.sourceAttributeName) as? NSObject
+            entityNameFromDestination = connection.relationship.destinationEntity?.name,
+            sourceAttributeValue = model.valueForKey(sourceAttribute) as? NSObject
             else { return }
+
+        let targetEntityName = isInverse ? entityNameFromDestination : mapping.entityName
+
         let moc = mapping.managedObjectContext
         var models: [NSManagedObject]
         let fetchRequest = NSFetchRequest(entityName: targetEntityName)
-        fetchRequest.predicate = NSPredicate(format: "%K IN %@", connection.targetIdAttributeName, sourceAttributeValue)
+        fetchRequest.predicate = NSPredicate(format: "%K IN %@", targetAttribute, sourceAttributeValue)
         do {
-            guard let objects = try mapping.managedObjectContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] where objects.count > 0 else { return }
+            guard let objects = try moc.executeFetchRequest(fetchRequest) as? [NSManagedObject] where objects.count > 0 else { return }
             models = objects
         } catch let error {
             log.error("Failed to perform fetch when making connectiong, error: \(error)")
@@ -106,6 +135,7 @@ private extension ModelMapper {
         }
         log.info("Found #\(models.count) for connection")
     }
+
 
     private func map(json json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {
         var mappedJson: MappedJSON = [:]
@@ -152,7 +182,14 @@ private extension ModelMapper {
     }
 
     private func responseDescriptor(forPath path: String) -> ResponseDescriptorProtocol? {
-        let descriptor = pathToDescriptorMap[path]
+        guard let url = NSURL(string: path) else { return nil }
+        let parsedPath: String
+        if let lastPathComponent = url.lastPathComponent, index = Int(lastPathComponent) {
+            parsedPath = url.absoluteString.stringByReplacingOccurrencesOfString(lastPathComponent, withString: ":id")
+        } else {
+            parsedPath = path
+        }
+        let descriptor = pathToDescriptorMap[parsedPath]
         return descriptor
     }
 }

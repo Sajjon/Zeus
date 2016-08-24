@@ -40,6 +40,7 @@ class ZeusConfigurator {
         modelManager.map(Character.mapping(store), House.mapping(store)) {
             character, house in
             character == Router.Characters
+            character == Router.CharacterById(nil)
             house == Router.Houses
         }
     }

@@ -26,6 +26,7 @@ class HouseDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
     }
 
 }
@@ -52,8 +53,12 @@ extension HouseDetailsViewController: UITableViewDataSource {
 //                cell.configure(withLabel: "Name", andInfo: house.name)
             } else {
                 let memberIdIndex = row - attributeCountExceptMembers
-                guard let memberId = house.memberIds?[memberIdIndex] else { return cell }
-                cell.configure(withLabel: "Member id", andInfo: memberId)
+                if let member = characterAtIndex(memberIdIndex) {
+                    cell.configure(withLabel: "Member", andInfo: member.name)
+                } else {
+                    guard let memberId = house.memberIds?[memberIdIndex] else { return cell }
+                    cell.configure(withLabel: "Member id", andInfo: memberId)
+                }
             }
         }
         return cell
@@ -83,9 +88,15 @@ private extension HouseDetailsViewController {
                     print("Error fetching character, error: \(error)")
                 } else if let character = result.data as? Character {
                     print("successfully charachter '\(character)'")
-
+                    self.tableView.reloadData()
                 }
             }
         }
+    }
+
+    private func characterAtIndex(index: Int) -> Character? {
+        guard (index < characters?.count) == true else { return nil }
+        let character = characters?[index]
+        return character
     }
 }

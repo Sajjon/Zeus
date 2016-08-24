@@ -23,6 +23,7 @@ class Character: ManagedObject {
 
     override class var attributeMapping: AttributeMappingProtocol {
         return AttributeMapping(mapping: [
+            "url" : "characterId",
             "name": "name",
             "gender": "gender"
         ])

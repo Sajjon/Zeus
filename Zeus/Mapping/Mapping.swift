@@ -85,7 +85,7 @@ public extension Mappable {
             mapping.transformers = transformerDictionary
         }
         if let futureConnections = futureConnections(forMapping: mapping) {
-
+            mapping.futureConnections = futureConnections
         }
         return mapping
     }
