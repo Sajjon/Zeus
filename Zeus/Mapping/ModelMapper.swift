@@ -117,15 +117,20 @@ private extension ModelMapper {
 
         guard let
             entityNameFromDestination = connection.relationship.destinationEntity?.name,
+            entityNameFromSource = connection.relationship.entity.name,
             sourceAttributeValue = model.valueForKey(sourceAttribute) as? NSObject
             else { return }
 
-        let targetEntityName = isInverse ? entityNameFromDestination : mapping.entityName
+        let targetEntityName = isInverse ? entityNameFromSource : entityNameFromDestination
 
         let moc = mapping.managedObjectContext
         var models: [NSManagedObject]
         let fetchRequest = NSFetchRequest(entityName: targetEntityName)
-        fetchRequest.predicate = NSPredicate(format: "%K IN %@", targetAttribute, sourceAttributeValue)
+
+        if let array = sourceAttributeValue as? NSArray {
+            fetchRequest.predicate = NSPredicate(format: "ANY %K CONTAINS %@", targetAttribute, array)
+        }
+
         do {
             guard let objects = try moc.executeFetchRequest(fetchRequest) as? [NSManagedObject] where objects.count > 0 else { return }
             models = objects
@@ -133,6 +138,34 @@ private extension ModelMapper {
             log.error("Failed to perform fetch when making connectiong, error: \(error)")
             fatalError()
         }
+
+        if isInverse {
+            guard let idOfObjectToMatch = model.valueForKey(sourceAttribute) as? NSObject else {
+                print("idOfObjectToMatch is not nsobject")
+                return
+            }
+            for fetchedModel in models {
+                guard let idArray = fetchedModel.valueForKey(targetAttribute) as? NSArray where idArray.count > 0 else {
+                    print("not nsarray")
+                    continue
+                }
+                for idArrayObject in idArray {
+                    guard let idString = idArrayObject as? NSString else {
+                        print("not string")
+                        continue
+                    }
+                    if idString == idOfObjectToMatch {
+                        print("found match")
+                        guard let set = fetchedModel.mutableSetValueForKey(connection.relationship.name) as? NSMutableSet else {
+                            print("not mutable set")
+                            return }
+                        set.addObject(model)
+                    }
+                }
+            }
+
+        }
+
         log.info("Found #\(models.count) for connection")
     }
 
