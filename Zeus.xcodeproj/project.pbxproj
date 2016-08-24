@@ -25,6 +25,7 @@
 		65A574771D67394800F4D439 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574761D67394800F4D439 /* ModelManager.swift */; };
 		65B9FAB01D6C765C008F9B99 /* Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAAF1D6C765C008F9B99 /* Zeus.swift */; };
 		65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */; };
+		7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */; };
 		DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		65A574761D67394800F4D439 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		65B9FAAF1D6C765C008F9B99 /* Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zeus.swift; sourceTree = "<group>"; };
 		65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
+		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
 		CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 				65195B4E1D6B275900813E59 /* MappingContext.swift */,
 				65195B491D6B270800813E59 /* ModelMapper.swift */,
 				65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */,
+				7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */,
 			);
 			path = Mapping;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */,
 				65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */,
 				65195B541D6B27CB00813E59 /* AttributeMapping.swift in Sources */,
+				7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */,
 				65195B571D6B27EC00813E59 /* Error.swift in Sources */,
 				65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */,
 				65195B4F1D6B275900813E59 /* MappingContext.swift in Sources */,

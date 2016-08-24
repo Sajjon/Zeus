@@ -11,6 +11,7 @@ import Zeus
 
 protocol APIClientProtocol {
     func getHouses(queryParams queryParams: QueryParameters?, done: Done?)
+    func getCharacter(byId id: String, queryParams: QueryParameters?, done: Done?)
 }
 
 class APIClient: APIClientProtocol {
@@ -24,5 +25,9 @@ class APIClient: APIClientProtocol {
 
     func getHouses(queryParams queryParams: QueryParameters?, done: Done?) {
         httpClient.get(atPath: .Houses, queryParams: queryParams, done: done)
+    }
+
+    func getCharacter(byId id: String, queryParams: QueryParameters?, done: Done?) {
+        httpClient.get(atPath: .CharacterById(id), queryParams: queryParams, done: done)
     }
 }

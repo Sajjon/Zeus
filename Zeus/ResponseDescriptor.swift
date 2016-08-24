@@ -17,6 +17,7 @@ public protocol ResponseDescriptorProtocol {
 public protocol RouterProtocol {
     var method: HTTPMethod{get}
     var path: String{get}
+    var pathMapping: String{get}
 }
 
 public struct ResponseDescriptor: ResponseDescriptorProtocol {

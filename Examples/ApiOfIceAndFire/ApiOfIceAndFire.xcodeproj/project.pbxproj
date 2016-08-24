@@ -14,8 +14,6 @@
 		655F6CFA1D6C63860080FAA0 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6CF61D6C63860080FAA0 /* Character.swift */; };
 		655F6CFB1D6C63860080FAA0 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6CF71D6C63860080FAA0 /* House.swift */; };
 		655F6CFC1D6C63860080FAA0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 655F6CF81D6C63860080FAA0 /* Model.xcdatamodeld */; };
-		655F6CFF1D6C63E80080FAA0 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655F6CFE1D6C63E80080FAA0 /* Zeus.framework */; };
-		655F6D001D6C63EE0080FAA0 /* Zeus.framework in Embedd Frameworks */ = {isa = PBXBuildFile; fileRef = 655F6CFE1D6C63E80080FAA0 /* Zeus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		655F6D021D6C690A0080FAA0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6D011D6C690A0080FAA0 /* APIClient.swift */; };
 		655F6D051D6C692B0080FAA0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6D041D6C692B0080FAA0 /* HTTPClient.swift */; };
 		655F6D071D6C69480080FAA0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6D061D6C69480080FAA0 /* Router.swift */; };
@@ -23,18 +21,21 @@
 		655F6D0B1D6C69B50080FAA0 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6D0A1D6C69B50080FAA0 /* ManagedObject.swift */; };
 		65B9FAB31D6C8470008F9B99 /* HousesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB21D6C8470008F9B99 /* HousesViewController.swift */; };
 		65B9FAB51D6C847F008F9B99 /* HouseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB41D6C847F008F9B99 /* HouseDetailsViewController.swift */; };
+		7BCD22741D6CB4F2008BE83C /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCD22731D6CB4F2008BE83C /* Zeus.framework */; };
+		7BCD22761D6CB4FC008BE83C /* Zeus.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCD22731D6CB4F2008BE83C /* Zeus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7BCD227C1D6D778E008BE83C /* HouseInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227B1D6D778E008BE83C /* HouseInfoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		655F6CFD1D6C63B50080FAA0 /* Embedd Frameworks */ = {
+		7BCD22721D6CB4D4008BE83C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				655F6D001D6C63EE0080FAA0 /* Zeus.framework in Embedd Frameworks */,
+				7BCD22761D6CB4FC008BE83C /* Zeus.framework in Embed Frameworks */,
 			);
-			name = "Embedd Frameworks";
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -49,7 +50,6 @@
 		655F6CF61D6C63860080FAA0 /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		655F6CF71D6C63860080FAA0 /* House.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 		655F6CF91D6C63860080FAA0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		655F6CFE1D6C63E80080FAA0 /* Zeus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zeus.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/Zeus.framework"; sourceTree = "<group>"; };
 		655F6D011D6C690A0080FAA0 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		655F6D041D6C692B0080FAA0 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		655F6D061D6C69480080FAA0 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -57,6 +57,8 @@
 		655F6D0A1D6C69B50080FAA0 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		65B9FAB21D6C8470008F9B99 /* HousesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HousesViewController.swift; sourceTree = "<group>"; };
 		65B9FAB41D6C847F008F9B99 /* HouseDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseDetailsViewController.swift; sourceTree = "<group>"; };
+		7BCD22731D6CB4F2008BE83C /* Zeus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zeus.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Zeus-ctkddxqicxwarnheiltnyfumvcck/Build/Products/Debug-iphonesimulator/Zeus.framework"; sourceTree = "<group>"; };
+		7BCD227B1D6D778E008BE83C /* HouseInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseInfoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655F6CFF1D6C63E80080FAA0 /* Zeus.framework in Frameworks */,
+				7BCD22741D6CB4F2008BE83C /* Zeus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +76,7 @@
 		655F6CD71D6C62F40080FAA0 = {
 			isa = PBXGroup;
 			children = (
-				655F6CFE1D6C63E80080FAA0 /* Zeus.framework */,
+				7BCD22731D6CB4F2008BE83C /* Zeus.framework */,
 				655F6CE21D6C62F40080FAA0 /* ApiOfIceAndFire */,
 				655F6CE11D6C62F40080FAA0 /* Products */,
 			);
@@ -91,6 +93,7 @@
 		655F6CE21D6C62F40080FAA0 /* ApiOfIceAndFire */ = {
 			isa = PBXGroup;
 			children = (
+				7BCD22791D6D7782008BE83C /* Views */,
 				65B9FAB11D6C8470008F9B99 /* ViewControllers */,
 				655F6D031D6C69220080FAA0 /* Network */,
 				655F6CF51D6C63860080FAA0 /* Models */,
@@ -134,6 +137,22 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		7BCD22791D6D7782008BE83C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD227A1D6D7782008BE83C /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7BCD227A1D6D7782008BE83C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD227B1D6D778E008BE83C /* HouseInfoTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,7 +163,7 @@
 				655F6CDC1D6C62F40080FAA0 /* Sources */,
 				655F6CDD1D6C62F40080FAA0 /* Frameworks */,
 				655F6CDE1D6C62F40080FAA0 /* Resources */,
-				655F6CFD1D6C63B50080FAA0 /* Embedd Frameworks */,
+				7BCD22721D6CB4D4008BE83C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,6 +227,7 @@
 			files = (
 				65B9FAB51D6C847F008F9B99 /* HouseDetailsViewController.swift in Sources */,
 				655F6D071D6C69480080FAA0 /* Router.swift in Sources */,
+				7BCD227C1D6D778E008BE83C /* HouseInfoTableViewCell.swift in Sources */,
 				655F6CFA1D6C63860080FAA0 /* Character.swift in Sources */,
 				655F6D0B1D6C69B50080FAA0 /* ManagedObject.swift in Sources */,
 				655F6D091D6C697F0080FAA0 /* ZeusConfigurator.swift in Sources */,

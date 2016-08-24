@@ -15,7 +15,7 @@ class House: ManagedObject {
     @NSManaged var words: String?
     @NSManaged var region: String?
     @NSManaged var coatOfArms: String?
-    @NSManaged var members: NSSet?
+    @NSManaged var membersSet: NSSet?
     @NSManaged var currentLord: Character?
 
     @NSManaged var memberIds: [String]?
@@ -46,5 +46,16 @@ class House: ManagedObject {
             return memberId
         }
         return [memberIdTransformer]
+    }
+
+    override class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {
+        let characterFuture = FutureConnection(relationshipName: "membersSet", mapping: mapping, sourceAttributeName: "memberIds", targetIdAttributeName: "characterId")
+        return [characterFuture]
+    }
+}
+
+extension House {
+    var members: [Character]? {
+        return membersSet?.allObjects as? [Character]
     }
 }

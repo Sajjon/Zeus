@@ -10,23 +10,40 @@ import Foundation
 import Zeus
 
 enum Router: RouterProtocol {
-    case Characters, Houses
+    case Characters
+    case CharacterById(String!)
+    case Houses
     var method: HTTPMethod {
         let method: HTTPMethod
         switch self {
         case .Houses: fallthrough
-        case .Characters:
+        case .Characters: fallthrough
+        case .CharacterById:
             method = .GET
         }
         return method
     }
-    var path: String {
+
+    var pathMapping: String {
         let path: String
         switch self {
         case .Characters:
             path = "characters"
+        case .CharacterById:
+            path = "\(Characters.pathMapping)/:id"
         case .Houses:
             path = "houses"
+        }
+        return path
+    }
+
+    var path: String {
+        let path: String
+        switch self {
+        case .CharacterById(let id):
+            path = "\(Characters.pathMapping)/\(id)"
+        default:
+            path = pathMapping
         }
         return path
     }

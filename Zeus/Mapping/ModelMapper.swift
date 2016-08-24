@@ -61,7 +61,7 @@ internal class ModelMapper: ModelMapperProtocol {
 //MARK: Private Methods
 private extension ModelMapper {
     private func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
-        pathToDescriptorMap[descriptor.route.path] = descriptor
+        pathToDescriptorMap[descriptor.route.pathMapping] = descriptor
     }
 
     private func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSManagedObject? {
@@ -76,8 +76,13 @@ private extension ModelMapper {
             model = NSManagedObject(entity: mapping.entityDescription, insertIntoManagedObjectContext: moc)
         }
         model.update(withJson: mappedJson)
+        makeConnections(withMapping: mapping, forModel: model)
         moc.saveToPersistentStore()
         return model
+    }
+
+    private func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
+        fatalError()
     }
 
     private func map(json json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {

@@ -14,11 +14,18 @@ class HouseDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var house: House!
+    private var characters: [Character]? {
+        return house.members
+    }
 
     static func instantiate(withHouse house: House) -> HouseDetailsViewController {
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("houseDetails") as! HouseDetailsViewController
         viewController.house = house
         return viewController
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
 
 }
@@ -58,18 +65,27 @@ extension HouseDetailsViewController: UITableViewDataSource {
     }
 }
 
+//MARK: UITableViewDelegate Methods
 extension HouseDetailsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50
     }
 }
 
-class HouseInfoTableViewCell: UITableViewCell {
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var info: UILabel!
+//MARK: Private Methods
+private extension HouseDetailsViewController {
+    private func fetchData() {
+        guard let memberIds = house.memberIds else { return }
+        for memberId in memberIds {
+            APIClient.sharedInstance.getCharacter(byId: memberId, queryParams: nil) {
+                result in
+                if let error = result.error {
+                    print("Error fetching character, error: \(error)")
+                } else if let character = result.data as? Character {
+                    print("successfully charachter '\(character)'")
 
-    func configure(withLabel label: String, andInfo info: String?) {
-        self.label.text = label
-        self.info.text = info
+                }
+            }
+        }
     }
 }

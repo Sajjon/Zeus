@@ -15,7 +15,9 @@ public protocol MappingProtocol {
     var idAttributeName: String{get}
     var attributeMapping: AttributeMappingProtocol{get}
     var transformers: Dictionary<String, TransformerProtocol>? {get}
+    var futureConnections: [FutureConnectionProtocol]? {get}
     func add(transformer transformer: TransformerProtocol)
+    func add(futureConnection connection: FutureConnectionProtocol)
 }
 
 public extension MappingProtocol {
@@ -33,6 +35,7 @@ public class Mapping: MappingProtocol {
     public let idAttributeName: String
     public let attributeMapping: AttributeMappingProtocol
     public var transformers: Dictionary<String, TransformerProtocol>?
+    public var futureConnections: [FutureConnectionProtocol]?
 
     public init(
         entityName: String,
@@ -52,6 +55,13 @@ public class Mapping: MappingProtocol {
         }
         transformers![transformer.key] = transformer
     }
+
+    public func add(futureConnection connection: FutureConnectionProtocol) {
+        if futureConnections == nil {
+            futureConnections = []
+        }
+        futureConnections!.append(connection)
+    }
 }
 
 public protocol Mappable {
@@ -59,6 +69,7 @@ public protocol Mappable {
     static var idAttributeName: String{get}
     static var attributeMapping: AttributeMappingProtocol{get}
     static var transformers: [TransformerProtocol]? {get}
+    static func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]?
     static func mapping(store: DataStoreProtocol) -> MappingProtocol
 }
 
@@ -72,6 +83,9 @@ public extension Mappable {
                 transformerDictionary[transformer.key] = transformer
             }
             mapping.transformers = transformerDictionary
+        }
+        if let futureConnections = futureConnections(forMapping: mapping) {
+
         }
         return mapping
     }

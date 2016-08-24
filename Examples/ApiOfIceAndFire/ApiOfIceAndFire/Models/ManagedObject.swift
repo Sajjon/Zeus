@@ -18,4 +18,5 @@ class ManagedObject: NSManagedObject, Mappable {
     class var idAttributeName: String { fatalError(mustOverride) }
     class var attributeMapping: AttributeMappingProtocol { fatalError(mustOverride) }
     class var transformers: [TransformerProtocol]? { return nil }
+    class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {return nil}
 }
