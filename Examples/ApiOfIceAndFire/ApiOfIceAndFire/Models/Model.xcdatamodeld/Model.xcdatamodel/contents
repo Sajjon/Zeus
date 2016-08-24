@@ -8,16 +8,19 @@
         <relationship name="lordOfHouses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="House" inverseName="currentLord" inverseEntity="House" syncable="YES"/>
     </entity>
     <entity name="House" representedClassName=".House" syncable="YES">
+        <attribute name="cadetBranchIds" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="coatOfArms" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="houseId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="memberIds" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="words" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cadetBranchesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="House" inverseName="cadetBranchesSet" inverseEntity="House" syncable="YES"/>
         <relationship name="currentLord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="lordOfHouses" inverseEntity="Character" syncable="YES"/>
         <relationship name="membersSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="house" inverseEntity="Character" syncable="YES"/>
     </entity>
     <elements>
         <element name="Character" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="House" positionX="-63" positionY="0" width="128" height="150"/>
+        <element name="House" positionX="-63" positionY="0" width="128" height="195"/>
     </elements>
 </model>

@@ -42,6 +42,7 @@ class ZeusConfigurator {
             character == Router.Characters
             character == Router.CharacterById(nil)
             house == Router.Houses
+            house == Router.HouseById(nil)
         }
     }
 }

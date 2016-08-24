@@ -13,10 +13,13 @@ enum Router: RouterProtocol {
     case Characters
     case CharacterById(String!)
     case Houses
+    case HouseById(String!)
+
     var method: HTTPMethod {
         let method: HTTPMethod
         switch self {
         case .Houses: fallthrough
+        case .HouseById: fallthrough
         case .Characters: fallthrough
         case .CharacterById:
             method = .GET
@@ -33,6 +36,8 @@ enum Router: RouterProtocol {
             path = "\(Characters.pathMapping)/:id"
         case .Houses:
             path = "houses"
+        case .HouseById:
+            path = "\(Houses.pathMapping)/:id"
         }
         return path
     }
@@ -40,6 +45,8 @@ enum Router: RouterProtocol {
     var path: String {
         let path: String
         switch self {
+        case .HouseById(let id):
+            path = "\(Houses.pathMapping)/\(id)"
         case .CharacterById(let id):
             path = "\(Characters.pathMapping)/\(id)"
         default:

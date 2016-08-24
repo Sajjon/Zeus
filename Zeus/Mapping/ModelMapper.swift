@@ -121,6 +121,10 @@ private extension ModelMapper {
             sourceAttributeValue = model.valueForKey(sourceAttribute) as? NSObject
             else { return }
 
+        if entityNameFromDestination == entityNameFromSource {
+            print("mapping self")
+        }
+
         let targetEntityName = isInverse ? entityNameFromSource : entityNameFromDestination
 
         let moc = mapping.managedObjectContext
