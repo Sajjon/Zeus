@@ -76,7 +76,7 @@ class House: ManagedObject {
     override class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {
         let characterFuture = FutureConnection(relationshipName: "membersSet", mapping: mapping, sourceAttributeName: "memberIds", targetIdAttributeName: "characterId")
         let cadetBranchFuture = FutureConnection(relationshipName: "cadetBranchesSet", mapping: mapping, sourceAttributeName: "cadetBranchIds", targetIdAttributeName: "houseId")
-        return [characterFuture, cadetBranchFuture]
+        return [characterFuture]//, cadetBranchFuture]
     }
 }
 

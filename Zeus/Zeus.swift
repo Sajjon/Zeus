@@ -15,6 +15,7 @@ public typealias QueryParameters = Dictionary<String, String>
 public typealias JSONMapping = Dictionary<String, String>
 public typealias Done = (Result) -> Void
 
+public typealias Attribute = NSObject
 internal typealias JSON = Dictionary<String, NSObject>
 internal typealias MappedJSON = JSON
 

@@ -21,9 +21,8 @@
 		655F6D0B1D6C69B50080FAA0 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6D0A1D6C69B50080FAA0 /* ManagedObject.swift */; };
 		65B9FAB31D6C8470008F9B99 /* HousesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB21D6C8470008F9B99 /* HousesViewController.swift */; };
 		65B9FAB51D6C847F008F9B99 /* HouseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB41D6C847F008F9B99 /* HouseDetailsViewController.swift */; };
+		65B9FABC1D6EE972008F9B99 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B9FABB1D6EE972008F9B99 /* Zeus.framework */; };
 		7BCD227C1D6D778E008BE83C /* HouseInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227B1D6D778E008BE83C /* HouseInfoTableViewCell.swift */; };
-		7BCD22801D6E0C1F008BE83C /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCD227F1D6E0C1F008BE83C /* Zeus.framework */; };
-		7BCD22811D6E0C23008BE83C /* Zeus.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCD227F1D6E0C1F008BE83C /* Zeus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,7 +32,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7BCD22811D6E0C23008BE83C /* Zeus.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,8 +55,8 @@
 		655F6D0A1D6C69B50080FAA0 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		65B9FAB21D6C8470008F9B99 /* HousesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HousesViewController.swift; sourceTree = "<group>"; };
 		65B9FAB41D6C847F008F9B99 /* HouseDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseDetailsViewController.swift; sourceTree = "<group>"; };
+		65B9FABB1D6EE972008F9B99 /* Zeus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zeus.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/Zeus.framework"; sourceTree = "<group>"; };
 		7BCD227B1D6D778E008BE83C /* HouseInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseInfoTableViewCell.swift; sourceTree = "<group>"; };
-		7BCD227F1D6E0C1F008BE83C /* Zeus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zeus.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Zeus-ctkddxqicxwarnheiltnyfumvcck/Build/Products/Debug-iphonesimulator/Zeus.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BCD22801D6E0C1F008BE83C /* Zeus.framework in Frameworks */,
+				65B9FABC1D6EE972008F9B99 /* Zeus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +74,7 @@
 		655F6CD71D6C62F40080FAA0 = {
 			isa = PBXGroup;
 			children = (
-				7BCD227F1D6E0C1F008BE83C /* Zeus.framework */,
+				65B9FABB1D6EE972008F9B99 /* Zeus.framework */,
 				655F6CE21D6C62F40080FAA0 /* ApiOfIceAndFire */,
 				655F6CE11D6C62F40080FAA0 /* Products */,
 			);

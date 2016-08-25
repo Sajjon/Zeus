@@ -30,14 +30,14 @@ public class ModelManager: ModelManagerProtocol {
     public let managedObjectStore: DataStoreProtocol
     public let httpClient: Alamofire.Manager
 
-    private let modelMapper: ModelMapperProtocol
+    private let modelMappingManager: ModelMappingManagerProtocol
     private let baseUrl: String
 
     public init(baseUrl: String, store: DataStoreProtocol) {
         self.baseUrl = baseUrl
         self.managedObjectStore = store
         self.httpClient = Alamofire.Manager()
-        self.modelMapper = ModelMapper()
+        self.modelMappingManager = ModelMappingManager()
     }
 
     public func get(atPath path: String, queryParameters params: QueryParameters?, done: Done?) {
@@ -62,7 +62,7 @@ public class ModelManager: ModelManagerProtocol {
         closure(
             MappingProxy(context: context, mapping: a)
         )
-        modelMapper.addResponseDescriptors(fromContext: context)
+        modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
     public func map(
@@ -75,7 +75,7 @@ public class ModelManager: ModelManagerProtocol {
             MappingProxy(context: context, mapping: a),
             MappingProxy(context: context, mapping: b)
         )
-        modelMapper.addResponseDescriptors(fromContext: context)
+        modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
 
@@ -91,7 +91,7 @@ public class ModelManager: ModelManagerProtocol {
             MappingProxy(context: context, mapping: b),
             MappingProxy(context: context, mapping: c)
         )
-        modelMapper.addResponseDescriptors(fromContext: context)
+        modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
     public func map(
@@ -108,7 +108,7 @@ public class ModelManager: ModelManagerProtocol {
             MappingProxy(context: context, mapping: c),
             MappingProxy(context: context, mapping: d)
         )
-        modelMapper.addResponseDescriptors(fromContext: context)
+        modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
     public func map(
@@ -127,7 +127,7 @@ public class ModelManager: ModelManagerProtocol {
             MappingProxy(context: context, mapping: d),
             MappingProxy(context: context, mapping: e)
         )
-        modelMapper.addResponseDescriptors(fromContext: context)
+        modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 }
 
@@ -143,9 +143,9 @@ private extension ModelManager {
         case .Success(let data):
             var result: Result!
             if let jsonArray = data as? [JSON] {
-                result = modelMapper.mapping(withJsonArray: jsonArray, fromPath: path)
+                result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path)
             } else if let json = data as? JSON {
-                result = modelMapper.mapping(withJson: json, fromPath: path)
+                result = modelMappingManager.mapping(withJson: json, fromPath: path)
             }
             if let mappingResult = result {
                 done?(mappingResult)
@@ -159,7 +159,7 @@ private extension ModelManager {
     }
 
     private func addResponseDescriptors(fromContext context: MappingContext) {
-        modelMapper.addResponseDescriptors(fromContext: context)
+        modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
 }
