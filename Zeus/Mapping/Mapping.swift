@@ -9,6 +9,20 @@
 import Foundation
 import CoreData
 
+/*
+ let shouldUpdateCondition = ShouldStoreModelCondition(attributeName: "latestUpdated"){
+ (incomingValue: NSObject, maybeCurrentValue: NSObject?) -> Bool in
+ let shouldUpdate = incomingValue > currentValue
+ return shouldUpdate
+	}
+
+	let cherryPicker = CherryPicker(attributeName: "latestUpdated") {
+ (incomingValue: NSObject, currentValue: NSObject) -> NSObject in
+ let pickedValue = incomingValue > currentValue ? incomingValue : currentValue
+ return pickedValue
+	}
+ */
+
 public protocol MappingProtocol {
     var idAttributeName: String{get}
     var attributeMapping: AttributeMappingProtocol{get}
