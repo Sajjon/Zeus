@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol MappingProtocol {
+    var destinationClass: NSObject.Type { get }
     var idAttributeName: String { get }
     var attributeMapping: AttributeMappingProtocol { get }
 
@@ -29,7 +30,7 @@ public protocol MappingProtocol {
 }
 
 public class Mapping: MappingProtocol {
-
+    public let destinationClass: NSObject.Type
     public let idAttributeName: String
     public let attributeMapping: AttributeMappingProtocol
 
@@ -39,9 +40,11 @@ public class Mapping: MappingProtocol {
     public var cherryPickers: Dictionary<String, CherryPickerProtocol>?
 
     public init(
+        destinationClass: NSObject.Type,
         idAttributeName: String,
         attributeMapping: AttributeMappingProtocol
         ) {
+        self.destinationClass = destinationClass
         self.idAttributeName = idAttributeName
         self.attributeMapping = attributeMapping
     }
@@ -57,7 +60,7 @@ public class Mapping: MappingProtocol {
         if futureConnections == nil {
             futureConnections = [:]
         }
-        futureConnections?[connection.relationship.name] = connection
+        futureConnections?[connection.connectionName] = connection
     }
 
     public func add(cherryPicker picker: CherryPickerProtocol) {

@@ -17,12 +17,20 @@ public enum RelationshipType: Int {
 }
 
 public protocol FutureConnectionProtocol {
-    var relationship: NSRelationshipDescription { get }
+    var connectionName: String { get }
     var sourceAttributeName: String { get }
     var destinationAttributeName: String { get }
 }
 
-public extension FutureConnectionProtocol {
+public protocol FutureEntityConnectionProtocol: FutureConnectionProtocol {
+    var relationship: NSRelationshipDescription { get }
+}
+
+public extension FutureEntityConnectionProtocol {
+
+    public var connectionName: String {
+        return relationship.name
+    }
 
     /**
      Convenience property that returns 'true' relationship within the same relationship.
@@ -64,7 +72,7 @@ public extension FutureConnectionProtocol {
     }
 }
 
-public class FutureConnection: FutureConnectionProtocol {
+public class FutureEntityConnection: FutureEntityConnectionProtocol {
 
     public let relationship: NSRelationshipDescription
     public let sourceAttributeName: String

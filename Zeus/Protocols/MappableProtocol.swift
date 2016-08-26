@@ -10,11 +10,12 @@ import Foundation
 import CoreData
 
 public protocol Mappable {
-    static var idAttributeName: String{get}
-    static var attributeMapping: AttributeMappingProtocol{get}
-    static var transformers: [TransformerProtocol]? {get}
-    static var cherryPickers: [CherryPickerProtocol]? {get}
-    static var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? {get}
+    static var destinationClass: NSObject.Type { get }
+    static var idAttributeName: String { get }
+    static var attributeMapping: AttributeMappingProtocol { get }
+    static var transformers: [TransformerProtocol]? { get }
+    static var cherryPickers: [CherryPickerProtocol]? { get }
+    static var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? { get }
     static func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]?
     static func mapping(store: DataStoreProtocol) -> MappingProtocol
 }
@@ -26,7 +27,7 @@ public protocol MappableEntity: Mappable {
 
 public extension Mappable {
     static func mapping(store: DataStoreProtocol) -> MappingProtocol {
-        let mapping = Mapping(idAttributeName: idAttributeName, attributeMapping: attributeMapping)
+        let mapping = Mapping(destinationClass: destinationClass, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
 
         if let list = transformers {
             var dictionary: Dictionary<String, TransformerProtocol> = [:]
@@ -39,7 +40,7 @@ public extension Mappable {
         if let list = futureConnections(forMapping: mapping) {
             var dictionary: Dictionary<String, FutureConnectionProtocol> = [:]
             for element in list {
-                dictionary[element.relationship.name] = element
+                dictionary[element.connectionName] = element
             }
             mapping.futureConnections = dictionary
         }
@@ -68,7 +69,7 @@ public extension MappableEntity {
     static func entityMapping(store: DataStoreProtocol) -> EntityMappingProtocol {
         let moc = store.persistentStoreManagedObjectContext
         let mapping = self.mapping(store)
-        let entityMapping = EntityMapping(mapping: mapping, entityName: entity.className, managedObjectContext: moc)
+        let entityMapping = EntityMapping(destinationClass: destinationClass, mapping: mapping, managedObjectContext: moc)
         return entityMapping
     }
 }

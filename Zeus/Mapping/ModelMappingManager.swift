@@ -30,7 +30,7 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
     }
 
     internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: String) -> Result {
-        var models: [Any] = []
+        var models: [NSObject] = []
         var error: NSError?
         for json in jsonArray {
             let result = mapping(withJson: json, fromPath: path)
@@ -72,23 +72,24 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
 
 //MARK: Private Methods
 private extension ModelMappingManager {
+
     private func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
         pathToDescriptorMap[descriptor.route.pathMapping] = descriptor
         let mapping = descriptor.mapping
-        if let futureConnections = mapping.futureConnections {
-            for (_, futureConnection) in futureConnections {
-                let relationship = futureConnection.relationship
-                guard let targetEntityName = relationship.destinationEntity?.name else { continue }
-                let existingConnections = inverseFutureConnectionMap[targetEntityName]
-                var connectionsForEntity = existingConnections ?? []
-                connectionsForEntity.append(futureConnection)
-                inverseFutureConnectionMap[targetEntityName] = connectionsForEntity
-            }
-        }
+//        if let futureConnections = mapping.futureConnections {
+//            for (_, futureConnection) in futureConnections {
+//                let relationship = futureConnection.relationship
+//                guard let targetEntityName = relationship.destinationEntity?.name else { continue }
+//                let existingConnections = inverseFutureConnectionMap[targetEntityName]
+//                var connectionsForEntity = existingConnections ?? []
+//                connectionsForEntity.append(futureConnection)
+//                inverseFutureConnectionMap[targetEntityName] = connectionsForEntity
+//            }
+//        }
     }
 
-    private func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> Any? {
-        let model: Any?
+    private func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSObject? {
+        let model: NSObject?
         if mapping is EntityMappingProtocol {
             model = managedObjectMapper.model(fromJson: json, withMapping: mapping)
         } else {

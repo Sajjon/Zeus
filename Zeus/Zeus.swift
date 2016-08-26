@@ -18,6 +18,7 @@ public typealias Done = (Result) -> Void
 public typealias Attribute = NSObject
 internal typealias JSON = Dictionary<String, NSObject>
 internal typealias MappedJSON = JSON
+internal typealias CherryPickedJSON = JSON
 
 public var logLevel: SwiftyBeaver.Level {
 set {

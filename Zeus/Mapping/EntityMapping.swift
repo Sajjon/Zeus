@@ -28,25 +28,16 @@ public class EntityMapping: Mapping, EntityMappingProtocol {
     public let entityName: String
 
     public init(
-        entityName: String,
-        managedObjectContext: NSManagedObjectContext,
-        idAttributeName: String,
-        attributeMapping: AttributeMappingProtocol
-        ) {
-        self.entityName = entityName
-        self.managedObjectContext = managedObjectContext
-        super.init(idAttributeName: idAttributeName, attributeMapping: attributeMapping)
-    }
-
-    public init(
+        destinationClass: NSObject.Type,
         mapping: MappingProtocol,
-        entityName: String,
         managedObjectContext: NSManagedObjectContext
         ) {
-        self.entityName = entityName
+        self.entityName = destinationClass.className
         self.managedObjectContext = managedObjectContext
-        super.init(idAttributeName: mapping.idAttributeName, attributeMapping: mapping.attributeMapping)
+        super.init(destinationClass: destinationClass, idAttributeName: mapping.idAttributeName, attributeMapping: mapping.attributeMapping)
         self.transformers = mapping.transformers
         self.futureConnections = mapping.futureConnections
+        self.cherryPickers = mapping.cherryPickers
+        self.shouldStoreConditions = mapping.shouldStoreConditions
     }
 }

@@ -11,12 +11,18 @@ import CoreData
 import Zeus
 
 let mustOverride = "must override"
-class ManagedObject: NSManagedObject, Mappable {
+class ManagedObject: NSManagedObject, MappableEntity {
+
+    class var destinationClass: NSObject.Type {
+        return entity
+    }
     class var entity: NSManagedObject.Type {
         return self
     }
     class var idAttributeName: String { fatalError(mustOverride) }
     class var attributeMapping: AttributeMappingProtocol { fatalError(mustOverride) }
     class var transformers: [TransformerProtocol]? { return nil }
+    class var cherryPickers: [CherryPickerProtocol]? { return nil }
+    class var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? { return nil }
     class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {return nil}
 }

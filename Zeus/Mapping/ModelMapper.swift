@@ -23,6 +23,11 @@ internal class InMemoryModelMapper: ModelMapper, InMemoryModelMapperProtocol {
     override var store: StoreProtocol {
         return inMemoryStore
     }
+
+    override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+        let newModel = mapping.destinationClass.init()
+        return newModel
+    }
 }
 
 internal protocol ManagedObjectMapperProtocol: ModelMapperProtocol {
@@ -38,10 +43,22 @@ internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
     override var store: StoreProtocol {
         return managedObjectStore
     }
+
+    override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+        guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
+        return newModel(fromJson: json, withEntityMapping: entityMapping)
+    }
+}
+
+private extension ManagedObjectMapper {
+    private func newModel(fromJson json: MappedJSON, withEntityMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
+        let newModel = NSManagedObject(entity: mapping.entityDescription, insertIntoManagedObjectContext: mapping.managedObjectContext)
+        return newModel
+    }
 }
 
 internal protocol ModelMapperProtocol {
-    func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> Any?
+    func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSObject?
     var store: StoreProtocol { get }
 }
 
@@ -49,55 +66,84 @@ internal class ModelMapper: ModelMapperProtocol {
 
     var store: StoreProtocol { fatalError("Must override") }
 
-    internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> Any? {
+    internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSObject? {
         let mappedJson = map(json: json, withMapping: mapping)
-        let jsonPair = split(json: mappedJson, withMapping: mapping)
+        guard shouldStoreModel(mappedJson, withMapping: mapping) else { return nil }
+        let model = storeModel(mappedJson, withMapping: mapping)
+        return model
+    }
+
+    internal func shouldStoreModel(json: MappedJSON, withMapping mapping: MappingProtocol) -> Bool {
+        guard let conditions = mapping.shouldStoreConditions else { return true }
+
+        for (attributeName, attributeValue) in json {
+            guard let condition = conditions[attributeName] else { continue }
+            let currentValue: Attribute? = currentValueFor(attributeNamed: attributeName, fromJson: json, withMapping: mapping, forClazz: mapping.destinationClass)
+            guard incomingAttribute(attributeValue, fullfillsCondition: condition, compareTo: currentValue) else { return false }
+        }
+
+        return true
+    }
+
+    internal func currentValueFor<T: NSObject>(attributeNamed name: String, fromJson json: MappedJSON, withMapping mapping: MappingProtocol, forClazz clazz: T.Type) -> Attribute? {
+        var maybeCurrentValue: Attribute?
+        if let existing = store.existingModel(fromJson: json, withMapping: mapping) as? T {
+            maybeCurrentValue = existing.valueForKey(name) as? Attribute
+        }
+        return maybeCurrentValue
+    }
+
+    internal func incomingAttribute(incomingAttribute: Attribute, fullfillsCondition condition: ShouldStoreModelConditionProtocol, compareTo currentValue: Attribute?) -> Bool {
+        let fullfills = condition.shouldStore(incomingValue: incomingAttribute, maybeCurrentValue: currentValue)
+        return fullfills
+    }
+
+    internal func cherryPick(from json: MappedJSON, withMapping mapping: MappingProtocol) -> CherryPickedJSON {
+        guard let cherryPickers = mapping.cherryPickers else { return json }
+        var cherryPickedValues: CherryPickedJSON = json
+        for (attributeName, attributeValue) in json {
+            guard let
+                cherryPicker = cherryPickers[attributeName],
+                currentValue = currentValueFor(attributeNamed: attributeName, fromJson: json, withMapping: mapping, forClazz: mapping.destinationClass)
+            else { continue }
+            let cherryPickedValue = cherryPicker.valueToStore(incomingValue: attributeValue, currentValue: currentValue)
+            cherryPickedValues[attributeName] = cherryPickedValue
+        }
+        return cherryPickedValues
+    }
+
+    internal func storeModel(json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+        let jsonPair = split(json: json, withMapping: mapping)
         let relationshipJson = jsonPair.relationship
         let attributesJson = jsonPair.attributes
 
-        let maybeModel: Any?
+        var maybeModel: NSObject?
         if let existing = existingModel(fromJson: attributesJson, withMapping: mapping) {
             maybeModel = existing
-        } else {
-            maybeModel = newModel(fromJson: attributesJson, withMapping: mapping)
+        } else if let new = newModel(fromJson: attributesJson, withMapping: mapping) {
+            maybeModel = new
         }
         guard let model = maybeModel else { return nil }
-        update(attributes: attributesJson, inModel: model, withMapping: mapping)
+        setValuesFor(attributes: attributesJson, inModel: model, withMapping: mapping)
         return model
-
-        //        let moc = mapping.managedObjectContext
-        //        /* Try to find an existing istance and update it using identity attribute */
-        //        let model: NSManagedObject
-        //        if let existing = existingEntityObject(fromJson: mappedJson, withMapping: mapping) {
-        //            log.verbose("Found existing model")
-        //            model = existing
-        //        } else {
-        //            model = NSManagedObject(entity: mapping.entityDescription, insertIntoManagedObjectContext: moc)
-        //        }
-        //        model.update(withJson: mappedJson)
-        //        makeConnections(withMapping: mapping, forModel: model)
-        //        //        makeInverseConnections(withMapping: mapping, forModel: model)
-        //        moc.saveToPersistentStore()
     }
 
-    internal func update(attributes attributesJson: MappedJSON, inModel model: Any, withMapping mapping: MappingProtocol) {
-
+    internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {
+        let cherryPicked = cherryPick(from: attributesJson, withMapping: mapping)
+        model.setValuesForKeysWithDictionary(cherryPicked)
     }
 
     internal func split(json json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
         return (relationship: json, attributes: json)
     }
 
-    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> Any? {
+    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
         let existing = store.existingModel(fromJson: json, withMapping: mapping)
         return existing
     }
 
-    internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> Any? {
-        //        if let conditions = mapping.shouldStoreConditions, condition = conditions[] {
-        //
-        //        }
-        return nil
+    internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+        fatalError("Must override")
     }
 }
 

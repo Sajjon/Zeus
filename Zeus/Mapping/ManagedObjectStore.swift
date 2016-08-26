@@ -16,12 +16,12 @@ internal protocol ManagedObjectStoreProtocol: StoreProtocol {
 internal class ManagedObjectStore: ManagedObjectStoreProtocol {
 
 
-    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> Any? {
+    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
         guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
         let existing = existingEntityObject(fromJson: json, withMapping: entityMapping)
         return existing
     }
-    func store(model: Any) {}
+    func store(model: NSObject) {}
 }
 
 private extension ManagedObjectStore {

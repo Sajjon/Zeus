@@ -11,7 +11,7 @@ import Foundation
 /**
  
 let shouldUpdateCondition = ShouldStoreModelCondition(attributeName: "latestUpdated"){
-    (incomingValue: NSObject, maybeCurrentValue: NSObject?) -> Bool in
+    (incomingValue: Attribute, maybeCurrentValue: Attribute?) -> Bool in
  
     let shouldUpdate = incomingValue > currentValue
     return shouldUpdate

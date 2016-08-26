@@ -73,11 +73,12 @@ class House: ManagedObject {
         return [houseIdTransformer, memberIdTransformer, cadetBranchIdTransformer]
     }
 
-    override class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {
-        let characterFuture = FutureConnection(relationshipName: "membersSet", mapping: mapping, sourceAttributeName: "memberIds", targetIdAttributeName: "characterId")
-        let cadetBranchFuture = FutureConnection(relationshipName: "cadetBranchesSet", mapping: mapping, sourceAttributeName: "cadetBranchIds", targetIdAttributeName: "houseId")
-        return [characterFuture]//, cadetBranchFuture]
-    }
+//    override class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {
+//        guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
+//        let characterFuture = FutureEntityConnection(relationshipName: "membersSet", entityMapping: entityMapping, sourceAttributeName: "memberIds", destinationAttributeName: "characterId")
+//        let cadetBranchFuture = FutureEntityConnection(relationshipName: "cadetBranchesSet", entityMapping: entityMapping, sourceAttributeName: "cadetBranchIds", destinationAttributeName: "houseId")
+//        return [characterFuture, cadetBranchFuture]
+//    }
 }
 
 extension House {

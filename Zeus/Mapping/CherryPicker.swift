@@ -11,14 +11,14 @@ import Foundation
 /**
 
 let cherryPicker = CherryPicker(attributeName: "latestUpdated") {
-    (incomingValue: NSObject, currentValue: NSObject) -> NSObject in
+    (incomingValue: Attribute, currentValue: Attribute) -> Attribute in
 
     let pickedValue = incomingValue > currentValue ? incomingValue : currentValue
     return pickedValue
 }
 
 */
-public typealias CherryPickingClosure = (incomingValue: Attribute, maybeCurrentValue: Attribute) -> Attribute
+public typealias CherryPickingClosure = (incomingValue: Attribute, currentValue: Attribute) -> Attribute
 
 public protocol CherryPickerProtocol {
     var attributeName: String { get }
