@@ -27,6 +27,14 @@
 		65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */; };
 		65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */; };
 		7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */; };
+		7BCD22851D6F4BE7008BE83C /* CherryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */; };
+		7BCD22871D6F4BFD008BE83C /* ShouldStoreModelCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */; };
+		7BCD22891D6F4C62008BE83C /* EntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22881D6F4C62008BE83C /* EntityMapping.swift */; };
+		7BCD228C1D701AA5008BE83C /* StoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD228B1D701AA5008BE83C /* StoreProtocol.swift */; };
+		7BCD228E1D701AC0008BE83C /* MappableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD228D1D701AC0008BE83C /* MappableProtocol.swift */; };
+		7BCD22901D701AD9008BE83C /* InMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */; };
+		7BCD22921D701B06008BE83C /* ManagedObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */; };
+		7BCD22941D701B2E008BE83C /* ModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22931D701B2E008BE83C /* ModelMapper.swift */; };
 		DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +73,14 @@
 		65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipMapping.swift; sourceTree = "<group>"; };
 		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
+		7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CherryPicker.swift; sourceTree = "<group>"; };
+		7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldStoreModelCondition.swift; sourceTree = "<group>"; };
+		7BCD22881D6F4C62008BE83C /* EntityMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMapping.swift; sourceTree = "<group>"; };
+		7BCD228B1D701AA5008BE83C /* StoreProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreProtocol.swift; sourceTree = "<group>"; };
+		7BCD228D1D701AC0008BE83C /* MappableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableProtocol.swift; sourceTree = "<group>"; };
+		7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
+		7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectStore.swift; sourceTree = "<group>"; };
+		7BCD22931D701B2E008BE83C /* ModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMapper.swift; sourceTree = "<group>"; };
 		CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -129,6 +145,7 @@
 		6501247A1D6609C3003BFFA6 /* Zeus */ = {
 			isa = PBXGroup;
 			children = (
+				7BCD228A1D701A9D008BE83C /* Protocols */,
 				65195B421D6B268500813E59 /* DataStore.swift */,
 				65195B551D6B27E100813E59 /* Enums */,
 				65195B4B1D6B272B00813E59 /* Extensions */,
@@ -157,12 +174,18 @@
 			isa = PBXGroup;
 			children = (
 				65195B531D6B27CB00813E59 /* AttributeMapping.swift */,
+				7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */,
+				7BCD22881D6F4C62008BE83C /* EntityMapping.swift */,
+				7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */,
+				7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */,
+				7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */,
 				65195B471D6B26CF00813E59 /* Mapping.swift */,
 				65195B4E1D6B275900813E59 /* MappingContext.swift */,
+				7BCD22931D701B2E008BE83C /* ModelMapper.swift */,
 				65195B491D6B270800813E59 /* ModelMappingManager.swift */,
-				65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */,
-				7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */,
 				65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */,
+				7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */,
+				65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */,
 			);
 			path = Mapping;
 			sourceTree = "<group>";
@@ -191,6 +214,15 @@
 				65195B5A1D6B284300813E59 /* HTTPMethod.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		7BCD228A1D701A9D008BE83C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD228D1D701AC0008BE83C /* MappableProtocol.swift */,
+				7BCD228B1D701AA5008BE83C /* StoreProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,21 +369,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				65B9FAB01D6C765C008F9B99 /* Zeus.swift in Sources */,
+				7BCD228C1D701AA5008BE83C /* StoreProtocol.swift in Sources */,
 				65195B4A1D6B270800813E59 /* ModelMappingManager.swift in Sources */,
 				65195B481D6B26CF00813E59 /* Mapping.swift in Sources */,
 				65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */,
 				65195B451D6B26A200813E59 /* ResponseDescriptor.swift in Sources */,
 				65195B4D1D6B273500813E59 /* NSObject_Extension.swift in Sources */,
+				7BCD22901D701AD9008BE83C /* InMemoryStore.swift in Sources */,
+				7BCD22871D6F4BFD008BE83C /* ShouldStoreModelCondition.swift in Sources */,
 				65A574771D67394800F4D439 /* ModelManager.swift in Sources */,
 				65195B591D6B282500813E59 /* Macros.swift in Sources */,
+				7BCD22891D6F4C62008BE83C /* EntityMapping.swift in Sources */,
+				7BCD228E1D701AC0008BE83C /* MappableProtocol.swift in Sources */,
 				65195B431D6B268500813E59 /* DataStore.swift in Sources */,
 				65195B521D6B27A200813E59 /* Result.swift in Sources */,
+				7BCD22941D701B2E008BE83C /* ModelMapper.swift in Sources */,
 				65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */,
 				65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */,
 				65195B541D6B27CB00813E59 /* AttributeMapping.swift in Sources */,
 				7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */,
 				65195B571D6B27EC00813E59 /* Error.swift in Sources */,
+				7BCD22921D701B06008BE83C /* ManagedObjectStore.swift in Sources */,
 				65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */,
+				7BCD22851D6F4BE7008BE83C /* CherryPicker.swift in Sources */,
 				65195B4F1D6B275900813E59 /* MappingContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
