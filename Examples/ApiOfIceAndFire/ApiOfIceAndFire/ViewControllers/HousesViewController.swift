@@ -61,7 +61,7 @@ private extension HousesViewController {
     }
 
     private func fetchData() {
-        apiClient.getHouses(queryParams: ["pageSize":"50"]) {
+        apiClient.getHouses(queryParams: ["pageSize":"500"]) {
             result in
             if let error = result.error {
                 print("Error fetching houses, error: \(error)")

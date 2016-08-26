@@ -26,6 +26,8 @@
 		65B9FAB01D6C765C008F9B99 /* Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAAF1D6C765C008F9B99 /* Zeus.swift */; };
 		65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */; };
 		65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */; };
+		65B9FAC01D706871008F9B99 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABF1D706871008F9B99 /* Option.swift */; };
+		65B9FAC21D7068E2008F9B99 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAC11D7068E2008F9B99 /* Options.swift */; };
 		7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */; };
 		7BCD22851D6F4BE7008BE83C /* CherryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */; };
 		7BCD22871D6F4BFD008BE83C /* ShouldStoreModelCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */; };
@@ -72,6 +74,8 @@
 		65B9FAAF1D6C765C008F9B99 /* Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zeus.swift; sourceTree = "<group>"; };
 		65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipMapping.swift; sourceTree = "<group>"; };
+		65B9FABF1D706871008F9B99 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		65B9FAC11D7068E2008F9B99 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
 		7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CherryPicker.swift; sourceTree = "<group>"; };
 		7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldStoreModelCondition.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 			children = (
 				65195B511D6B27A200813E59 /* Result.swift */,
 				65195B5C1D6B28C100813E59 /* MappingProxy.swift */,
+				65B9FAC11D7068E2008F9B99 /* Options.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			children = (
 				65195B561D6B27EC00813E59 /* Error.swift */,
 				65195B5A1D6B284300813E59 /* HTTPMethod.swift */,
+				65B9FABF1D706871008F9B99 /* Option.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				7BCD228C1D701AA5008BE83C /* StoreProtocol.swift in Sources */,
 				65195B4A1D6B270800813E59 /* ModelMappingManager.swift in Sources */,
 				65195B481D6B26CF00813E59 /* Mapping.swift in Sources */,
+				65B9FAC21D7068E2008F9B99 /* Options.swift in Sources */,
 				65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */,
 				65195B451D6B26A200813E59 /* ResponseDescriptor.swift in Sources */,
 				65195B4D1D6B273500813E59 /* NSObject_Extension.swift in Sources */,
@@ -388,6 +395,7 @@
 				65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */,
 				65195B541D6B27CB00813E59 /* AttributeMapping.swift in Sources */,
 				7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */,
+				65B9FAC01D706871008F9B99 /* Option.swift in Sources */,
 				65195B571D6B27EC00813E59 /* Error.swift in Sources */,
 				7BCD22921D701B06008BE83C /* ManagedObjectStore.swift in Sources */,
 				65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */,

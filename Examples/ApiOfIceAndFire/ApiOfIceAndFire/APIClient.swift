@@ -25,14 +25,14 @@ class APIClient: APIClientProtocol {
     }
 
     func getHouses(queryParams queryParams: QueryParameters?, done: Done?) {
-        httpClient.get(atPath: .Houses, queryParams: queryParams, done: done)
+        httpClient.get(atPath: .Houses, queryParams: queryParams, options: Options(.DontPersistEntitiesDuringMapping), done: done)
     }
 
     func getHouse(byId id: String, queryParams: QueryParameters?, done: Done?) {
-        httpClient.get(atPath: .HouseById(id), queryParams: queryParams, done: done)
+        httpClient.get(atPath: .HouseById(id), queryParams: queryParams, options: nil, done: done)
     }
 
     func getCharacter(byId id: String, queryParams: QueryParameters?, done: Done?) {
-        httpClient.get(atPath: .CharacterById(id), queryParams: queryParams, done: done)
+        httpClient.get(atPath: .CharacterById(id), queryParams: queryParams, options: nil, done: done)
     }
 }

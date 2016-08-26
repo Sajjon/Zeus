@@ -20,7 +20,7 @@ public protocol ModelManagerProtocol {
     func map(a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy) -> Void)
     func map(a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
     func map(a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, _ e: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
-    func get(atPath path: String, queryParameters params: QueryParameters?, done: Done?)
+    func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?)
     func post(model model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?)
 }
 
@@ -40,13 +40,14 @@ public class ModelManager: ModelManagerProtocol {
         self.modelMappingManager = ModelMappingManager()
     }
 
-    public func get(atPath path: String, queryParameters params: QueryParameters?, done: Done?) {
+    public func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?) {
         let pathFull = fullPath(withPath: path)
+        let options = options ?? Options(.PersistEntitiesDuringMapping)
         httpClient.request(.GET, pathFull, parameters: params)
             .validate()
             .responseJSON() {
                 response in
-                self.handle(jsonResponse: response, fromPath: path, done: done)
+                self.handle(jsonResponse: response, fromPath: path, options: options, done: done)
         }
     }
 
@@ -138,14 +139,14 @@ private extension ModelManager {
         return fullPath
     }
 
-    private func handle(jsonResponse response: Response<AnyObject, NSError>, fromPath path: String, done: Done?) {
+    private func handle(jsonResponse response: Response<AnyObject, NSError>, fromPath path: String, options: Options, done: Done?) {
         switch response.result {
         case .Success(let data):
             var result: Result!
             if let jsonArray = data as? [JSON] {
-                result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path)
+                result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
             } else if let json = data as? JSON {
-                result = modelMappingManager.mapping(withJson: json, fromPath: path)
+                result = modelMappingManager.mapping(withJson: json, fromPath: path, options: options)
             }
             if let mappingResult = result {
                 done?(mappingResult)

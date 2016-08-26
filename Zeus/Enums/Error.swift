@@ -13,6 +13,7 @@ public enum Error: Int, ErrorType {
     case ParsingJSON = 10100
     case MappingModel = 10200
     case MappingNoResponseDescriptor = 10201
+    case MappingOptionsPersist = 10300
 
     var errorMessage: String {
         let message: String
@@ -25,6 +26,8 @@ public enum Error: Int, ErrorType {
             message = "Failed to map model"
         case .MappingNoResponseDescriptor:
             message = "Failed to map model, missing descriptor"
+        case .MappingOptionsPersist:
+            message = "Your options regarding when to persist models are conflicting with each other"
         }
         return message
     }

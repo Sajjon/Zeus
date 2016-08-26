@@ -73,12 +73,45 @@ class House: ManagedObject {
         return [houseIdTransformer, memberIdTransformer, cadetBranchIdTransformer]
     }
 
+    override class var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? {
+        let noBoltonsAllowed = ShouldStoreModelCondition(attributeName: "name") {
+            (incomingValue: Attribute, maybeCurrentValue: Attribute?) -> Bool in
+            guard let string = (incomingValue as? NSString) else { return true }
+            let name = string as String
+            let isBolton = name.contains("Bolton")
+            guard isBolton == false else {
+                print("We don't like the Boltons, they are not invited into our app! Skipping mapping...")
+                return false
+            }
+            return true
+        }
+        return [noBoltonsAllowed]
+    }
+
+    override class var cherryPickers: [CherryPickerProtocol]? {
+        let picker = CherryPicker(attributeName: "name") {
+            (incomingValue: Attribute, currentValue: Attribute) -> Attribute in
+            if incomingValue != currentValue {
+                print("House changed name from: '\(currentValue)' to '\(incomingValue)'")
+            }
+            return incomingValue
+        }
+        return [picker]
+    }
+
 //    override class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {
 //        guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
 //        let characterFuture = FutureEntityConnection(relationshipName: "membersSet", entityMapping: entityMapping, sourceAttributeName: "memberIds", destinationAttributeName: "characterId")
 //        let cadetBranchFuture = FutureEntityConnection(relationshipName: "cadetBranchesSet", entityMapping: entityMapping, sourceAttributeName: "cadetBranchIds", destinationAttributeName: "houseId")
 //        return [characterFuture, cadetBranchFuture]
 //    }
+}
+
+extension String {
+    func contains(find: String) -> Bool {
+        return self.rangeOfString(find) != nil
+    }
+
 }
 
 extension House {

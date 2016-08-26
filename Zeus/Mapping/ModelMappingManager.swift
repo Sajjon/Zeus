@@ -11,8 +11,8 @@ import CoreData
 
 
 internal protocol ModelMappingManagerProtocol {
-    func mapping(withJson json: JSON, fromPath path: String) -> Result
-    func mapping(withJsonArray jsonArray: [JSON], fromPath path: String) -> Result
+    func mapping(withJson json: JSON, fromPath path: String, options: Options?) -> Result
+    func mapping(withJsonArray jsonArray: [JSON], fromPath path: String, options: Options?) -> Result
     func addResponseDescriptors(fromContext context: MappingContext)
 }
 
@@ -29,14 +29,20 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         managedObjectMapper = ManagedObjectMapper(managedObjectStore: managedObjectStore)
     }
 
-    internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: String) -> Result {
+    internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: String, options: Options?) -> Result {
         var models: [NSObject] = []
         var error: NSError?
         for json in jsonArray {
-            let result = mapping(withJson: json, fromPath: path)
+            let result = mapping(withJson: json, fromPath: path, options: options)
             guard let model = result.data else {
-                error = result.error
-                break
+                if let mappingError = result.error {
+                    error = mappingError
+                    break
+                } else if let mappingEvent = result.mappingEvent {
+                    log.info(mappingEvent)
+                } else { fatalError("This should not happen") }
+
+                continue
             }
             models.append(model)
         }
@@ -50,14 +56,9 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         return result
     }
 
-    internal func mapping(withJson json: JSON, fromPath path: String) -> Result {
+    internal func mapping(withJson json: JSON, fromPath path: String, options: Options?) -> Result {
         guard let descriptor = responseDescriptor(forPath: path) else { return Result(.MappingNoResponseDescriptor) }
-        let result: Result
-        if let model = model(fromJson: json, withMapping: descriptor.mapping) {
-            result = Result(data: model)
-        } else {
-            result = Result(.MappingModel)
-        }
+        let result = model(fromJson: json, withMapping: descriptor.mapping, options: options)
         return result
     }
 
@@ -88,14 +89,14 @@ private extension ModelMappingManager {
 //        }
     }
 
-    private func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSObject? {
-        let model: NSObject?
+    private func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+        let result: Result
         if mapping is EntityMappingProtocol {
-            model = managedObjectMapper.model(fromJson: json, withMapping: mapping)
+            result = managedObjectMapper.model(fromJson: json, withMapping: mapping, options: options)
         } else {
-            model = inMemoryModelMapper.model(fromJson: json, withMapping: mapping)
+            result = inMemoryModelMapper.model(fromJson: json, withMapping: mapping, options: options)
         }
-        return model
+        return result
     }
 
     private func responseDescriptor(forPath path: String) -> ResponseDescriptorProtocol? {

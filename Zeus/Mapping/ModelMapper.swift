@@ -58,7 +58,7 @@ private extension ManagedObjectMapper {
 }
 
 internal protocol ModelMapperProtocol {
-    func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSObject?
+    func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result
     var store: StoreProtocol { get }
 }
 
@@ -66,11 +66,14 @@ internal class ModelMapper: ModelMapperProtocol {
 
     var store: StoreProtocol { fatalError("Must override") }
 
-    internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let mappedJson = map(json: json, withMapping: mapping)
-        guard shouldStoreModel(mappedJson, withMapping: mapping) else { return nil }
-        let model = storeModel(mappedJson, withMapping: mapping)
-        return model
+        guard shouldStoreModel(mappedJson, withMapping: mapping) else {
+            log.verbose("Not storing model with json: \(json) since it does not fulfill store condition")
+            return Result(.SkippedDueToCondition)
+        }
+        let result = storeModel(mappedJson, withMapping: mapping, options: options)
+        return result
     }
 
     internal func shouldStoreModel(json: MappedJSON, withMapping mapping: MappingProtocol) -> Bool {
@@ -112,7 +115,7 @@ internal class ModelMapper: ModelMapperProtocol {
         return cherryPickedValues
     }
 
-    internal func storeModel(json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    internal func storeModel(json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let jsonPair = split(json: json, withMapping: mapping)
         let relationshipJson = jsonPair.relationship
         let attributesJson = jsonPair.attributes
@@ -123,9 +126,15 @@ internal class ModelMapper: ModelMapperProtocol {
         } else if let new = newModel(fromJson: attributesJson, withMapping: mapping) {
             maybeModel = new
         }
-        guard let model = maybeModel else { return nil }
+        guard let model = maybeModel else { return Result(Error.MappingModel) }
         setValuesFor(attributes: attributesJson, inModel: model, withMapping: mapping)
-        return model
+
+        /* This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal! */
+        if options?.persistEntities == true && store is ManagedObjectStore, let entityMapping = mapping as? EntityMappingProtocol {
+            entityMapping.managedObjectContext.saveToPersistentStore()
+        }
+
+        return Result(model)
     }
 
     internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {

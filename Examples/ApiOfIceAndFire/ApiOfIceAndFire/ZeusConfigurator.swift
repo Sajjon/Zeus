@@ -26,7 +26,7 @@ class ZeusConfigurator {
     }
 
     private func setupLogging() {
-        Zeus.logLevel = .Verbose
+        Zeus.logLevel = .Warning
     }
 
     private func setupCoreDataStack() {
