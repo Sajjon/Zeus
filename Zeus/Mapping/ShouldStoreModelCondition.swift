@@ -18,7 +18,7 @@ let shouldUpdateCondition = ShouldStoreModelCondition(attributeName: "latestUpda
 }
 
 */
-public typealias ShouldStoreModelClosure = (incomingValue: Attribute, maybeCurrentValue: Attribute?) -> Bool
+public typealias ShouldStoreModelClosure = (_ incomingValue: Attribute, _ maybeCurrentValue: Attribute?) -> Bool
 
 public protocol ShouldStoreModelConditionProtocol {
     var attributeName: String { get }

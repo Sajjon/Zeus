@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 public enum RelationshipType: Int {
-    case OneToOne
-    case OneToMany
-    case ManyToOne
-    case ManyToMany
+    case oneToOne
+    case oneToMany
+    case manyToOne
+    case manyToMany
 }
 
 public protocol FutureConnectionProtocol {
@@ -38,8 +38,8 @@ public extension FutureEntityConnectionProtocol {
     var intraMapping: Bool {
         guard let
             destinationEntity = relationship.destinationEntity,
-            destinationEntityName = destinationEntity.name,
-            sourceEntityName = relationship.entity.name
+            let destinationEntityName = destinationEntity.name,
+            let sourceEntityName = relationship.entity.name
             else { return false }
         let intra = destinationEntityName == sourceEntityName
         return intra
@@ -55,28 +55,28 @@ public extension FutureEntityConnectionProtocol {
     }
 
     var type: RelationshipType {
-        let relationshipIsToMany = relationship.toMany
-        let inverseRelationshipIsToMany = inverseRelationship.toMany
+        let relationshipIsToMany = relationship.isToMany
+        let inverseRelationshipIsToMany = inverseRelationship.isToMany
         let type: RelationshipType
         switch (relationshipIsToMany, inverseRelationshipIsToMany) {
         case (true, true):
-            type = .ManyToMany
+            type = .manyToMany
         case (true, false):
-            type = .ManyToOne
+            type = .manyToOne
         case (false, true):
-            type = .OneToMany
+            type = .oneToMany
         case (false, false):
-            type = .OneToOne
+            type = .oneToOne
         }
         return type
     }
 }
 
-public class FutureEntityConnection: FutureEntityConnectionProtocol {
+open class FutureEntityConnection: FutureEntityConnectionProtocol {
 
-    public let relationship: NSRelationshipDescription
-    public let sourceAttributeName: String
-    public let destinationAttributeName: String
+    open let relationship: NSRelationshipDescription
+    open let sourceAttributeName: String
+    open let destinationAttributeName: String
 
     public convenience init(relationshipName: String, entityMapping: EntityMappingProtocol, sourceAttributeName: String, destinationAttributeName: String) {
         let relationship = entityMapping.entityDescription.relationshipsByName[relationshipName]!

@@ -19,24 +19,24 @@ class ZeusConfigurator {
         setup()
     }
 
-    private func setup() {
+    fileprivate func setup() {
         setupCoreDataStack()
         setupLogging()
         setupMapping()
     }
 
-    private func setupLogging() {
+    fileprivate func setupLogging() {
         Zeus.logLevel = .Warning
     }
 
-    private func setupCoreDataStack() {
+    fileprivate func setupCoreDataStack() {
         store = DataStore()
         modelManager = ModelManager(baseUrl: baseUrl, store: store)
         DataStore.sharedInstance = store
         ModelManager.sharedInstance = modelManager
     }
 
-    private func setupMapping() {
+    fileprivate func setupMapping() {
         modelManager.map(Character.entityMapping(store), House.entityMapping(store)) {
             character, house in
             character == Router.Characters

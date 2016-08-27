@@ -13,8 +13,8 @@ public protocol MappingContextProtocol {
     func add(responseDescriptor descriptor: ResponseDescriptorProtocol)
 }
 
-public class MappingContext {
-    public var responseDescriptors: [ResponseDescriptorProtocol]
+open class MappingContext {
+    open var responseDescriptors: [ResponseDescriptorProtocol]
 
     public init() {
         self.responseDescriptors = []

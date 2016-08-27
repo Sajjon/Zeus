@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47181653D30D11FCB8BF360C /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */; };
 		6501247C1D6609C3003BFFA6 /* Zeus.h in Headers */ = {isa = PBXBuildFile; fileRef = 6501247B1D6609C3003BFFA6 /* Zeus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		650124831D6609C3003BFFA6 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650124781D6609C3003BFFA6 /* Zeus.framework */; };
 		650124881D6609C3003BFFA6 /* ZeusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650124871D6609C3003BFFA6 /* ZeusTests.swift */; };
@@ -37,7 +38,6 @@
 		7BCD22901D701AD9008BE83C /* InMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */; };
 		7BCD22921D701B06008BE83C /* ManagedObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */; };
 		7BCD22941D701B2E008BE83C /* ModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22931D701B2E008BE83C /* ModelMapper.swift */; };
-		DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2C5ADE56FB1FBA76507096CE /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
 		650124781D6609C3003BFFA6 /* Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6501247B1D6609C3003BFFA6 /* Zeus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zeus.h; sourceTree = "<group>"; };
 		6501247D1D6609C3003BFFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipMapping.swift; sourceTree = "<group>"; };
 		65B9FABF1D706871008F9B99 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		65B9FAC11D7068E2008F9B99 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
 		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
 		7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CherryPicker.swift; sourceTree = "<group>"; };
 		7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldStoreModelCondition.swift; sourceTree = "<group>"; };
@@ -85,8 +85,8 @@
 		7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
 		7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectStore.swift; sourceTree = "<group>"; };
 		7BCD22931D701B2E008BE83C /* ModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMapper.swift; sourceTree = "<group>"; };
-		CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
-		F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
+		EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE638D300B8572AC68CA5B48 /* Pods_Zeus.framework in Frameworks */,
+				47181653D30D11FCB8BF360C /* Pods_Zeus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,21 +109,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E4B098D0AF0D8074268AA78 /* Frameworks */ = {
+		3D89B4A60063F037BE00977E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F39EC4FE59E91C9FE8CEA613 /* Pods_Zeus.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5DD7EBCC690098854A9B73A5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */,
-				2C5ADE56FB1FBA76507096CE /* Pods-Zeus.release.xcconfig */,
+				9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */,
+				6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4F2245F4B22E6E6D5875248B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6501246E1D6609C3003BFFA6 = {
@@ -132,8 +132,8 @@
 				6501247A1D6609C3003BFFA6 /* Zeus */,
 				650124861D6609C3003BFFA6 /* ZeusTests */,
 				650124791D6609C3003BFFA6 /* Products */,
-				5DD7EBCC690098854A9B73A5 /* Pods */,
-				3E4B098D0AF0D8074268AA78 /* Frameworks */,
+				3D89B4A60063F037BE00977E /* Pods */,
+				4F2245F4B22E6E6D5875248B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -295,6 +295,7 @@
 				TargetAttributes = {
 					650124771D6609C3003BFFA6 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					650124811D6609C3003BFFA6 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -516,7 +517,7 @@
 		};
 		6501248D1D6609C3003BFFA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC7612A65AC0C614C10E6702 /* Pods-Zeus.debug.xcconfig */;
+			baseConfigurationReference = 9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -530,12 +531,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		6501248E1D6609C3003BFFA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C5ADE56FB1FBA76507096CE /* Pods-Zeus.release.xcconfig */;
+			baseConfigurationReference = 6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -548,6 +550,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.Zeus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

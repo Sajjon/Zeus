@@ -51,8 +51,8 @@ internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
 }
 
 private extension ManagedObjectMapper {
-    private func newModel(fromJson json: MappedJSON, withEntityMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
-        let newModel = NSManagedObject(entity: mapping.entityDescription, insertIntoManagedObjectContext: mapping.managedObjectContext)
+    func newModel(fromJson json: MappedJSON, withEntityMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
+        let newModel = NSManagedObject(entity: mapping.entityDescription, insertInto: mapping.managedObjectContext)
         return newModel
     }
 }
@@ -70,13 +70,13 @@ internal class ModelMapper: ModelMapperProtocol {
         let mappedJson = map(json: json, withMapping: mapping)
         guard shouldStoreModel(mappedJson, withMapping: mapping) else {
             log.verbose("Not storing model with json: \(json) since it does not fulfill store condition")
-            return Result(.SkippedDueToCondition)
+            return Result(.skippedDueToCondition)
         }
         let result = storeModel(mappedJson, withMapping: mapping, options: options)
         return result
     }
 
-    internal func shouldStoreModel(json: MappedJSON, withMapping mapping: MappingProtocol) -> Bool {
+    internal func shouldStoreModel(_ json: MappedJSON, withMapping mapping: MappingProtocol) -> Bool {
         guard let conditions = mapping.shouldStoreConditions else { return true }
 
         for (attributeName, attributeValue) in json {
@@ -91,13 +91,13 @@ internal class ModelMapper: ModelMapperProtocol {
     internal func currentValueFor<T: NSObject>(attributeNamed name: String, fromJson json: MappedJSON, withMapping mapping: MappingProtocol, forClazz clazz: T.Type) -> Attribute? {
         var maybeCurrentValue: Attribute?
         if let existing = store.existingModel(fromJson: json, withMapping: mapping) as? T {
-            maybeCurrentValue = existing.valueForKey(name) as? Attribute
+            maybeCurrentValue = existing.value(forKey: name) as? Attribute
         }
         return maybeCurrentValue
     }
 
-    internal func incomingAttribute(incomingAttribute: Attribute, fullfillsCondition condition: ShouldStoreModelConditionProtocol, compareTo currentValue: Attribute?) -> Bool {
-        let fullfills = condition.shouldStore(incomingValue: incomingAttribute, maybeCurrentValue: currentValue)
+    internal func incomingAttribute(_ incomingAttribute: Attribute, fullfillsCondition condition: ShouldStoreModelConditionProtocol, compareTo currentValue: Attribute?) -> Bool {
+        let fullfills = condition.shouldStore(incomingAttribute, currentValue)
         return fullfills
     }
 
@@ -107,15 +107,15 @@ internal class ModelMapper: ModelMapperProtocol {
         for (attributeName, attributeValue) in json {
             guard let
                 cherryPicker = cherryPickers[attributeName],
-                currentValue = currentValueFor(attributeNamed: attributeName, fromJson: json, withMapping: mapping, forClazz: mapping.destinationClass)
+                let currentValue = currentValueFor(attributeNamed: attributeName, fromJson: json, withMapping: mapping, forClazz: mapping.destinationClass)
             else { continue }
-            let cherryPickedValue = cherryPicker.valueToStore(incomingValue: attributeValue, currentValue: currentValue)
+            let cherryPickedValue = cherryPicker.valueToStore(attributeValue, currentValue)
             cherryPickedValues[attributeName] = cherryPickedValue
         }
         return cherryPickedValues
     }
 
-    internal func storeModel(json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+    internal func storeModel(_ json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let jsonPair = split(json: json, withMapping: mapping)
         let relationshipJson = jsonPair.relationship
         let attributesJson = jsonPair.attributes
@@ -126,7 +126,7 @@ internal class ModelMapper: ModelMapperProtocol {
         } else if let new = newModel(fromJson: attributesJson, withMapping: mapping) {
             maybeModel = new
         }
-        guard let model = maybeModel else { return Result(Error.MappingModel) }
+        guard let model = maybeModel else { return Result(Error.mappingModel) }
         setValuesFor(attributes: attributesJson, inModel: model, withMapping: mapping)
 
         /* This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal! */
@@ -139,10 +139,10 @@ internal class ModelMapper: ModelMapperProtocol {
 
     internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {
         let cherryPicked = cherryPick(from: attributesJson, withMapping: mapping)
-        model.setValuesForKeysWithDictionary(cherryPicked)
+        model.setValuesForKeys(cherryPicked)
     }
 
-    internal func split(json json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
+    internal func split(json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
         return (relationship: json, attributes: json)
     }
 
@@ -158,11 +158,11 @@ internal class ModelMapper: ModelMapperProtocol {
 
 private extension ModelMapper {
 
-    private func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
+    func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
 
     }
 
-    private func map(json json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {
+    func map(json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {
         var mappedJson: MappedJSON = [:]
         for (key, value) in json {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
@@ -172,13 +172,13 @@ private extension ModelMapper {
         return mappedJson
     }
 
-    private func transform(value value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject? {
-        guard let transformers = mapping.transformers, transformer = transformers[key] else { return value }
+    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject? {
+        guard let transformers = mapping.transformers, let transformer = transformers[key] else { return value }
         let transformedValue = transformer.transform(value: value)
         return transformedValue
     }
 
-    private func map(key key: String, toAttributeWithMapping mapping: AttributeMappingProtocol) -> String? {
+    func map(key: String, toAttributeWithMapping mapping: AttributeMappingProtocol) -> String? {
         var mappedKey: String?
         for (mappingKey, value) in mapping.mapping {
             guard mappingKey == key else { continue }

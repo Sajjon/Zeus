@@ -1,13 +1,25 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (4.0.0-beta.1)
   - SwiftyBeaver (0.6.5)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift3`)
   - SwiftyBeaver
 
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: swift3
+    :git: https://github.com/Alamofire/Alamofire.git
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 3cc5b4e8453bec9fd6b973d60e6b0605a38e4cf4
+    :git: https://github.com/Alamofire/Alamofire.git
+
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: 698bf56c9e48d3248168e4a3a90588ac2e23836a
   SwiftyBeaver: 1f7e6378e75bae631bb219fa0a351ce6f34a40da
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 818c9948a95843e35182fe4e2a7833a70b8ec6b2
+
+COCOAPODS: 1.0.1

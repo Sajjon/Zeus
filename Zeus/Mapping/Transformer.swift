@@ -14,7 +14,7 @@ public protocol TransformerProtocol {
 }
 
 internal extension TransformerProtocol {
-    func transform(value value: NSObject) -> NSObject? {
+    func transform(value: NSObject) -> NSObject? {
         if let array = value as? [NSObject] {
             return transform(array: array)
         }
@@ -32,10 +32,10 @@ internal extension TransformerProtocol {
     }
 }
 
-public class Transformer: TransformerProtocol {
-    public let transformation: (NSObject?) -> NSObject?
-    public let key: String
-    public init(key: String, transformation: (NSObject?) -> NSObject?) {
+open class Transformer: TransformerProtocol {
+    open let transformation: (NSObject?) -> NSObject?
+    open let key: String
+    public init(key: String, transformation: @escaping (NSObject?) -> NSObject?) {
         self.key = key
         self.transformation = transformation
     }

@@ -17,14 +17,14 @@ public protocol DataStoreProtocol {
     var persistentStoreManagedObjectContext: NSManagedObjectContext!{get}
     var mainThreadManagedObjectContext: NSManagedObjectContext!{get}
     var persistentStoreCoordinator: NSPersistentStoreCoordinator!{get}
-    func addPersistentStore(withUrl storeUrl: NSURL) throws -> NSPersistentStore
+    func addPersistentStore(withUrl storeUrl: URL) throws -> NSPersistentStore
 }
 
-public class DataStore: DataStoreProtocol {
-    public static var sharedInstance: DataStoreProtocol!
+open class DataStore: DataStoreProtocol {
+    open static var sharedInstance: DataStoreProtocol!
 
 
-    public var logLevel: SwiftyBeaver.Level {
+    open var logLevel: SwiftyBeaver.Level {
         set {
             log.removeDestination(console)
             console = consoleLogging(withLogLevel: newValue)
@@ -35,15 +35,15 @@ public class DataStore: DataStoreProtocol {
         }
     }
 
-    public private(set) var managedObjectModel: NSManagedObjectModel
-    public private(set) var persistentStoreManagedObjectContext: NSManagedObjectContext!
-    public private(set) var mainThreadManagedObjectContext: NSManagedObjectContext!
-    public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
+    open fileprivate(set) var managedObjectModel: NSManagedObjectModel
+    open fileprivate(set) var persistentStoreManagedObjectContext: NSManagedObjectContext!
+    open fileprivate(set) var mainThreadManagedObjectContext: NSManagedObjectContext!
+    open fileprivate(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 
-    private var console: ConsoleDestination /* Logging by SwiftyBeaver */
+    fileprivate var console: ConsoleDestination /* Logging by SwiftyBeaver */
 
     public convenience init() {
-        let model = NSManagedObjectModel.mergedModelFromBundles(nil)!
+        let model = NSManagedObjectModel.mergedModel(from: nil)!
         self.init(managedObjectModel: model)
     }
 
@@ -59,27 +59,27 @@ public class DataStore: DataStoreProtocol {
         guard tryAddPersistentStore() else { let err = "Failed to add persistent store"; log.error(err); fatalError(err) }
     }
 
-    public func addPersistentStore(withUrl storeUrl: NSURL) throws -> NSPersistentStore {
+    open func addPersistentStore(withUrl storeUrl: URL) throws -> NSPersistentStore {
         let store: NSPersistentStore
         do {
-            try store = persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeUrl, options: nil)
+            try store = persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeUrl, options: nil)
         } catch let error {
             log.error("Failed to add SQLite store, error: \(error)")
-            throw Error.AddingSQLiteStore
+            throw Error.addingSQLiteStore
         }
         return store
     }
 }
 
-public var defaultStoreURL: NSURL? {
+public var defaultStoreURL: URL? {
     guard let documentsFolderUrl = documentsFolder else { return nil }
-    let storeUrl = documentsFolderUrl.URLByAppendingPathComponent("Store.sqlite")
+    let storeUrl = documentsFolderUrl.appendingPathComponent("Store.sqlite")
     return storeUrl
 }
 
 //MARK: Private Methods
 private extension DataStore {
-    private func tryAddPersistentStore() -> Bool {
+    func tryAddPersistentStore() -> Bool {
         guard let storeUrl = defaultStoreURL else { return false }
         do {
            try addPersistentStore(withUrl: storeUrl)
@@ -90,13 +90,13 @@ private extension DataStore {
         return true
     }
 
-    private func createManagedObjectContext() {
-        persistentStoreManagedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+    func createManagedObjectContext() {
+        persistentStoreManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         persistentStoreManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         persistentStoreManagedObjectContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 
-        mainThreadManagedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        mainThreadManagedObjectContext.parentContext = persistentStoreManagedObjectContext
+        mainThreadManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainThreadManagedObjectContext.parent = persistentStoreManagedObjectContext
         mainThreadManagedObjectContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
     }
 }

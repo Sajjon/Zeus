@@ -3,7 +3,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'Zeus' do
-    pod 'Alamofire', '~> 3.4'
+    pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3'
     pod 'SwiftyBeaver'
 end
 

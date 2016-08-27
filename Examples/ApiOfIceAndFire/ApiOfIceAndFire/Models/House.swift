@@ -44,7 +44,7 @@ class House: ManagedObject {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String)
                 else { return obj}
 
             let houseId = url.lastPathComponent
@@ -54,7 +54,7 @@ class House: ManagedObject {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String)
                 else { return obj}
 
             let memberId = url.lastPathComponent
@@ -64,7 +64,7 @@ class House: ManagedObject {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String)
                 else { return obj}
 
             let branchId = url.lastPathComponent
@@ -108,8 +108,8 @@ class House: ManagedObject {
 }
 
 extension String {
-    func contains(find: String) -> Bool {
-        return self.rangeOfString(find) != nil
+    func contains(_ find: String) -> Bool {
+        return self.range(of: find) != nil
     }
 
 }

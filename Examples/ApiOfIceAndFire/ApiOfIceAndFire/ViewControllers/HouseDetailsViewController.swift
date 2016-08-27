@@ -7,21 +7,32 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 private let cellIdentifier = "cellIdSetInStoryboard"
 class HouseDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    private var house: House!
-    private var characters: [Character]? {
+    fileprivate var house: House!
+    fileprivate var characters: [Character]? {
         return house.members
     }
-    private var cadetBranches: [House]? {
+    fileprivate var cadetBranches: [House]? {
         return house.cadetBranches
     }
 
     static func instantiate(withHouse house: House) -> HouseDetailsViewController {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("houseDetails") as! HouseDetailsViewController
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "houseDetails") as! HouseDetailsViewController
         viewController.house = house
         return viewController
     }
@@ -36,11 +47,11 @@ class HouseDetailsViewController: UIViewController {
 
 //MARK: UITableViewDataSource Methods
 extension HouseDetailsViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if let cell = cell as? HouseInfoTableViewCell {
-            let row = indexPath.row
-            if indexPath.section == 0 {
+            let row = (indexPath as NSIndexPath).row
+            if (indexPath as NSIndexPath).section == 0 {
                 if row == 0 {
                     cell.configure(withLabel: "Id", andInfo: house.houseId)
                 } else if row == 1 {
@@ -52,14 +63,14 @@ extension HouseDetailsViewController: UITableViewDataSource {
                 } else if row == 4 {
                     cell.configure(withLabel: "Coat of arms", andInfo: house.coatOfArms)
                 }
-            } else if indexPath.section == 1 {
+            } else if (indexPath as NSIndexPath).section == 1 {
                 if let member = characterAtIndex(row) {
                     cell.configure(withLabel: "Member", andInfo: member.name)
                 } else {
                     guard let memberId = house.memberIds?[row] else { return cell }
                     cell.configure(withLabel: "Member id", andInfo: memberId)
                 }
-            } else if indexPath.section == 2 {
+            } else if (indexPath as NSIndexPath).section == 2 {
                 if let cadetBranch = cadetBranchAtIndex(row) {
                     cell.configure(withLabel: "House", andInfo: cadetBranch.name)
                 } else {
@@ -71,7 +82,7 @@ extension HouseDetailsViewController: UITableViewDataSource {
         return cell
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 5
         } else if section == 1 {
@@ -82,11 +93,11 @@ extension HouseDetailsViewController: UITableViewDataSource {
         return 0
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "General Info"
         } else if section == 1 {
@@ -100,13 +111,13 @@ extension HouseDetailsViewController: UITableViewDataSource {
 
 //MARK: UITableViewDelegate Methods
 extension HouseDetailsViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 2 {
-            guard let house = cadetBranchAtIndex(indexPath.row) else { return }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 2 {
+            guard let house = cadetBranchAtIndex((indexPath as NSIndexPath).row) else { return }
             let viewController = HouseDetailsViewController.instantiate(withHouse: house)
             navigationController?.pushViewController(viewController, animated: true)
         }
@@ -115,7 +126,7 @@ extension HouseDetailsViewController: UITableViewDelegate {
 
 //MARK: Private Methods
 private extension HouseDetailsViewController {
-    private func fetchMembers() {
+    func fetchMembers() {
         guard let memberIds = house.memberIds else { return }
         for memberId in memberIds {
             APIClient.sharedInstance.getCharacter(byId: memberId, queryParams: nil) {
@@ -128,7 +139,7 @@ private extension HouseDetailsViewController {
             }
         }
     }
-    private func fetchCadetBranches() {
+    func fetchCadetBranches() {
         guard let cadetBranchIds = house.cadetBranchIds else { return }
         for cadetBranchId in cadetBranchIds {
             APIClient.sharedInstance.getHouse(byId: cadetBranchId, queryParams: nil) {
@@ -142,13 +153,13 @@ private extension HouseDetailsViewController {
         }
     }
 
-    private func characterAtIndex(index: Int) -> Character? {
+    func characterAtIndex(_ index: Int) -> Character? {
         guard (index < characters?.count) == true else { return nil }
         let character = characters?[index]
         return character
     }
 
-    private func cadetBranchAtIndex(index: Int) -> House? {
+    func cadetBranchAtIndex(_ index: Int) -> House? {
         guard (index < cadetBranches?.count) == true else { return nil }
         let house = cadetBranches?[index]
         return house

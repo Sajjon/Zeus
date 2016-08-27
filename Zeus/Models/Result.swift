@@ -33,7 +33,7 @@ public struct Result {
     }
 }
 
-private func validate(data: NSObject? = nil, error: NSError? = nil, event: MappingEvent? = nil) {
+private func validate(_ data: NSObject? = nil, error: NSError? = nil, event: MappingEvent? = nil) {
     if event == nil {
         let bothNil = data == nil && error == nil
         let noneNil = data != nil && error != nil
@@ -44,12 +44,12 @@ private func validate(data: NSObject? = nil, error: NSError? = nil, event: Mappi
 }
 
 internal enum MappingEvent: Int, CustomStringConvertible {
-    case SkippedDueToCondition
+    case skippedDueToCondition
 
     var description: String {
         let message: String
         switch self {
-        case .SkippedDueToCondition:
+        case .skippedDueToCondition:
             message = "You have added a condition for the object being mapped that prevented it from being stored"
         }
         return message

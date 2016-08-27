@@ -34,7 +34,7 @@ class Character: ManagedObject {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String)
                 else { return obj}
 
             let characterId = url.lastPathComponent

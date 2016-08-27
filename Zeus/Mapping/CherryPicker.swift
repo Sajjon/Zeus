@@ -18,7 +18,7 @@ let cherryPicker = CherryPicker(attributeName: "latestUpdated") {
 }
 
 */
-public typealias CherryPickingClosure = (incomingValue: Attribute, currentValue: Attribute) -> Attribute
+public typealias CherryPickingClosure = (_ incomingValue: Attribute, _ currentValue: Attribute) -> Attribute
 
 public protocol CherryPickerProtocol {
     var attributeName: String { get }
