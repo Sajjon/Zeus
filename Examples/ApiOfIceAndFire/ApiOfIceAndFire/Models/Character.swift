@@ -30,17 +30,7 @@ class Character: ManagedObject {
     }
 
     override class var transformers: [TransformerProtocol]? {
-        let characterIdTransformer = Transformer(key: "url") {
-            (obj: NSObject?) -> NSObject? in
-
-            guard let urlString = obj as? NSString,
-                let url = NSURL(string: urlString as String),
-            let lastPath = url.lastPathComponent
-                else { return obj}
-
-            let asId = lastPath as NSString
-            return asId
-        }
+        let characterIdTransformer = URLToIdTransformer(key: "url")
         return [characterIdTransformer]
     }
 }

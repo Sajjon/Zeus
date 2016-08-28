@@ -166,13 +166,13 @@ private extension ModelMapper {
         var mappedJson: MappedJSON = [:]
         for (key, value) in json {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
-            guard let transformedValue = transform(value: value, forKey: key, withMapping: mapping) else { continue }
+            let transformedValue = transform(value: value, forKey: key, withMapping: mapping)
             mappedJson[mappedKey] = transformedValue
         }
         return mappedJson
     }
 
-    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject? {
+    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject {
         guard let transformers = mapping.transformers, let transformer = transformers[key] else { return value }
         let transformedValue = transformer.transform(value: value)
         return transformedValue
