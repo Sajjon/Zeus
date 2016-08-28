@@ -30,7 +30,7 @@ private extension ManagedObjectStore {
     func existingEntityObject(fromJson json: MappedJSON, withMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
         let idAttributeName = mapping.idAttributeName
         guard let idAttributeValue = json[idAttributeName] else { return nil }
-        let fetchRequest = NSFetchRequest(entityName: mapping.entityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: mapping.entityName)
         fetchRequest.predicate = NSPredicate(format: "%K == %@", idAttributeName, idAttributeValue)
 
         var existingModel: NSManagedObject?

@@ -41,12 +41,12 @@ private extension Options {
         }
     }
 
-    func validatePersisting() -> Error? {
+    func validatePersisting() -> ZeusError? {
         var foundPersistingOption = false
         for option in options {
             switch (option.isPersistingOption, foundPersistingOption) {
             case (true, true):
-                return Error.mappingOptionsPersist
+                return ZeusError.mappingOptionsPersist
             case (true, _):
                 foundPersistingOption = true
             default:

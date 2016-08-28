@@ -21,7 +21,6 @@ public protocol Mappable {
 }
 
 public protocol MappableEntity: Mappable {
-    static var entity: NSManagedObject.Type { get }
     static func entityMapping(_ store: DataStoreProtocol) -> EntityMappingProtocol
 }
 

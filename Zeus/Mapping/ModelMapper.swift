@@ -126,10 +126,10 @@ internal class ModelMapper: ModelMapperProtocol {
         } else if let new = newModel(fromJson: attributesJson, withMapping: mapping) {
             maybeModel = new
         }
-        guard let model = maybeModel else { return Result(Error.mappingModel) }
+        guard let model = maybeModel else { return Result(ZeusError.mappingModel) }
         setValuesFor(attributes: attributesJson, inModel: model, withMapping: mapping)
 
-        /* This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal! */
+        //TODO: This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal!
         if options?.persistEntities == true && store is ManagedObjectStore, let entityMapping = mapping as? EntityMappingProtocol {
             entityMapping.managedObjectContext.saveToPersistentStore()
         }

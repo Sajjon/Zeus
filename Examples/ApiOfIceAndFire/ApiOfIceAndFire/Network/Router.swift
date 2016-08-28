@@ -22,7 +22,7 @@ enum Router: RouterProtocol {
         case .houseById: fallthrough
         case .characters: fallthrough
         case .characterById:
-            method = .GET
+            method = .get
         }
         return method
     }
@@ -46,9 +46,9 @@ enum Router: RouterProtocol {
         let path: String
         switch self {
         case .houseById(let id):
-            path = "\(Router.houses.pathMapping)/\(id)"
+            path = "\(Router.houses.pathMapping)/\(id!)"
         case .characterById(let id):
-            path = "\(Router.characters.pathMapping)/\(id)"
+            path = "\(Router.characters.pathMapping)/\(id!)"
         default:
             path = pathMapping
         }

@@ -1,5 +1,5 @@
 //
-//  Error.swift
+//  ZeusError.swift
 //  Zeus
 //
 //  Created by Cyon Alexander on 22/08/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Error: Int, Error {
+public enum ZeusError: Int, Error {
     case addingSQLiteStore = 10000
     case parsingJSON = 10100
     case mappingModel = 10200

@@ -23,10 +23,10 @@ internal extension TransformerProtocol {
     }
 
     func transform(array arrayToTranform: [NSObject]) -> NSArray? {
-        var transformedArray: [NSObject] = []
+        let transformedArray: NSMutableArray = NSMutableArray()
         for value in arrayToTranform {
             guard let transformed = transformation(value) else { continue }
-            transformedArray.append(transformed)
+            transformedArray.add(transformed)
         }
         return transformedArray
     }

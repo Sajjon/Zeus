@@ -34,11 +34,12 @@ class Character: ManagedObject {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                let url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String),
+            let lastPath = url.lastPathComponent
                 else { return obj}
 
-            let characterId = url.lastPathComponent
-            return characterId
+            let asId = lastPath as NSString
+            return asId
         }
         return [characterIdTransformer]
     }

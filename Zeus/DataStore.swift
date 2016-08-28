@@ -65,7 +65,7 @@ open class DataStore: DataStoreProtocol {
             try store = persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeUrl, options: nil)
         } catch let error {
             log.error("Failed to add SQLite store, error: \(error)")
-            throw Error.addingSQLiteStore
+            throw ZeusError.addingSQLiteStore
         }
         return store
     }

@@ -13,7 +13,7 @@ public struct Result {
     public let error: NSError?
     internal let mappingEvent: MappingEvent?
 
-    init(_ error: Zeus.Error) {
+    init(_ error: ZeusError) {
         self.init(error: err(error))
     }
 

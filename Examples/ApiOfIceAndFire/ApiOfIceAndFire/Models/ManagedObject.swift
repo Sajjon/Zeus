@@ -14,9 +14,6 @@ let mustOverride = "must override"
 class ManagedObject: NSManagedObject, MappableEntity {
 
     class var destinationClass: NSObject.Type {
-        return entity
-    }
-    class var entity: NSManagedObject.Type {
         return self
     }
     class var idAttributeName: String { fatalError(mustOverride) }

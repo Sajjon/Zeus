@@ -29,6 +29,10 @@
 		65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */; };
 		65B9FAC01D706871008F9B99 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABF1D706871008F9B99 /* Option.swift */; };
 		65B9FAC21D7068E2008F9B99 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAC11D7068E2008F9B99 /* Options.swift */; };
+		7BB8BCC21D72E11D004BFBE9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEA20281D71C62800669743 /* Alamofire.framework */; };
+		7BB8BCC41D72E11D004BFBE9 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */; };
+		7BB8BCC61D72E14F004BFBE9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEA20281D71C62800669743 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7BB8BCC71D72E154004BFBE9 /* SwiftyBeaver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */; };
 		7BCD22851D6F4BE7008BE83C /* CherryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */; };
 		7BCD22871D6F4BFD008BE83C /* ShouldStoreModelCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */; };
@@ -49,6 +53,21 @@
 			remoteInfo = Zeus;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7BB8BCC51D72E142004BFBE9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7BB8BCC71D72E154004BFBE9 /* SwiftyBeaver.framework in Embed Frameworks */,
+				7BB8BCC61D72E14F004BFBE9 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		650124781D6609C3003BFFA6 /* Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +95,7 @@
 		65B9FABF1D706871008F9B99 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		65B9FAC11D7068E2008F9B99 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
+		7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-ctkddxqicxwarnheiltnyfumvcck/Build/Products/Debug-iphonesimulator/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
 		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
 		7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CherryPicker.swift; sourceTree = "<group>"; };
 		7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldStoreModelCondition.swift; sourceTree = "<group>"; };
@@ -85,6 +105,7 @@
 		7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
 		7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectStore.swift; sourceTree = "<group>"; };
 		7BCD22931D701B2E008BE83C /* ModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMapper.swift; sourceTree = "<group>"; };
+		7BEA20281D71C62800669743 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-ctkddxqicxwarnheiltnyfumvcck/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB8BCC41D72E11D004BFBE9 /* SwiftyBeaver.framework in Frameworks */,
+				7BB8BCC21D72E11D004BFBE9 /* Alamofire.framework in Frameworks */,
 				47181653D30D11FCB8BF360C /* Pods_Zeus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +144,8 @@
 		4F2245F4B22E6E6D5875248B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */,
+				7BEA20281D71C62800669743 /* Alamofire.framework */,
 				EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */,
 			);
 			name = Frameworks;
@@ -255,6 +280,7 @@
 				650124751D6609C3003BFFA6 /* Headers */,
 				650124761D6609C3003BFFA6 /* Resources */,
 				84877DAA5AC921334BA9A5F1 /* [CP] Copy Pods Resources */,
+				7BB8BCC51D72E142004BFBE9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -290,7 +316,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = com.cyon;
 				TargetAttributes = {
 					650124771D6609C3003BFFA6 = {
@@ -299,6 +325,7 @@
 					};
 					650124811D6609C3003BFFA6 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -438,8 +465,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -487,8 +516,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -508,6 +539,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -519,7 +551,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -539,7 +573,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -561,6 +597,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.ZeusTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -571,6 +608,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.ZeusTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

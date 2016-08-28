@@ -11,25 +11,25 @@ import Foundation
 
 public class FileDestination: BaseDestination {
 
-    public var logFileURL: NSURL?
+    public var logFileURL: URL?
 
     override public var defaultHashValue: Int {return 2}
-    let fileManager = NSFileManager.defaultManager()
-    var fileHandle: NSFileHandle? = nil
+    let fileManager = FileManager.default
+    var fileHandle: FileHandle? = nil
 
     public override init() {
         // platform-dependent logfile directory default
-        var baseURL: NSURL?
+        var baseURL: URL?
 
         if OS == "OSX" {
-            if let url = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).first {
+            if let url = fileManager.urls(for:.cachesDirectory, in: .userDomainMask).first {
                 baseURL = url
                 // try to use ~/Library/Caches/APP NAME instead of ~/Library/Caches
-                if let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleExecutable") as? String {
+                if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleExecutable") as? String {
                     do {
-                        if let appURL = baseURL?.URLByAppendingPathComponent(appName, isDirectory: true) {
-                            try fileManager.createDirectoryAtURL(appURL,
-                                                                 withIntermediateDirectories: true, attributes: nil)
+                        if let appURL = baseURL?.appendingPathComponent(appName, isDirectory: true) {
+                            try fileManager.createDirectory(at: appURL,
+                                                            withIntermediateDirectories: true, attributes: nil)
                             baseURL = appURL
                         }
                     } catch let error as NSError {
@@ -39,13 +39,13 @@ public class FileDestination: BaseDestination {
             }
         } else {
             // iOS, watchOS, etc. are using the caches directory
-            if let url = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).first {
+            if let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
                 baseURL = url
             }
         }
 
         if let baseURL = baseURL {
-            logFileURL = baseURL.URLByAppendingPathComponent("swiftybeaver.log", isDirectory: false)
+            logFileURL = baseURL.appendingPathComponent("swiftybeaver.log", isDirectory: false)
         }
         super.init()
 
@@ -62,12 +62,12 @@ public class FileDestination: BaseDestination {
     }
 
     // append to file. uses full base class functionality
-    override public func send(level: SwiftyBeaver.Level, msg: String, thread: String,
+    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
         path: String, function: String, line: Int) -> String? {
         let formattedString = super.send(level, msg: msg, thread: thread, path: path, function: function, line: line)
 
         if let str = formattedString {
-            saveToFile(str)
+            let _ = saveToFile(str: str)
         }
         return formattedString
     }
@@ -84,21 +84,21 @@ public class FileDestination: BaseDestination {
     func saveToFile(str: String) -> Bool {
         guard let url = logFileURL else { return false }
         do {
-            if fileManager.fileExistsAtPath(url.path!) == false {
+            if fileManager.fileExists(atPath: url.path) == false {
                 // create file if not existing
                 let line = str + "\n"
-                try line.writeToURL(url, atomically: true, encoding: NSUTF8StringEncoding)
+                try line.write(to: url as URL, atomically: true, encoding: String.Encoding.utf8)
             } else {
                 // append to end of file
                 if fileHandle == nil {
                     // initial setting of file handle
-                    fileHandle = try NSFileHandle(forWritingToURL: url)
+                    fileHandle = try FileHandle(forWritingTo: url as URL)
                 }
                 if let fileHandle = fileHandle {
                     fileHandle.seekToEndOfFile()
                     let line = str + "\n"
-                    let data = line.dataUsingEncoding(NSUTF8StringEncoding)!
-                    fileHandle.writeData(data)
+                    let data = line.data(using: String.Encoding.utf8)!
+                    fileHandle.write(data)
                 }
             }
             return true

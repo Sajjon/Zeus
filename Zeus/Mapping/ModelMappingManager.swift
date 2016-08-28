@@ -76,7 +76,7 @@ private extension ModelMappingManager {
 
     func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
         pathToDescriptorMap[descriptor.route.pathMapping] = descriptor
-        let mapping = descriptor.mapping
+//        let mapping = descriptor.mapping
 //        if let futureConnections = mapping.futureConnections {
 //            for (_, futureConnection) in futureConnections {
 //                let relationship = futureConnection.relationship
@@ -105,10 +105,12 @@ private extension ModelMappingManager {
         return descriptor
     }
 
+    //TODO: Fix class that understands that 'api/object/7' should match 'api/object/:objectid'
     func parse(path: String) -> String {
         guard let url = URL(string: path) else { return path }
         let parsedPath: String
-        if let lastPathComponent = url.lastPathComponent, let _ = Int(lastPathComponent) {
+        let lastPathComponent = url.lastPathComponent
+        if let _ = Int(lastPathComponent) {
             parsedPath = url.absoluteString.replacingOccurrences(of: lastPathComponent, with: ":id")
         } else {
             parsedPath = path

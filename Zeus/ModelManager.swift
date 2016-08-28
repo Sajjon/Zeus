@@ -12,9 +12,9 @@ import Alamofire
 import SwiftyBeaver
 
 public protocol ModelManagerProtocol {
-    static var sharedInstance: ModelManagerProtocol!{get set}
-    var managedObjectStore: DataStoreProtocol{get}
-    var httpClient: Alamofire.Manager{get}
+    static var sharedInstance: ModelManagerProtocol! { get set }
+    var managedObjectStore: DataStoreProtocol { get }
+    var httpClient: Alamofire.SessionManager { get }
     func map(_ a: MappingProtocol, closure: (MappingProxy) -> Void)
     func map(_ a: MappingProtocol, _ b: MappingProtocol, closure: (MappingProxy, MappingProxy) -> Void)
     func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy) -> Void)
@@ -28,7 +28,7 @@ open class ModelManager: ModelManagerProtocol {
 
     open static var sharedInstance: ModelManagerProtocol!
     open let managedObjectStore: DataStoreProtocol
-    open let httpClient: Alamofire.Manager
+    open let httpClient: Alamofire.SessionManager
 
     fileprivate let modelMappingManager: ModelMappingManagerProtocol
     fileprivate let baseUrl: String
@@ -36,18 +36,19 @@ open class ModelManager: ModelManagerProtocol {
     public init(baseUrl: String, store: DataStoreProtocol) {
         self.baseUrl = baseUrl
         self.managedObjectStore = store
-        self.httpClient = Alamofire.Manager()
+        self.httpClient = Alamofire.SessionManager()
         self.modelMappingManager = ModelMappingManager()
     }
 
     open func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?) {
         let pathFull = fullPath(withPath: path)
         let options = options ?? Options(.persistEntitiesDuringMapping)
-        httpClient.request(.GET, pathFull, parameters: params)
+
+        httpClient.request(pathFull, withMethod: Alamofire.HTTPMethod.get, parameters: params)
             .validate()
-            .responseJSON() {
+            .responseJSON {
                 response in
-                self.handle(jsonResponse: response, fromPath: path, options: options, done: done)
+            self.handle(jsonResponse: response, fromPath: path, options: options, done: done)
         }
     }
 
@@ -139,9 +140,9 @@ private extension ModelManager {
         return fullPath
     }
 
-    func handle(jsonResponse response: Response<AnyObject, NSError>, fromPath path: String, options: Options, done: Done?) {
+    func handle(jsonResponse response: Response<Any, NSError>, fromPath path: String, options: Options, done: Done?) {
         switch response.result {
-        case .Success(let data):
+        case .success(let data):
             var result: Result!
             if let jsonArray = data as? [JSON] {
                 result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
@@ -153,7 +154,7 @@ private extension ModelManager {
             } else {
                 done?(Result(.parsingJSON))
             }
-        case .Failure(let error):
+        case .failure(let error):
             log.error("failed, error: \(error)")
             done?(Result(.parsingJSON))
         }

@@ -44,31 +44,34 @@ class House: ManagedObject {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                let url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String),
+                let lastPath = url.lastPathComponent
                 else { return obj}
 
-            let houseId = url.lastPathComponent
-            return houseId
+            let asId = lastPath as NSString
+            return asId
         }
         let memberIdTransformer = Transformer(key: "swornMembers") {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                let url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String),
+                let lastPath = url.lastPathComponent
                 else { return obj}
 
-            let memberId = url.lastPathComponent
-            return memberId
+            let asId = lastPath as NSString
+            return asId
         }
         let cadetBranchIdTransformer = Transformer(key: "cadetBranches") {
             (obj: NSObject?) -> NSObject? in
 
             guard let urlString = obj as? NSString,
-                let url = NSURL(string: urlString as String)
+                let url = NSURL(string: urlString as String),
+                let lastPath = url.lastPathComponent
                 else { return obj}
 
-            let branchId = url.lastPathComponent
-            return branchId
+            let asId = lastPath as NSString
+            return asId
         }
         return [houseIdTransformer, memberIdTransformer, cadetBranchIdTransformer]
     }

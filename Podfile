@@ -4,6 +4,6 @@ use_frameworks!
 
 target 'Zeus' do
     pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3'
-    pod 'SwiftyBeaver'
+    pod 'SwiftyBeaver', :git => 'https://github.com/SwiftyBeaver/SwiftyBeaver.git', :branch => 'swift3'
 end
 

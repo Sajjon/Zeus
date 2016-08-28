@@ -39,10 +39,10 @@ class ZeusConfigurator {
     fileprivate func setupMapping() {
         modelManager.map(Character.entityMapping(store), House.entityMapping(store)) {
             character, house in
-            character == Router.Characters
-            character == Router.CharacterById(nil)
-            house == Router.Houses
-            house == Router.HouseById(nil)
+            character == Router.characters
+            character == Router.characterById(nil)
+            house == Router.houses
+            house == Router.houseById(nil)
         }
     }
 }
