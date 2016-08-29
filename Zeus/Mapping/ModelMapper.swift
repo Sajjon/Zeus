@@ -46,8 +46,31 @@ internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
 
     override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
         guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
-        return newModel(fromJson: json, withEntityMapping: entityMapping)
+        let new = newModel(fromJson: json, withEntityMapping: entityMapping)
+        return new
     }
+
+    internal func storeModel(_ json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+        let managedObject = super.storeModel(json, withMapping: mapping, options: options)
+
+        if let managedObject = model as? NSManagedObject {
+            do {
+                try managedObject.validateForInsert()
+            } catch let error {
+                log.error("Error validating model: \(error)")
+                let result = Result(.coreDataValidation)
+                return result
+            }
+        }
+
+        //TODO: This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal!
+        if options?.persistEntities == true, let entityMapping = mapping as? EntityMappingProtocol {
+            entityMapping.managedObjectContext.saveToPersistentStore()
+        }
+
+        return Result(managedObject)
+    }
+
 }
 
 private extension ManagedObjectMapper {
@@ -128,12 +151,6 @@ internal class ModelMapper: ModelMapperProtocol {
         }
         guard let model = maybeModel else { return Result(ZeusError.mappingModel) }
         setValuesFor(attributes: attributesJson, inModel: model, withMapping: mapping)
-
-        //TODO: This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal!
-        if options?.persistEntities == true && store is ManagedObjectStore, let entityMapping = mapping as? EntityMappingProtocol {
-            entityMapping.managedObjectContext.saveToPersistentStore()
-        }
-
         return Result(model)
     }
 
@@ -172,7 +189,7 @@ private extension ModelMapper {
         return mappedJson
     }
 
-    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject {
+    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject? {
         guard let transformers = mapping.transformers, let transformer = transformers[key] else { return value }
         let transformedValue = transformer.transform(value: value)
         return transformedValue

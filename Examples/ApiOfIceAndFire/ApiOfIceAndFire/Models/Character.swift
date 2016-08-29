@@ -12,7 +12,7 @@ import Zeus
 
 class Character: ManagedObject {
     @NSManaged var characterId: String?
-    @NSManaged var name: String?
+    @NSManaged var name: String
     @NSManaged var gender: String?
     @NSManaged var house: House?
     @NSManaged var lordOfHouses: NSSet?

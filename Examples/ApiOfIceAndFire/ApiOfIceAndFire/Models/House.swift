@@ -11,17 +11,17 @@ import CoreData
 import Zeus
 
 class House: ManagedObject {
-    @NSManaged var houseId: String?
-    @NSManaged var name: String?
-    @NSManaged var words: String?
-    @NSManaged var region: String?
-    @NSManaged var coatOfArms: String?
+    @NSManaged var houseId: String
+    @NSManaged var name: String
+    @NSManaged var words: String
+    @NSManaged var region: String
+    @NSManaged var coatOfArms: String
     @NSManaged var membersSet: NSSet?
     @NSManaged var cadetBranchesSet: NSSet?
     @NSManaged var currentLord: Character?
 
-    @NSManaged var memberIds: [String]?
-    @NSManaged var cadetBranchIds: [String]?
+    @NSManaged var memberIds: [String]
+    @NSManaged var cadetBranchIds: [String]
 
     override class var idAttributeName: String {
         return "houseId"

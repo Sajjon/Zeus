@@ -12,7 +12,7 @@ class HouseInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var info: UILabel!
 
-    func configure(withLabel label: String, andInfo info: String?) {
+    func configure(withLabel label: String, andInfo info: String) {
         self.label.text = label
         self.info.text = info
     }

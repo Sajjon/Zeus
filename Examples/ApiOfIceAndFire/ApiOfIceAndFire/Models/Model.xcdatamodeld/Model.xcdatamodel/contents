@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11224.2" systemVersion="15G31" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Character" representedClassName=".Character" syncable="YES">
         <attribute name="characterId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gender" attributeType="String" syncable="YES"/>
@@ -8,13 +8,13 @@
         <relationship name="lordOfHouses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="House" inverseName="currentLord" inverseEntity="House" syncable="YES"/>
     </entity>
     <entity name="House" representedClassName=".House" syncable="YES">
-        <attribute name="cadetBranchIds" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="coatOfArms" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="houseId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="memberIds" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="region" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="words" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cadetBranchIds" attributeType="Transformable" syncable="YES"/>
+        <attribute name="coatOfArms" attributeType="String" syncable="YES"/>
+        <attribute name="houseId" attributeType="String" syncable="YES"/>
+        <attribute name="memberIds" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="region" attributeType="String" syncable="YES"/>
+        <attribute name="words" attributeType="String" syncable="YES"/>
         <relationship name="cadetBranchesSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="House" inverseName="cadetBranchesSet" inverseEntity="House" syncable="YES"/>
         <relationship name="currentLord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="lordOfHouses" inverseEntity="Character" syncable="YES"/>
         <relationship name="membersSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="house" inverseEntity="Character" syncable="YES"/>

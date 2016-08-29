@@ -14,6 +14,7 @@ public enum ZeusError: Int, Error {
     case mappingModel = 10200
     case mappingNoResponseDescriptor = 10201
     case mappingOptionsPersist = 10300
+    case coreDataValidation = 10400
 
     var errorMessage: String {
         let message: String
@@ -28,6 +29,8 @@ public enum ZeusError: Int, Error {
             message = "Failed to map model, missing descriptor"
         case .mappingOptionsPersist:
             message = "Your options regarding when to persist models are conflicting with each other"
+        case .coreDataValidation:
+            message = "Model does not fulfill the required attributes"
         }
         return message
     }

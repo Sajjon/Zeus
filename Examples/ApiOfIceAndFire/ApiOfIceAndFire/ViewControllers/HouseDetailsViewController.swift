@@ -67,14 +67,14 @@ extension HouseDetailsViewController: UITableViewDataSource {
                 if let member = characterAtIndex(row) {
                     cell.configure(withLabel: "Member", andInfo: member.name)
                 } else {
-                    guard let memberId = house.memberIds?[row] else { return cell }
+                    guard let memberId = memberId(at: row) else { return cell }
                     cell.configure(withLabel: "Member id", andInfo: memberId)
                 }
             } else if (indexPath as NSIndexPath).section == 2 {
                 if let cadetBranch = cadetBranchAtIndex(row) {
                     cell.configure(withLabel: "House", andInfo: cadetBranch.name)
                 } else {
-                    guard let houseId = house.cadetBranchIds?[row] else { return cell }
+                    guard let houseId = cadetBranchId(at: row) else { return cell }
                     cell.configure(withLabel: "House id", andInfo: houseId)
                 }
             }
@@ -86,9 +86,9 @@ extension HouseDetailsViewController: UITableViewDataSource {
         if section == 0 {
             return 5
         } else if section == 1 {
-            return house.memberIds?.count ?? 0
+            return house.memberIds.count
         } else if section == 2 {
-            return house.cadetBranchIds?.count ?? 0
+            return house.cadetBranchIds.count
         }
         return 0
     }
@@ -127,8 +127,7 @@ extension HouseDetailsViewController: UITableViewDelegate {
 //MARK: Private Methods
 private extension HouseDetailsViewController {
     func fetchMembers() {
-        guard let memberIds = house.memberIds else { return }
-        for memberId in memberIds {
+        for memberId in house.memberIds {
             APIClient.sharedInstance.getCharacter(byId: memberId, queryParams: nil) {
                 result in
                 if let error = result.error {
@@ -140,8 +139,7 @@ private extension HouseDetailsViewController {
         }
     }
     func fetchCadetBranches() {
-        guard let cadetBranchIds = house.cadetBranchIds else { return }
-        for cadetBranchId in cadetBranchIds {
+        for cadetBranchId in house.cadetBranchIds {
             APIClient.sharedInstance.getHouse(byId: cadetBranchId, queryParams: nil) {
                 result in
                 if let error = result.error {
@@ -151,6 +149,18 @@ private extension HouseDetailsViewController {
                 }
             }
         }
+    }
+
+    func memberId(at index: Int) -> String? {
+        guard (index < house.memberIds.count) == true else { return nil }
+        let memberId = house.memberIds[index]
+        return memberId
+    }
+
+    func cadetBranchId(at index: Int) -> String? {
+        guard (index < house.cadetBranchIds.count) == true else { return nil }
+        let memberId = house.cadetBranchIds[index]
+        return memberId
     }
 
     func characterAtIndex(_ index: Int) -> Character? {
