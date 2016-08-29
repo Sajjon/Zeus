@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 public enum Result {
     case success(NSObject)
@@ -64,6 +65,17 @@ public enum Result {
             isEvent = false
         }
         return isEvent
+    }
+
+    internal var isManagedObject: Bool {
+        let isManagedObject: Bool
+        switch self {
+        case .success(let value):
+            isManagedObject = (value is NSManagedObject)
+        default:
+            isManagedObject = false
+        }
+        return isManagedObject
     }
 }
 

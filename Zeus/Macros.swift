@@ -8,6 +8,7 @@
 
 import Foundation
 
+let mustOverride = "must override"
 
 public var documentsFolder: URL? {
     let fileManager = FileManager.default

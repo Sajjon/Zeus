@@ -9,82 +9,6 @@
 import Foundation
 import CoreData
 
-
-internal protocol InMemoryModelMapperProtocol: ModelMapperProtocol {
-    var inMemoryStore: InMemoryStore { get }
-}
-
-internal class InMemoryModelMapper: ModelMapper, InMemoryModelMapperProtocol {
-    internal let inMemoryStore: InMemoryStore
-    internal init(inMemoryStore: InMemoryStore) {
-        self.inMemoryStore = inMemoryStore
-    }
-
-    override var store: StoreProtocol {
-        return inMemoryStore
-    }
-
-    override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
-        let newModel = mapping.destinationClass.init()
-        return newModel
-    }
-}
-
-internal protocol ManagedObjectMapperProtocol: ModelMapperProtocol {
-    var managedObjectStore: ManagedObjectStore { get }
-}
-
-internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
-    internal let managedObjectStore: ManagedObjectStore
-    internal init(managedObjectStore: ManagedObjectStore) {
-        self.managedObjectStore = managedObjectStore
-    }
-
-    override var store: StoreProtocol {
-        return managedObjectStore
-    }
-
-    override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
-        guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
-        let new = newModel(fromJson: json, withEntityMapping: entityMapping)
-        return new
-    }
-
-    internal override func storeModel(_ json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
-        let storeModelResult = super.storeModel(json, withMapping: mapping, options: options)
-
-        switch storeModelResult {
-        case .success(let model):
-            if let managedObject = model as? NSManagedObject {
-                do {
-                    try managedObject.validateForInsert()
-                } catch let error {
-                    log.error("Error validating model: \(error)")
-                    let result = Result(.coreDataValidation)
-                    return result
-                }
-
-                //TODO: This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal!
-                if options?.persistEntities == true, let entityMapping = mapping as? EntityMappingProtocol {
-                    entityMapping.managedObjectContext.saveToPersistentStore()
-                }
-            }
-        default:
-            break
-        }
-
-        return storeModelResult
-    }
-
-}
-
-private extension ManagedObjectMapper {
-    func newModel(fromJson json: MappedJSON, withEntityMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
-        let newModel = NSManagedObject(entity: mapping.entityDescription, insertInto: mapping.managedObjectContext)
-        return newModel
-    }
-}
-
 internal protocol ModelMapperProtocol {
     func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result
     var store: StoreProtocol { get }
@@ -92,7 +16,7 @@ internal protocol ModelMapperProtocol {
 
 internal class ModelMapper: ModelMapperProtocol {
 
-    var store: StoreProtocol { fatalError("Must override") }
+    var store: StoreProtocol { fatalError(mustOverride) }
 
     internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let mappedJson = map(json: json, withMapping: mapping)
@@ -130,8 +54,8 @@ internal class ModelMapper: ModelMapperProtocol {
     }
 
     internal func cherryPick(from json: MappedJSON, withMapping mapping: MappingProtocol) -> CherryPickedJSON {
-        guard let cherryPickers = mapping.cherryPickers else { return json }
-        var cherryPickedValues: CherryPickedJSON = json
+        guard let cherryPickers = mapping.cherryPickers else { return CherryPickedJSON(json) }
+        var cherryPickedValues = CherryPickedJSON(json)
         for (attributeName, attributeValue) in json {
             guard let
                 cherryPicker = cherryPickers[attributeName],
@@ -161,7 +85,7 @@ internal class ModelMapper: ModelMapperProtocol {
 
     internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {
         let cherryPicked = cherryPick(from: attributesJson, withMapping: mapping)
-        model.setValuesForKeys(cherryPicked)
+        model.setValuesForKeys(cherryPicked.map)
     }
 
     internal func split(json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
@@ -174,7 +98,7 @@ internal class ModelMapper: ModelMapperProtocol {
     }
 
     internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
-        fatalError("Must override")
+        fatalError(mustOverride)
     }
 }
 
@@ -185,7 +109,7 @@ private extension ModelMapper {
     }
 
     func map(json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {
-        var mappedJson: MappedJSON = [:]
+        var mappedJson: MappedJSON = MappedJSON()
         for (key, value) in json {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
             let transformedValue = transform(value: value, forKey: key, withMapping: mapping)

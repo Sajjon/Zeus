@@ -144,12 +144,16 @@ private extension ModelManager {
         switch response.result {
         case .success(let data):
             var result: Result!
-            if let jsonArray = data as? [JSON] {
+            if let arrayOrRawJson = data as? [RawJSON] {
+                let jsonArray: [JSON] = arrayOrRawJson.map { return JSON($0) }
                 result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
-            } else if let json = data as? JSON {
-                result = modelMappingManager.mapping(withJson: json, fromPath: path, options: options)
+            } else if let json = data as? RawJSON {
+                result = modelMappingManager.mapping(withJson: JSON(json), fromPath: path, options: options)
             }
             if let mappingResult = result {
+                if mappingResult.isManagedObject && options.persistEntities {
+                    managedObjectStore.mainThreadManagedObjectContext.saveToPersistentStore()
+                }
                 done?(mappingResult)
             } else {
                 done?(Result(.parsingJSON))
