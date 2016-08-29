@@ -1,4 +1,4 @@
-# Zeus
+# 🌩 Zeus 🌩
 REST Client with Core Data persistence in Swift. This project is inspired by the fantastic Objective-C framework [RestKit](https://github.com/RestKit/RestKit), but this project is written in Swift.
 
 
