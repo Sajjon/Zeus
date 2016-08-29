@@ -12,51 +12,52 @@ import Alamofire
 import SwiftyBeaver
 
 public protocol ModelManagerProtocol {
-    static var sharedInstance: ModelManagerProtocol!{get set}
-    var managedObjectStore: DataStoreProtocol{get}
-    var httpClient: Alamofire.Manager{get}
-    func map(a: MappingProtocol, closure: (MappingProxy) -> Void)
-    func map(a: MappingProtocol, _ b: MappingProtocol, closure: (MappingProxy, MappingProxy) -> Void)
-    func map(a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy) -> Void)
-    func map(a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
-    func map(a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, _ e: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
+    static var sharedInstance: ModelManagerProtocol! { get set }
+    var managedObjectStore: DataStoreProtocol { get }
+    var httpClient: Alamofire.SessionManager { get }
+    func map(_ a: MappingProtocol, closure: (MappingProxy) -> Void)
+    func map(_ a: MappingProtocol, _ b: MappingProtocol, closure: (MappingProxy, MappingProxy) -> Void)
+    func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy) -> Void)
+    func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
+    func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, _ e: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
     func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?)
-    func post(model model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?)
+    func post(model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?)
 }
 
-public class ModelManager: ModelManagerProtocol {
+open class ModelManager: ModelManagerProtocol {
 
-    public static var sharedInstance: ModelManagerProtocol!
-    public let managedObjectStore: DataStoreProtocol
-    public let httpClient: Alamofire.Manager
+    open static var sharedInstance: ModelManagerProtocol!
+    open let managedObjectStore: DataStoreProtocol
+    open let httpClient: Alamofire.SessionManager
 
-    private let modelMappingManager: ModelMappingManagerProtocol
-    private let baseUrl: String
+    fileprivate let modelMappingManager: ModelMappingManagerProtocol
+    fileprivate let baseUrl: String
 
     public init(baseUrl: String, store: DataStoreProtocol) {
         self.baseUrl = baseUrl
         self.managedObjectStore = store
-        self.httpClient = Alamofire.Manager()
+        self.httpClient = Alamofire.SessionManager()
         self.modelMappingManager = ModelMappingManager()
     }
 
-    public func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?) {
+    open func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?) {
         let pathFull = fullPath(withPath: path)
-        let options = options ?? Options(.PersistEntitiesDuringMapping)
-        httpClient.request(.GET, pathFull, parameters: params)
+        let options = options ?? Options(.persistEntitiesDuringMapping)
+
+        httpClient.request(pathFull, withMethod: Alamofire.HTTPMethod.get, parameters: params)
             .validate()
-            .responseJSON() {
+            .responseJSON {
                 response in
-                self.handle(jsonResponse: response, fromPath: path, options: options, done: done)
+            self.handle(jsonResponse: response, fromPath: path, options: options, done: done)
         }
     }
 
-    public func post(model model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?) {
+    open func post(model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?) {
         log.error("post")
     }
 
-    public func map(
-        a: MappingProtocol,
+    open func map(
+        _ a: MappingProtocol,
         closure: (MappingProxy) -> Void
         ) {
         let context = MappingContext()
@@ -66,8 +67,8 @@ public class ModelManager: ModelManagerProtocol {
         modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
-    public func map(
-        a: MappingProtocol,
+    open func map(
+        _ a: MappingProtocol,
         _ b: MappingProtocol,
           closure: (MappingProxy, MappingProxy) -> Void
         ) {
@@ -80,8 +81,8 @@ public class ModelManager: ModelManagerProtocol {
     }
 
 
-    public func map(
-        a: MappingProtocol,
+    open func map(
+        _ a: MappingProtocol,
         _ b: MappingProtocol,
           _ c: MappingProtocol,
             closure: (MappingProxy, MappingProxy, MappingProxy) -> Void
@@ -95,8 +96,8 @@ public class ModelManager: ModelManagerProtocol {
         modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
-    public func map(
-        a: MappingProtocol,
+    open func map(
+        _ a: MappingProtocol,
         _ b: MappingProtocol,
           _ c: MappingProtocol,
             _ d: MappingProtocol,
@@ -112,8 +113,8 @@ public class ModelManager: ModelManagerProtocol {
         modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 
-    public func map(
-        a: MappingProtocol,
+    open func map(
+        _ a: MappingProtocol,
         _ b: MappingProtocol,
           _ c: MappingProtocol,
             _ d: MappingProtocol,
@@ -134,14 +135,14 @@ public class ModelManager: ModelManagerProtocol {
 
 //MARK: Private Methods
 private extension ModelManager {
-    private func fullPath(withPath path: String) -> String {
+    func fullPath(withPath path: String) -> String {
         let fullPath = baseUrl + path
         return fullPath
     }
 
-    private func handle(jsonResponse response: Response<AnyObject, NSError>, fromPath path: String, options: Options, done: Done?) {
+    func handle(jsonResponse response: Response<Any, NSError>, fromPath path: String, options: Options, done: Done?) {
         switch response.result {
-        case .Success(let data):
+        case .success(let data):
             var result: Result!
             if let jsonArray = data as? [JSON] {
                 result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
@@ -151,15 +152,15 @@ private extension ModelManager {
             if let mappingResult = result {
                 done?(mappingResult)
             } else {
-                done?(Result(.ParsingJSON))
+                done?(Result(.parsingJSON))
             }
-        case .Failure(let error):
+        case .failure(let error):
             log.error("failed, error: \(error)")
-            done?(Result(.ParsingJSON))
+            done?(Result(.parsingJSON))
         }
     }
 
-    private func addResponseDescriptors(fromContext context: MappingContext) {
+    func addResponseDescriptors(fromContext context: MappingContext) {
         modelMappingManager.addResponseDescriptors(fromContext: context)
     }
 

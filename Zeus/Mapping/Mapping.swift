@@ -20,7 +20,7 @@ public protocol MappingProtocol {
 
     func add(cherryPicker picker: CherryPickerProtocol)
     func add(shouldStoreCondition condition: ShouldStoreModelConditionProtocol)
-    func add(transformer transformer: TransformerProtocol)
+    func add(transformer: TransformerProtocol)
     func add(futureConnection connection: FutureConnectionProtocol)
 
     func shouldStoreCondition(forAttributeName attributeName: String) -> ShouldStoreModelConditionProtocol?
@@ -29,15 +29,15 @@ public protocol MappingProtocol {
     func futureConnection(forRelationshipName relationshipName: String) -> FutureConnectionProtocol?
 }
 
-public class Mapping: MappingProtocol {
-    public let destinationClass: NSObject.Type
-    public let idAttributeName: String
-    public let attributeMapping: AttributeMappingProtocol
+open class Mapping: MappingProtocol {
+    open let destinationClass: NSObject.Type
+    open let idAttributeName: String
+    open let attributeMapping: AttributeMappingProtocol
 
-    public var transformers: Dictionary<String, TransformerProtocol>?
-    public var futureConnections: Dictionary<String, FutureConnectionProtocol>?
-    public var shouldStoreConditions: Dictionary<String, ShouldStoreModelConditionProtocol>?
-    public var cherryPickers: Dictionary<String, CherryPickerProtocol>?
+    open var transformers: Dictionary<String, TransformerProtocol>?
+    open var futureConnections: Dictionary<String, FutureConnectionProtocol>?
+    open var shouldStoreConditions: Dictionary<String, ShouldStoreModelConditionProtocol>?
+    open var cherryPickers: Dictionary<String, CherryPickerProtocol>?
 
     public init(
         destinationClass: NSObject.Type,
@@ -49,50 +49,50 @@ public class Mapping: MappingProtocol {
         self.attributeMapping = attributeMapping
     }
 
-    public func add(transformer transformer: TransformerProtocol) {
+    open func add(transformer: TransformerProtocol) {
         if transformers == nil {
             transformers = [:]
         }
         transformers?[transformer.key] = transformer
     }
 
-    public func add(futureConnection connection: FutureConnectionProtocol) {
+    open func add(futureConnection connection: FutureConnectionProtocol) {
         if futureConnections == nil {
             futureConnections = [:]
         }
         futureConnections?[connection.connectionName] = connection
     }
 
-    public func add(cherryPicker picker: CherryPickerProtocol) {
+    open func add(cherryPicker picker: CherryPickerProtocol) {
         if cherryPickers == nil {
             cherryPickers = [:]
         }
         cherryPickers?[picker.attributeName] = picker
     }
 
-    public func add(shouldStoreCondition condition: ShouldStoreModelConditionProtocol) {
+    open func add(shouldStoreCondition condition: ShouldStoreModelConditionProtocol) {
         if shouldStoreConditions == nil {
             shouldStoreConditions = [:]
         }
         shouldStoreConditions?[condition.attributeName] = condition
     }
 
-    public func shouldStoreCondition(forAttributeName attributeName: String) -> ShouldStoreModelConditionProtocol? {
+    open func shouldStoreCondition(forAttributeName attributeName: String) -> ShouldStoreModelConditionProtocol? {
         let condition = shouldStoreConditions?[attributeName]
         return condition
     }
 
-    public func cherryPicker(forAttributeName attributeName: String) -> CherryPickerProtocol? {
+    open func cherryPicker(forAttributeName attributeName: String) -> CherryPickerProtocol? {
         let picker = cherryPickers?[attributeName]
         return picker
     }
 
-    public func transformer(forKey key: String) -> TransformerProtocol? {
+    open func transformer(forKey key: String) -> TransformerProtocol? {
         let transformer = transformers?[key]
         return transformer
     }
 
-    public func futureConnection(forRelationshipName relationshipName: String) -> FutureConnectionProtocol? {
+    open func futureConnection(forRelationshipName relationshipName: String) -> FutureConnectionProtocol? {
         let connection = futureConnections?[relationshipName]
         return connection
     }

@@ -9,15 +9,15 @@
 import Foundation
 
 public enum Option: Int {
-    case PersistEntitiesDuringMapping
-    case DontPersistEntitiesDuringMapping
+    case persistEntitiesDuringMapping
+    case dontPersistEntitiesDuringMapping
 }
 
 internal extension Option {
     var isPersistingOption: Bool {
         switch self {
-        case .PersistEntitiesDuringMapping: fallthrough
-        case .DontPersistEntitiesDuringMapping:
+        case .persistEntitiesDuringMapping: fallthrough
+        case .dontPersistEntitiesDuringMapping:
             return true
         default:
             return false

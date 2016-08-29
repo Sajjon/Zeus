@@ -9,19 +9,12 @@
 import Foundation
 
 
-public var documentsFolder: NSURL? {
-    let fileManager = NSFileManager.defaultManager()
-    let path = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+public var documentsFolder: URL? {
+    let fileManager = FileManager.default
+    let path = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last
     return path
 }
 
 public var documentsFolderPath: String? {
     return documentsFolder?.absoluteString
 }
-
-func err(error: Error) -> NSError {
-    let userInfo = [NSLocalizedFailureReasonErrorKey: error.errorMessage]
-    let error = NSError(domain: "Zeus", code: error.rawValue, userInfo: userInfo)
-    return error
-}
-

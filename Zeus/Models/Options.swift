@@ -26,14 +26,14 @@ internal extension Options {
     var persistEntities: Bool {
         for option in options {
             guard option.isPersistingOption else { continue }
-            return option == .PersistEntitiesDuringMapping
+            return option == .persistEntitiesDuringMapping
         }
         return false
     }
 }
 
 private extension Options {
-    private func validate() {
+    func validate() {
         if let error = validatePersisting() {
             let errorMessage = error.errorMessage
             log.error(errorMessage)
@@ -41,12 +41,12 @@ private extension Options {
         }
     }
 
-    private func validatePersisting() -> Error? {
+    func validatePersisting() -> ZeusError? {
         var foundPersistingOption = false
         for option in options {
             switch (option.isPersistingOption, foundPersistingOption) {
             case (true, true):
-                return Error.MappingOptionsPersist
+                return ZeusError.mappingOptionsPersist
             case (true, _):
                 foundPersistingOption = true
             default:

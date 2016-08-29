@@ -1,0 +1,6 @@
+framework module Pods_ZeusFramework_Zeus {
+  umbrella header "Pods-ZeusFramework-Zeus-umbrella.h"
+
+  export *
+  module * { export * }
+}

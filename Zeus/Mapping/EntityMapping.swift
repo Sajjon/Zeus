@@ -16,16 +16,16 @@ public protocol EntityMappingProtocol: MappingProtocol {
 
 public extension EntityMappingProtocol {
     var entityDescription: NSEntityDescription {
-        guard let entityDescription: NSEntityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext) else {
+        guard let entityDescription: NSEntityDescription = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext) else {
             fatalError("There is no Entity with name \(entityName) in the managed object model")
         }
         return entityDescription
     }
 }
 
-public class EntityMapping: Mapping, EntityMappingProtocol {
-    public let managedObjectContext: NSManagedObjectContext
-    public let entityName: String
+open class EntityMapping: Mapping, EntityMappingProtocol {
+    open let managedObjectContext: NSManagedObjectContext
+    open let entityName: String
 
     public init(
         destinationClass: NSObject.Type,

@@ -14,7 +14,7 @@ import CoreData
 class AppDelegate: UIResponder {
 
     static var sharedInstance: AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
+        return UIApplication.shared.delegate as! AppDelegate
     }
     static var modelManager: ModelManagerProtocol {
         return sharedInstance.zeusConfig.modelManager
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder {
 }
 
 extension AppDelegate: UIApplicationDelegate {
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: Any]?) -> Bool {
         zeusConfig = ZeusConfigurator()
         return true
     }

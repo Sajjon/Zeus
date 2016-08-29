@@ -9,5 +9,5 @@
 import Foundation
 
 public enum HTTPMethod {
-    case ANY, GET, POST
+    case any, get, post
 }

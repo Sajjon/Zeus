@@ -12,7 +12,7 @@ import Zeus
 
 class Character: ManagedObject {
     @NSManaged var characterId: String?
-    @NSManaged var name: String?
+    @NSManaged var name: String
     @NSManaged var gender: String?
     @NSManaged var house: House?
     @NSManaged var lordOfHouses: NSSet?
@@ -30,16 +30,7 @@ class Character: ManagedObject {
     }
 
     override class var transformers: [TransformerProtocol]? {
-        let characterIdTransformer = Transformer(key: "url") {
-            (obj: NSObject?) -> NSObject? in
-
-            guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
-                else { return obj}
-
-            let characterId = url.lastPathComponent
-            return characterId
-        }
+        let characterIdTransformer = URLToIdTransformer(key: "url")
         return [characterIdTransformer]
     }
 }

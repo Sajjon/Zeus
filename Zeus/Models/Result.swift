@@ -8,50 +8,91 @@
 
 import Foundation
 
-public struct Result {
-    public let data: NSObject?
-    public let error: NSError?
-    internal let mappingEvent: MappingEvent?
+public enum Result {
+    case success(NSObject)
+    case failure(ZeusError)
 
-    init(_ error: Zeus.Error) {
-        self.init(error: err(error))
+    internal init(_ error: ZeusError) {
+        self = .failure(error)
     }
 
-    init(_ model: NSObject) {
-        self.init(data: model)
+    internal init(_ data: NSObject) {
+        self = .success(data)
     }
 
-    init(_ event: MappingEvent) {
-        self.init(event: event)
-    }
-
-    init(data: NSObject? = nil, error: NSError? = nil, event: MappingEvent? = nil) {
-        validate(data, error: error, event: event)
-        self.data = data
-        self.error = error
-        self.mappingEvent = event
-    }
-}
-
-private func validate(data: NSObject? = nil, error: NSError? = nil, event: MappingEvent? = nil) {
-    if event == nil {
-        let bothNil = data == nil && error == nil
-        let noneNil = data != nil && error != nil
-        guard !bothNil && !noneNil else { fatalError("Data and error cant be nil or not nil at the same time") }
-    } else {
-        guard data == nil && error == nil else { fatalError("Should not contain 'event' together with neither 'data' nor 'error'") }
-    }
-}
-
-internal enum MappingEvent: Int, CustomStringConvertible {
-    case SkippedDueToCondition
-
-    var description: String {
-        let message: String
+    /// Returns `true` if the result is a success, `false` otherwise.
+    public var isSuccess: Bool {
         switch self {
-        case .SkippedDueToCondition:
-            message = "You have added a condition for the object being mapped that prevented it from being stored"
+        case .success:
+            return true
+        case .failure:
+            return false
         }
-        return message
+    }
+
+    /// Returns `true` if the result is a failure, `false` otherwise.
+    public var isFailure: Bool {
+        return !isSuccess
+    }
+
+    /// Returns the associated value if the result is a success, `nil` otherwise.
+    public var value: NSObject? {
+        switch self {
+        case .success(let value):
+            return value
+        case .failure:
+            return nil
+        }
+    }
+
+    /// Returns the associated error value if the result is a failure, `nil` otherwise.
+    public var error: NSError? {
+        switch self {
+        case .success:
+            return nil
+        case .failure(let error):
+            return error.error
+        }
+    }
+
+    internal var isEvent: Bool {
+        let isEvent: Bool
+        switch self {
+        case .failure(let error):
+            isEvent = error.isEvent
+        default:
+            isEvent = false
+        }
+        return isEvent
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension Result: CustomStringConvertible {
+    /// The textual representation used when written to an output stream, which includes whether the result was a
+    /// success or failure.
+    public var description: String {
+        switch self {
+        case .success:
+            return "SUCCESS"
+        case .failure:
+            return "FAILURE"
+        }
+    }
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension Result: CustomDebugStringConvertible {
+    /// The debug textual representation used when written to an output stream, which includes whether the result was a
+    /// success or failure in addition to the value or error.
+    public var debugDescription: String {
+        switch self {
+        case .success(let value):
+            return "SUCCESS: \(value)"
+        case .failure(let error):
+            return "FAILURE: \(error)"
+        }
     }
 }

@@ -21,21 +21,21 @@ internal class ManagedObjectStore: ManagedObjectStoreProtocol {
         let existing = existingEntityObject(fromJson: json, withMapping: entityMapping)
         return existing
     }
-    func store(model: NSObject) {}
+    func store(_ model: NSObject) {}
 }
 
 private extension ManagedObjectStore {
 
 
-    private func existingEntityObject(fromJson json: MappedJSON, withMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
+    func existingEntityObject(fromJson json: MappedJSON, withMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
         let idAttributeName = mapping.idAttributeName
         guard let idAttributeValue = json[idAttributeName] else { return nil }
-        let fetchRequest = NSFetchRequest(entityName: mapping.entityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: mapping.entityName)
         fetchRequest.predicate = NSPredicate(format: "%K == %@", idAttributeName, idAttributeValue)
 
         var existingModel: NSManagedObject?
         do {
-            guard let objects = try mapping.managedObjectContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] else { return nil }
+            guard let objects = try mapping.managedObjectContext.fetch(fetchRequest) as? [NSManagedObject] else { return nil }
             guard objects.count > 0 else { return nil }
             guard objects.count == 1 else { let msg = "Found multiple objects for identification attribute, this should not happen"; log.warning(msg); fatalError(msg) }
             existingModel = objects.first

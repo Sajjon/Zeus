@@ -18,9 +18,9 @@ internal protocol ModelMappingManagerProtocol {
 
 internal class ModelMappingManager: ModelMappingManagerProtocol {
 
-    private var pathToDescriptorMap: Dictionary<String, ResponseDescriptorProtocol> = [:]
-    private let inMemoryModelMapper: InMemoryModelMapperProtocol
-    private let managedObjectMapper: ManagedObjectMapperProtocol
+    fileprivate var pathToDescriptorMap: Dictionary<String, ResponseDescriptorProtocol> = [:]
+    fileprivate let inMemoryModelMapper: InMemoryModelMapperProtocol
+    fileprivate let managedObjectMapper: ManagedObjectMapperProtocol
 
     internal init() {
         let inMemoryStore = InMemoryStore()
@@ -34,30 +34,29 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         var error: NSError?
         for json in jsonArray {
             let result = mapping(withJson: json, fromPath: path, options: options)
-            guard let model = result.data else {
-                if let mappingError = result.error {
-                    error = mappingError
+            switch result {
+            case .success(let model):
+                models.append(model)
+            case .failure(let mappingError):
+                guard mappingError.isEvent else {
+                    error = mappingError.error
                     break
-                } else if let mappingEvent = result.mappingEvent {
-                    log.info(mappingEvent)
-                } else { fatalError("This should not happen") }
-
-                continue
+                }
+                log.info(error)
             }
-            models.append(model)
         }
 
         let result: Result
         if let error = error {
-            result = Result(error: error)
+            result = Result(error)
         } else {
-            result = Result(data: models)
+            result = Result(NSArray(array: models))
         }
         return result
     }
 
     internal func mapping(withJson json: JSON, fromPath path: String, options: Options?) -> Result {
-        guard let descriptor = responseDescriptor(forPath: path) else { return Result(.MappingNoResponseDescriptor) }
+        guard let descriptor = responseDescriptor(forPath: path) else { return Result(.mappingNoResponseDescriptor) }
         let result = model(fromJson: json, withMapping: descriptor.mapping, options: options)
         return result
     }
@@ -68,15 +67,15 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         }
     }
 
-    private var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
+    fileprivate var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
 }
 
 //MARK: Private Methods
 private extension ModelMappingManager {
 
-    private func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
+    func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
         pathToDescriptorMap[descriptor.route.pathMapping] = descriptor
-        let mapping = descriptor.mapping
+//        let mapping = descriptor.mapping
 //        if let futureConnections = mapping.futureConnections {
 //            for (_, futureConnection) in futureConnections {
 //                let relationship = futureConnection.relationship
@@ -89,7 +88,7 @@ private extension ModelMappingManager {
 //        }
     }
 
-    private func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+    func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let result: Result
         if mapping is EntityMappingProtocol {
             result = managedObjectMapper.model(fromJson: json, withMapping: mapping, options: options)
@@ -99,17 +98,19 @@ private extension ModelMappingManager {
         return result
     }
 
-    private func responseDescriptor(forPath path: String) -> ResponseDescriptorProtocol? {
+    func responseDescriptor(forPath path: String) -> ResponseDescriptorProtocol? {
         let parsedPath = parse(path: path)
         let descriptor = pathToDescriptorMap[parsedPath]
         return descriptor
     }
 
-    private func parse(path path: String) -> String {
-        guard let url = NSURL(string: path) else { return path }
+    //TODO: Fix class that understands that 'api/object/7' should match 'api/object/:objectid'
+    func parse(path: String) -> String {
+        guard let url = URL(string: path) else { return path }
         let parsedPath: String
-        if let lastPathComponent = url.lastPathComponent, _ = Int(lastPathComponent) {
-            parsedPath = url.absoluteString.stringByReplacingOccurrencesOfString(lastPathComponent, withString: ":id")
+        let lastPathComponent = url.lastPathComponent
+        if let _ = Int(lastPathComponent) {
+            parsedPath = url.absoluteString.replacingOccurrences(of: lastPathComponent, with: ":id")
         } else {
             parsedPath = path
         }
@@ -118,27 +119,28 @@ private extension ModelMappingManager {
 }
 
 private extension NSManagedObject {
-    private func update(withJson json: MappedJSON) {
-        setValuesForKeysWithDictionary(json)
+    func update(withJson json: MappedJSON) {
+        setValuesForKeys(json)
     }
 }
 
 public extension NSManagedObjectContext {
+    @discardableResult
     public func saveToPersistentStore() -> Bool {
 
         var moc: NSManagedObjectContext! = self
 
         while moc != nil {
-            performBlockAndWait() {
+            performAndWait() {
                 let newlyInsertedObjects = Array(moc.insertedObjects)
                 do {
-                    try moc.obtainPermanentIDsForObjects(newlyInsertedObjects)
+                    try moc.obtainPermanentIDs(for: newlyInsertedObjects)
                 } catch let error {
                     log.error("Failed to obtain permanent ids for objects, error: \(error)")
                 }
             }
 
-            performBlockAndWait() {
+            performAndWait() {
                 do {
                     try moc.save()
                 } catch let error {
@@ -146,12 +148,12 @@ public extension NSManagedObjectContext {
                 }
             }
 
-            guard moc.parentContext != nil || moc.persistentStoreCoordinator != nil else {
+            guard moc.parent != nil || moc.persistentStoreCoordinator != nil else {
                 log.error("Called saveToPersistentStore on managedObjectContext that has no parentContext or persistentStoreCoordinator, objects are therefore not persisted")
                 return false
             }
             
-            moc = moc.parentContext
+            moc = moc.parent
         }
         
         return true

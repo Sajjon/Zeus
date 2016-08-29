@@ -11,17 +11,17 @@ import CoreData
 import Zeus
 
 class House: ManagedObject {
-    @NSManaged var houseId: String?
-    @NSManaged var name: String?
-    @NSManaged var words: String?
-    @NSManaged var region: String?
-    @NSManaged var coatOfArms: String?
+    @NSManaged var houseId: String
+    @NSManaged var name: String
+    @NSManaged var words: String
+    @NSManaged var region: String
+    @NSManaged var coatOfArms: String
     @NSManaged var membersSet: NSSet?
     @NSManaged var cadetBranchesSet: NSSet?
     @NSManaged var currentLord: Character?
 
-    @NSManaged var memberIds: [String]?
-    @NSManaged var cadetBranchIds: [String]?
+    @NSManaged var memberIds: [String]
+    @NSManaged var cadetBranchIds: [String]
 
     override class var idAttributeName: String {
         return "houseId"
@@ -40,50 +40,20 @@ class House: ManagedObject {
     }
 
     override class var transformers: [TransformerProtocol]? {
-        let houseIdTransformer = Transformer(key: "url") {
-            (obj: NSObject?) -> NSObject? in
-
-            guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
-                else { return obj}
-
-            let houseId = url.lastPathComponent
-            return houseId
-        }
-        let memberIdTransformer = Transformer(key: "swornMembers") {
-            (obj: NSObject?) -> NSObject? in
-
-            guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
-                else { return obj}
-
-            let memberId = url.lastPathComponent
-            return memberId
-        }
-        let cadetBranchIdTransformer = Transformer(key: "cadetBranches") {
-            (obj: NSObject?) -> NSObject? in
-
-            guard let urlString = obj as? NSString,
-                url = NSURL(string: urlString as String)
-                else { return obj}
-
-            let branchId = url.lastPathComponent
-            return branchId
-        }
+        let houseIdTransformer = URLToIdTransformer(key: "url")
+        let memberIdTransformer = URLToIdTransformer(key: "swornMembers")
+        let cadetBranchIdTransformer = URLToIdTransformer(key: "cadetBranches")
         return [houseIdTransformer, memberIdTransformer, cadetBranchIdTransformer]
     }
 
     override class var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? {
-        let noBoltonsAllowed = ShouldStoreModelCondition(attributeName: "name") {
-            (incomingValue: Attribute, maybeCurrentValue: Attribute?) -> Bool in
-            guard let string = (incomingValue as? NSString) else { return true }
-            let name = string as String
+        let noBoltonsAllowed = StoreModelConditionString(attributeName: "name") {
+            (name: String, maybeCurrentValue: String?) -> Bool in
             let isBolton = name.contains("Bolton")
-            guard isBolton == false else {
+            if isBolton {
                 print("We don't like the Boltons, they are not invited into our app! Skipping mapping...")
-                return false
             }
-            return true
+            return !isBolton
         }
         return [noBoltonsAllowed]
     }
@@ -108,8 +78,8 @@ class House: ManagedObject {
 }
 
 extension String {
-    func contains(find: String) -> Bool {
-        return self.rangeOfString(find) != nil
+    func contains(_ find: String) -> Bool {
+        return self.range(of: find) != nil
     }
 
 }

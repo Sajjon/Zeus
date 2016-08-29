@@ -10,19 +10,19 @@ import Foundation
 import Zeus
 
 enum Router: RouterProtocol {
-    case Characters
-    case CharacterById(String!)
-    case Houses
-    case HouseById(String!)
+    case characters
+    case characterById(String!)
+    case houses
+    case houseById(String!)
 
     var method: HTTPMethod {
         let method: HTTPMethod
         switch self {
-        case .Houses: fallthrough
-        case .HouseById: fallthrough
-        case .Characters: fallthrough
-        case .CharacterById:
-            method = .GET
+        case .houses: fallthrough
+        case .houseById: fallthrough
+        case .characters: fallthrough
+        case .characterById:
+            method = .get
         }
         return method
     }
@@ -30,14 +30,14 @@ enum Router: RouterProtocol {
     var pathMapping: String {
         let path: String
         switch self {
-        case .Characters:
+        case .characters:
             path = "characters"
-        case .CharacterById:
-            path = "\(Characters.pathMapping)/:id"
-        case .Houses:
+        case .characterById:
+            path = "\(Router.characters.pathMapping)/:id"
+        case .houses:
             path = "houses"
-        case .HouseById:
-            path = "\(Houses.pathMapping)/:id"
+        case .houseById:
+            path = "\(Router.houses.pathMapping)/:id"
         }
         return path
     }
@@ -45,10 +45,10 @@ enum Router: RouterProtocol {
     var path: String {
         let path: String
         switch self {
-        case .HouseById(let id):
-            path = "\(Houses.pathMapping)/\(id)"
-        case .CharacterById(let id):
-            path = "\(Characters.pathMapping)/\(id)"
+        case .houseById(let id):
+            path = "\(Router.houses.pathMapping)/\(id!)"
+        case .characterById(let id):
+            path = "\(Router.characters.pathMapping)/\(id!)"
         default:
             path = pathMapping
         }

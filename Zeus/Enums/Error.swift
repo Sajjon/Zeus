@@ -1,5 +1,5 @@
 //
-//  Error.swift
+//  ZeusError.swift
 //  Zeus
 //
 //  Created by Cyon Alexander on 22/08/16.
@@ -8,27 +8,51 @@
 
 import Foundation
 
-public enum Error: Int, ErrorType {
-    case AddingSQLiteStore = 10000
-    case ParsingJSON = 10100
-    case MappingModel = 10200
-    case MappingNoResponseDescriptor = 10201
-    case MappingOptionsPersist = 10300
+public enum ZeusError: Int, Error {
+    case addingSQLiteStore = 10000
+    case parsingJSON = 10100
+    case mappingModel = 10200
+    case mappingNoResponseDescriptor = 10201
+    case mappingOptionsPersist = 10300
+    case coreDataValidation = 10400
+
+    case eventMappingSkipped = 11000
 
     var errorMessage: String {
         let message: String
         switch self {
-        case .AddingSQLiteStore:
+        case .addingSQLiteStore:
             message = "Could not add sqlite store"
-        case .ParsingJSON:
+        case .parsingJSON:
             message = "JSON could not be serialized into response object"
-        case .MappingModel:
+        case .mappingModel:
             message = "Failed to map model"
-        case .MappingNoResponseDescriptor:
+        case .mappingNoResponseDescriptor:
             message = "Failed to map model, missing descriptor"
-        case .MappingOptionsPersist:
+        case .mappingOptionsPersist:
             message = "Your options regarding when to persist models are conflicting with each other"
+        case .coreDataValidation:
+            message = "Model does not fulfill the required attributes"
+        case .eventMappingSkipped:
+            message = "You have added a condition for the object being mapped that prevented it from being stored"
         }
         return message
+    }
+
+    var error: NSError {
+        let userInfo = [NSLocalizedFailureReasonErrorKey: errorMessage]
+        let error = NSError(domain: "Zeus", code: rawValue, userInfo: userInfo)
+        return error
+    }
+
+    var isEvent: Bool {
+        let isEvent: Bool
+        switch self {
+        case .eventMappingSkipped:
+            isEvent = true
+        default:
+            isEvent = false
+        }
+        return isEvent
     }
 }

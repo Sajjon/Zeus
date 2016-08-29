@@ -16,7 +16,7 @@ protocol HTTPClientProtocol {
 class HTTPClient: HTTPClientProtocol {
     static let sharedInstance: HTTPClientProtocol = HTTPClient()
 
-    private let modelManager: ModelManagerProtocol
+    fileprivate let modelManager: ModelManagerProtocol
 
     init() {
         self.modelManager = ModelManager.sharedInstance

@@ -15,5 +15,5 @@ internal class InMemoryStore: InMemoryStoreProtocol {
         return nil
     }
 
-    func store(model: NSObject) {}
+    func store(_ model: NSObject) {}
 }

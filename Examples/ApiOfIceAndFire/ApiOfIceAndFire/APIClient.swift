@@ -10,7 +10,7 @@ import Foundation
 import Zeus
 
 protocol APIClientProtocol {
-    func getHouses(queryParams queryParams: QueryParameters?, done: Done?)
+    func getHouses(queryParams: QueryParameters?, done: Done?)
     func getHouse(byId id: String, queryParams: QueryParameters?, done: Done?)
     func getCharacter(byId id: String, queryParams: QueryParameters?, done: Done?)
 }
@@ -18,21 +18,21 @@ protocol APIClientProtocol {
 class APIClient: APIClientProtocol {
     static let sharedInstance: APIClientProtocol = APIClient()
 
-    private let httpClient: HTTPClientProtocol
+    fileprivate let httpClient: HTTPClientProtocol
 
     init() {
         self.httpClient = HTTPClient.sharedInstance
     }
 
-    func getHouses(queryParams queryParams: QueryParameters?, done: Done?) {
-        httpClient.get(atPath: .Houses, queryParams: queryParams, options: Options(.DontPersistEntitiesDuringMapping), done: done)
+    func getHouses(queryParams: QueryParameters?, done: Done?) {
+        httpClient.get(atPath: .houses, queryParams: queryParams, options: nil, done: done)
     }
 
     func getHouse(byId id: String, queryParams: QueryParameters?, done: Done?) {
-        httpClient.get(atPath: .HouseById(id), queryParams: queryParams, options: nil, done: done)
+        httpClient.get(atPath: .houseById(id), queryParams: queryParams, options: nil, done: done)
     }
 
     func getCharacter(byId id: String, queryParams: QueryParameters?, done: Done?) {
-        httpClient.get(atPath: .CharacterById(id), queryParams: queryParams, options: nil, done: done)
+        httpClient.get(atPath: .characterById(id), queryParams: queryParams, options: nil, done: done)
     }
 }

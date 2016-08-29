@@ -7,16 +7,27 @@
 //
 import UIKit
 import Zeus
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 private let cellIdentifier = "cellId"
 class HousesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    private var houses: [House]? {
+    fileprivate var houses: [House]? {
         didSet { tableView.reloadData() }
     }
 
-    private lazy var apiClient: APIClientProtocol = {
+    fileprivate lazy var apiClient: APIClientProtocol = {
         let apiClient = APIClient.sharedInstance
         return apiClient
     }()
@@ -31,14 +42,14 @@ class HousesViewController: UIViewController {
 
 //MARK: UITableViewDataSource Methods
 extension HousesViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         guard let house = house(forIndexPath: indexPath) else { return cell }
         cell.textLabel?.text = house.name
         return cell
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rowCount = houses?.count ?? 0
         return rowCount
     }
@@ -46,7 +57,7 @@ extension HousesViewController: UITableViewDataSource {
 
 //MARK: UITableViewDelegate Methods
 extension HousesViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let house = house(forIndexPath: indexPath) else { return }
         let detailsViewController = HouseDetailsViewController.instantiate(withHouse: house)
         navigationController?.pushViewController(detailsViewController, animated: true)
@@ -56,25 +67,28 @@ extension HousesViewController: UITableViewDelegate {
 //MARK: Private Methods
 private extension HousesViewController {
 
-    private func setupViews() {
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+    func setupViews() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
 
-    private func fetchData() {
-        apiClient.getHouses(queryParams: ["pageSize":"500"]) {
+    func fetchData() {
+        apiClient.getHouses(queryParams: ["pageSize" : "50"]) {
             result in
-            if let error = result.error {
+            switch result {
+            case .success(let houses):
+                if let houses = houses as? [House] {
+                    print("successfully fetched #\(houses.count) houses")
+                    self.houses = houses
+                } else {fatalError("bah")}
+            case .failure(let error):
                 print("Error fetching houses, error: \(error)")
-            } else if let houses = result.data as? [House] {
-                print("successfully fetched #\(houses.count) houses")
-                self.houses = houses
             }
         }
     }
 
-    private func house(forIndexPath indexPath: NSIndexPath) -> House? {
-        guard (indexPath.row < houses?.count) == true else { return nil }
-        let house = houses?[indexPath.row]
+    func house(forIndexPath indexPath: IndexPath) -> House? {
+        guard ((indexPath as NSIndexPath).row < houses?.count) == true else { return nil }
+        let house = houses?[(indexPath as NSIndexPath).row]
         return house
     }
 }
