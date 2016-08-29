@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@import Pods_Zeus;
 
 //! Project version number for Zeus.
 FOUNDATION_EXPORT double ZeusVersionNumber;

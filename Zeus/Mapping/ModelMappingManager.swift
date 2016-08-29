@@ -34,24 +34,23 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         var error: NSError?
         for json in jsonArray {
             let result = mapping(withJson: json, fromPath: path, options: options)
-            guard let model = result.data else {
-                if let mappingError = result.error {
-                    error = mappingError
+            switch result {
+            case .success(let model):
+                models.append(model)
+            case .failure(let mappingError):
+                guard mappingError.isEvent else {
+                    error = mappingError.error
                     break
-                } else if let mappingEvent = result.mappingEvent {
-                    log.info(mappingEvent)
-                } else { fatalError("This should not happen") }
-
-                continue
+                }
+                log.info(error)
             }
-            models.append(model)
         }
 
         let result: Result
         if let error = error {
-            result = Result(error: error)
+            result = Result(error)
         } else {
-            result = Result(data: models as NSObject?)
+            result = Result(NSArray(array: models))
         }
         return result
     }
@@ -126,6 +125,7 @@ private extension NSManagedObject {
 }
 
 public extension NSManagedObjectContext {
+    @discardableResult
     public func saveToPersistentStore() -> Bool {
 
         var moc: NSManagedObjectContext! = self

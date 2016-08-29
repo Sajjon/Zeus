@@ -72,13 +72,16 @@ private extension HousesViewController {
     }
 
     func fetchData() {
-        apiClient.getHouses(queryParams: ["pageSize":"500"]) {
+        apiClient.getHouses(queryParams: ["pageSize" : "50"]) {
             result in
-            if let error = result.error {
+            switch result {
+            case .success(let houses):
+                if let houses = houses as? [House] {
+                    print("successfully fetched #\(houses.count) houses")
+                    self.houses = houses
+                } else {fatalError("bah")}
+            case .failure(let error):
                 print("Error fetching houses, error: \(error)")
-            } else if let houses = result.data as? [House] {
-                print("successfully fetched #\(houses.count) houses")
-                self.houses = houses
             }
         }
     }

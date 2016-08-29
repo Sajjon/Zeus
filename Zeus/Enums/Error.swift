@@ -16,6 +16,8 @@ public enum ZeusError: Int, Error {
     case mappingOptionsPersist = 10300
     case coreDataValidation = 10400
 
+    case eventMappingSkipped = 11000
+
     var errorMessage: String {
         let message: String
         switch self {
@@ -31,7 +33,26 @@ public enum ZeusError: Int, Error {
             message = "Your options regarding when to persist models are conflicting with each other"
         case .coreDataValidation:
             message = "Model does not fulfill the required attributes"
+        case .eventMappingSkipped:
+            message = "You have added a condition for the object being mapped that prevented it from being stored"
         }
         return message
+    }
+
+    var error: NSError {
+        let userInfo = [NSLocalizedFailureReasonErrorKey: errorMessage]
+        let error = NSError(domain: "Zeus", code: rawValue, userInfo: userInfo)
+        return error
+    }
+
+    var isEvent: Bool {
+        let isEvent: Bool
+        switch self {
+        case .eventMappingSkipped:
+            isEvent = true
+        default:
+            isEvent = false
+        }
+        return isEvent
     }
 }

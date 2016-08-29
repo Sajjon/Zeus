@@ -59,6 +59,7 @@ open class DataStore: DataStoreProtocol {
         guard tryAddPersistentStore() else { let err = "Failed to add persistent store"; log.error(err); fatalError(err) }
     }
 
+    @discardableResult
     open func addPersistentStore(withUrl storeUrl: URL) throws -> NSPersistentStore {
         let store: NSPersistentStore
         do {

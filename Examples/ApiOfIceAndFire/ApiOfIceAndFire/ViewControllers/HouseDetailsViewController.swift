@@ -130,10 +130,14 @@ private extension HouseDetailsViewController {
         for memberId in house.memberIds {
             APIClient.sharedInstance.getCharacter(byId: memberId, queryParams: nil) {
                 result in
-                if let error = result.error {
+                switch result {
+                case .success(let character):
+                    if let character = character as? Character {
+                        print("successfully fetched character named '\(character.name)'")
+                        self.tableView.reloadData()
+                    } else {fatalError("bah")}
+                case .failure(let error):
                     print("Error fetching character, error: \(error)")
-                } else if let character = result.data as? Character {
-                    self.tableView.reloadData()
                 }
             }
         }
@@ -142,10 +146,14 @@ private extension HouseDetailsViewController {
         for cadetBranchId in house.cadetBranchIds {
             APIClient.sharedInstance.getHouse(byId: cadetBranchId, queryParams: nil) {
                 result in
-                if let error = result.error {
+                switch result {
+                case .success(let house):
+                    if let house = house as? House {
+                        print("successfully fetched house named: '\(house.name)'")
+                        self.tableView.reloadData()
+                    } else {fatalError("bah")}
+                case .failure(let error):
                     print("Error fetching house, error: \(error)")
-                } else if let house = result.data as? House {
-                    self.tableView.reloadData()
                 }
             }
         }

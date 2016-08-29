@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47181653D30D11FCB8BF360C /* Pods_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */; };
+		39653F2AA40BA9D98041DE1D /* Pods_ZeusFramework_Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DE3FC33E36C26D35B03587 /* Pods_ZeusFramework_Zeus.framework */; };
 		6501247C1D6609C3003BFFA6 /* Zeus.h in Headers */ = {isa = PBXBuildFile; fileRef = 6501247B1D6609C3003BFFA6 /* Zeus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		650124831D6609C3003BFFA6 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650124781D6609C3003BFFA6 /* Zeus.framework */; };
 		650124881D6609C3003BFFA6 /* ZeusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650124871D6609C3003BFFA6 /* ZeusTests.swift */; };
@@ -23,16 +23,16 @@
 		65195B591D6B282500813E59 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B581D6B282500813E59 /* Macros.swift */; };
 		65195B5B1D6B284300813E59 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B5A1D6B284300813E59 /* HTTPMethod.swift */; };
 		65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65195B5C1D6B28C100813E59 /* MappingProxy.swift */; };
+		657945F11D746E750091B967 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F01D746E750091B967 /* Alamofire.framework */; };
+		657945F31D746E7B0091B967 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F21D746E7B0091B967 /* SwiftyBeaver.framework */; };
+		657945F41D746E830091B967 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F01D746E750091B967 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		657945F51D746E870091B967 /* SwiftyBeaver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F21D746E7B0091B967 /* SwiftyBeaver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65A574771D67394800F4D439 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A574761D67394800F4D439 /* ModelManager.swift */; };
 		65B9FAB01D6C765C008F9B99 /* Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAAF1D6C765C008F9B99 /* Zeus.swift */; };
 		65B9FAB71D6CB0F9008F9B99 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */; };
 		65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */; };
 		65B9FAC01D706871008F9B99 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABF1D706871008F9B99 /* Option.swift */; };
 		65B9FAC21D7068E2008F9B99 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAC11D7068E2008F9B99 /* Options.swift */; };
-		7BB8BCC21D72E11D004BFBE9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEA20281D71C62800669743 /* Alamofire.framework */; };
-		7BB8BCC41D72E11D004BFBE9 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */; };
-		7BB8BCC61D72E14F004BFBE9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEA20281D71C62800669743 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7BB8BCC71D72E154004BFBE9 /* SwiftyBeaver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */; };
 		7BCD22851D6F4BE7008BE83C /* CherryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */; };
 		7BCD22871D6F4BFD008BE83C /* ShouldStoreModelCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */; };
@@ -52,6 +52,13 @@
 			remoteGlobalIDString = 650124771D6609C3003BFFA6;
 			remoteInfo = Zeus;
 		};
+		65D16EC51D746782006565CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 655F6CE01D6C62F40080FAA0;
+			remoteInfo = ApiOfIceAndFire;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,8 +68,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7BB8BCC71D72E154004BFBE9 /* SwiftyBeaver.framework in Embed Frameworks */,
-				7BB8BCC61D72E14F004BFBE9 /* Alamofire.framework in Embed Frameworks */,
+				657945F51D746E870091B967 /* SwiftyBeaver.framework in Embed Frameworks */,
+				657945F41D746E830091B967 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,14 +95,16 @@
 		65195B581D6B282500813E59 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		65195B5A1D6B284300813E59 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		65195B5C1D6B28C100813E59 /* MappingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappingProxy.swift; sourceTree = "<group>"; };
+		657945F01D746E750091B967 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		657945F21D746E7B0091B967 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
+		65864A44787980FE7BD8D63B /* Pods-ZeusFramework-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeusFramework-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		65A574761D67394800F4D439 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		65B9FAAF1D6C765C008F9B99 /* Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zeus.swift; sourceTree = "<group>"; };
 		65B9FAB61D6CB0F9008F9B99 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationshipMapping.swift; sourceTree = "<group>"; };
 		65B9FABF1D706871008F9B99 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		65B9FAC11D7068E2008F9B99 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
-		6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
-		7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-ctkddxqicxwarnheiltnyfumvcck/Build/Products/Debug-iphonesimulator/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
+		65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApiOfIceAndFire.xcodeproj; path = Examples/ApiOfIceAndFire/ApiOfIceAndFire.xcodeproj; sourceTree = "<group>"; };
 		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
 		7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CherryPicker.swift; sourceTree = "<group>"; };
 		7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldStoreModelCondition.swift; sourceTree = "<group>"; };
@@ -105,9 +114,8 @@
 		7BCD228F1D701AD9008BE83C /* InMemoryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
 		7BCD22911D701B06008BE83C /* ManagedObjectStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectStore.swift; sourceTree = "<group>"; };
 		7BCD22931D701B2E008BE83C /* ModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMapper.swift; sourceTree = "<group>"; };
-		7BEA20281D71C62800669743 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-ctkddxqicxwarnheiltnyfumvcck/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
-		9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zeus/Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
-		EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93DE3FC33E36C26D35B03587 /* Pods_ZeusFramework_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZeusFramework_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C090DC856D9ACCEDF390E168 /* Pods-ZeusFramework-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeusFramework-Zeus.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +123,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BB8BCC41D72E11D004BFBE9 /* SwiftyBeaver.framework in Frameworks */,
-				7BB8BCC21D72E11D004BFBE9 /* Alamofire.framework in Frameworks */,
-				47181653D30D11FCB8BF360C /* Pods_Zeus.framework in Frameworks */,
+				39653F2AA40BA9D98041DE1D /* Pods_ZeusFramework_Zeus.framework in Frameworks */,
+				657945F11D746E750091B967 /* Alamofire.framework in Frameworks */,
+				657945F31D746E7B0091B967 /* SwiftyBeaver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,21 +140,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D89B4A60063F037BE00977E /* Pods */ = {
+		5F215117AC003CE57A6226B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */,
-				6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		4F2245F4B22E6E6D5875248B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7BB8BCC31D72E11D004BFBE9 /* SwiftyBeaver.framework */,
-				7BEA20281D71C62800669743 /* Alamofire.framework */,
-				EB89A7AC88203EFBA8743F8A /* Pods_Zeus.framework */,
+				657945F21D746E7B0091B967 /* SwiftyBeaver.framework */,
+				657945F01D746E750091B967 /* Alamofire.framework */,
+				93DE3FC33E36C26D35B03587 /* Pods_ZeusFramework_Zeus.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,11 +153,12 @@
 		6501246E1D6609C3003BFFA6 = {
 			isa = PBXGroup;
 			children = (
+				65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */,
 				6501247A1D6609C3003BFFA6 /* Zeus */,
 				650124861D6609C3003BFFA6 /* ZeusTests */,
 				650124791D6609C3003BFFA6 /* Products */,
-				3D89B4A60063F037BE00977E /* Pods */,
-				4F2245F4B22E6E6D5875248B /* Frameworks */,
+				ED35046BBE9F32EC67B1EE47 /* Pods */,
+				5F215117AC003CE57A6226B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -247,6 +247,14 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		65D16EC21D746782006565CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65D16EC61D746782006565CF /* ApiOfIceAndFire.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7BCD228A1D701A9D008BE83C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +262,15 @@
 				7BCD228B1D701AA5008BE83C /* StoreProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		ED35046BBE9F32EC67B1EE47 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				65864A44787980FE7BD8D63B /* Pods-ZeusFramework-Zeus.debug.xcconfig */,
+				C090DC856D9ACCEDF390E168 /* Pods-ZeusFramework-Zeus.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,8 +296,8 @@
 				650124741D6609C3003BFFA6 /* Frameworks */,
 				650124751D6609C3003BFFA6 /* Headers */,
 				650124761D6609C3003BFFA6 /* Resources */,
-				84877DAA5AC921334BA9A5F1 /* [CP] Copy Pods Resources */,
 				7BB8BCC51D72E142004BFBE9 /* Embed Frameworks */,
+				84877DAA5AC921334BA9A5F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,6 +356,12 @@
 			mainGroup = 6501246E1D6609C3003BFFA6;
 			productRefGroup = 650124791D6609C3003BFFA6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 65D16EC21D746782006565CF /* Products */;
+					ProjectRef = 65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				650124771D6609C3003BFFA6 /* Zeus */,
@@ -346,6 +369,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		65D16EC61D746782006565CF /* ApiOfIceAndFire.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ApiOfIceAndFire.app;
+			remoteRef = 65D16EC51D746782006565CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		650124761D6609C3003BFFA6 /* Resources */ = {
@@ -377,7 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Zeus/Pods-Zeus-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BB7794808F2C72FF4B900424 /* [CP] Check Pods Manifest.lock */ = {
@@ -549,7 +582,7 @@
 		};
 		6501248D1D6609C3003BFFA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9273548CAAA604D8EEF54607 /* Pods-Zeus.debug.xcconfig */;
+			baseConfigurationReference = 65864A44787980FE7BD8D63B /* Pods-ZeusFramework-Zeus.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -571,7 +604,7 @@
 		};
 		6501248E1D6609C3003BFFA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F75AE1CC6588A8FD6C037AA /* Pods-Zeus.release.xcconfig */;
+			baseConfigurationReference = C090DC856D9ACCEDF390E168 /* Pods-ZeusFramework-Zeus.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;

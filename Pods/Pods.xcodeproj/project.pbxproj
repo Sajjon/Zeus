@@ -7,124 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CFEA871EDCED1765666CDC62F4B6F12 /* SBPlatformDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47202AED1C21942FB7ED0F96A990251A /* SBPlatformDestination.swift */; };
+		130072A510FAB54FC39765098894BC5F /* SBPlatformDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47202AED1C21942FB7ED0F96A990251A /* SBPlatformDestination.swift */; };
 		13E39355B9B2F07FC6619E46E2488EB9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A84B15097DFFC3F345B3541B7DC095 /* Result.swift */; };
 		1494389C8E30F964D52FC95176FBAC1D /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C89C148B60D6DC5C215E18FADDBABE /* TaskDelegate.swift */; };
-		20631BFCA01B4CA24163ED9B2C537D32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		25B565E7C03D71E7A8D90DC7DF9B5243 /* AES256CBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C23357F2B38F206387E1D5F924A9AE /* AES256CBC.swift */; };
+		18FA49AD15ABB32F58B6CB39836F46A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		27416314CFEDF15C75FA4B5824ACC486 /* SwiftyBeaver-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B585B9E5EB43648A8226D1D9974D0335 /* SwiftyBeaver-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38FD65F98DC17A7B6FB3D7BAD8D1BA6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2451F8EDB5F61672CFB627A0AD0DF1 /* Timeline.swift */; };
+		390A3EFA5889DCF16BBA15F43D33B0B4 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C95CC603E09CD610AD3CDD3578438E /* FileDestination.swift */; };
 		3FC608FC88CDA077F29912E176F70EA4 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8CE4B42D9BDB9AB5DACD1A9B13A34B /* Alamofire-dummy.m */; };
 		44F4D67257052A4EED6D1CD59B6DBB3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		465FAC9640728100D7C9EF53119FA6C6 /* Pods-ZeusFramework-Zeus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 03596DD6A77EB706D89F8140C3C39D72 /* Pods-ZeusFramework-Zeus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4C4D859A3DF35B6D7DE08509AA808675 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A730292BDD5221DD224B93946D3A8AFA /* SessionManager.swift */; };
 		5226DCAD7A66B91FED757730B36792A9 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414231869811CA085DAC067AFEB96DFB /* Alamofire.swift */; };
+		539519CB6364E8941CF514A1C0CEB593 /* AES256CBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C23357F2B38F206387E1D5F924A9AE /* AES256CBC.swift */; };
 		5A3016D5EC8C68BC6FCF0ECC754660A8 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2FF427F706B5150CBDFC1D1040F7C /* NetworkReachabilityManager.swift */; };
-		5ED0CF04AA0DBC303E722229D10B648A /* SwiftyBeaver-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B585B9E5EB43648A8226D1D9974D0335 /* SwiftyBeaver-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6568C0453237BC5DB5DE272D993AEC6A /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0795F9AB69851632EC7A1CDCED8625 /* Notifications.swift */; };
-		736733A482D104DD151CB681D4A69A84 /* Pods-Zeus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 91C86EF79D845E6626AB57BC333BE560 /* Pods-Zeus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7EE21826DDB5309DF4270F1F09B7329D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		6ACDA4668E85704B076BCD200A692146 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFEC0627FCD3D6FC3968D577227445D /* Filter.swift */; };
 		7F9B0FD02463DA4FFCA278AA344636BB /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C84FD9A0848651449877F8744876B5 /* MultipartFormData.swift */; };
-		821E6FA05E11E3E867613104AB650B08 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C95CC603E09CD610AD3CDD3578438E /* FileDestination.swift */; };
 		890C421F2AE399D7D782F0461B1B1D99 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69D91F8F299C4A64EBD3278F1270DAB /* SessionDelegate.swift */; };
+		8BFD397890050CB591E97EF1FB96F4F2 /* SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03100E7E7817E8DF205E8091BBD5E0C2 /* SwiftyBeaver.swift */; };
+		97F3DA1D2EA0C878505E0FA5041F97E8 /* Pods-ZeusFramework-Zeus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1B544B0687E12F018C3DC24338FD0B /* Pods-ZeusFramework-Zeus-dummy.m */; };
 		989E76EA7F66D2703BE7C4D8C4D491FE /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEA2487A05BADB4EAC8D3A44FF72138 /* ServerTrustPolicy.swift */; };
+		9CCC4C838C225EF56CF63B320D44AE43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		9F2748FA7E1EC90E940FD13B80A74C3C /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6F890001F90BCCEE401FF764E37C1B /* ResponseSerialization.swift */; };
 		A3C1B5E525CF0D4453FFB9725BDBC933 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10114B8639137AB664587A3F617BA1FA /* ParameterEncoding.swift */; };
-		AB4DC2AF84A9492932FAF97D737BE1C7 /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9385412E5C171EF73D85364CA18D9420 /* BaseDestination.swift */; };
-		AF86644C298224D5926CB4F45FC94EC7 /* SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03100E7E7817E8DF205E8091BBD5E0C2 /* SwiftyBeaver.swift */; };
-		B0675BA950ED77779B6283F6559E48D0 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFEC0627FCD3D6FC3968D577227445D /* Filter.swift */; };
-		B373B7C94FF6024275F351F85819A863 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47625D558D5B1F56CC1B3D6BFC1048E /* ConsoleDestination.swift */; };
 		C34F209E7E5BE856F1DF50F470304424 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A1A20DD68770331FC51887D241AE552 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6A87045806F4086CB595C900A84604D /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9385412E5C171EF73D85364CA18D9420 /* BaseDestination.swift */; };
 		CC7F234B388263547F80F7C55ECB76EE /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7B146D798EDCD061FD481315FEDE08 /* Validation.swift */; };
 		CCBDEF648407AB84FE6B382966E05F2A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3187897D8E54613CB6A9D1C7E42E21B6 /* Response.swift */; };
-		CED7B307A64654CF570890E07E16F42E /* Pods-Zeus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60767F6C4F91EDFB285CDCD7328F3531 /* Pods-Zeus-dummy.m */; };
-		E29697A0B03A27A926F071D7DDD83027 /* SwiftyBeaver-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A81CF01AB768490CE618ED035FD16E /* SwiftyBeaver-dummy.m */; };
+		DCC00DC93AE6199D56024103E223568F /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47625D558D5B1F56CC1B3D6BFC1048E /* ConsoleDestination.swift */; };
 		F4211E93D60755D2AA87E19C58D466F5 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FF05056BE6221931DE282D6DE4FCF /* Request.swift */; };
+		F89007CC316B611D6313C0AC2C2D478F /* SwiftyBeaver-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A81CF01AB768490CE618ED035FD16E /* SwiftyBeaver-dummy.m */; };
 		FAE4D3C78B20FCC3757437B895901EF4 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD531E9F9C44E1FA4E55ED2389D452B2 /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BB488843F629586CD9906A372F42F40D /* PBXContainerItemProxy */ = {
+		CE7C2E697EE028A56429DEC85FE634E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7B6F52488EC10931E5A24414ECAE1BD4;
 			remoteInfo = Alamofire;
 		};
-		E0DA753661B24134AFE44745245CB669 /* PBXContainerItemProxy */ = {
+		FF861F64761AEC541C9C4F9553EE5F16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5B4A857F944E5F779496634B9F3807CF;
+			remoteGlobalIDString = A06CFF4B898F4ADB70CEB76CCD541293;
 			remoteInfo = SwiftyBeaver;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		03100E7E7817E8DF205E8091BBD5E0C2 /* SwiftyBeaver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyBeaver.swift; path = sources/SwiftyBeaver.swift; sourceTree = "<group>"; };
+		03596DD6A77EB706D89F8140C3C39D72 /* Pods-ZeusFramework-Zeus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ZeusFramework-Zeus-umbrella.h"; sourceTree = "<group>"; };
 		06826FAF90377844C907F00EAED02851 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A1A20DD68770331FC51887D241AE552 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		10114B8639137AB664587A3F617BA1FA /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
-		10AB80AC130298711531E60A649A9F34 /* Pods-Zeus-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Zeus-acknowledgements.markdown"; sourceTree = "<group>"; };
 		112088192D38C8EC5FAED2E8285ED673 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		1138402C2C5AC4CF9A6CA461A2FD0827 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17AE9789B35952A7F3B4B0E0118AC9D4 /* SwiftyBeaver.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyBeaver.modulemap; sourceTree = "<group>"; };
+		18F98A2943829B05A333A15370C996FA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		261E0421ADAF16771AA61128C5206A1F /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
+		2C1D7396AB8D27C44C20879FA4A59327 /* Pods-ZeusFramework-Zeus.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZeusFramework-Zeus.modulemap"; sourceTree = "<group>"; };
+		2E3B8321A453F365C5358B071475B477 /* Pods-ZeusFramework-Zeus-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZeusFramework-Zeus-acknowledgements.plist"; sourceTree = "<group>"; };
 		3187897D8E54613CB6A9D1C7E42E21B6 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
-		34C95EE7733092017E6E52D4F3E52C74 /* Pods-Zeus-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Zeus-frameworks.sh"; sourceTree = "<group>"; };
 		3D8CE4B42D9BDB9AB5DACD1A9B13A34B /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		414231869811CA085DAC067AFEB96DFB /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		47202AED1C21942FB7ED0F96A990251A /* SBPlatformDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SBPlatformDestination.swift; path = sources/SBPlatformDestination.swift; sourceTree = "<group>"; };
-		47EAEF916D367BAA9E9902E8820187FE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F2FF427F706B5150CBDFC1D1040F7C /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		4A6F890001F90BCCEE401FF764E37C1B /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		50C23357F2B38F206387E1D5F924A9AE /* AES256CBC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AES256CBC.swift; path = sources/AES256CBC.swift; sourceTree = "<group>"; };
-		51F253FFB646056999FD9526D260AED0 /* Pods-Zeus-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Zeus-resources.sh"; sourceTree = "<group>"; };
+		5527EF2336DF886905B5810ACCD01AEC /* Pods-ZeusFramework-Zeus-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZeusFramework-Zeus-frameworks.sh"; sourceTree = "<group>"; };
 		5C9F823F100DB3F8A338BD842020964D /* SwiftyBeaver.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBeaver.xcconfig; sourceTree = "<group>"; };
-		60767F6C4F91EDFB285CDCD7328F3531 /* Pods-Zeus-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Zeus-dummy.m"; sourceTree = "<group>"; };
-		6188B26B06DE6E22460228298CEA3926 /* Pods-Zeus-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Zeus-acknowledgements.plist"; sourceTree = "<group>"; };
 		6D8FF05056BE6221931DE282D6DE4FCF /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
-		70AFC0F01E2F7D08E265AFAFD8195C8B /* Pods-Zeus.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Zeus.modulemap"; sourceTree = "<group>"; };
+		72217BFAB5BE50FAEE572DFC71767FE0 /* Pods-ZeusFramework-Zeus-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZeusFramework-Zeus-acknowledgements.markdown"; sourceTree = "<group>"; };
 		79A81CF01AB768490CE618ED035FD16E /* SwiftyBeaver-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyBeaver-dummy.m"; sourceTree = "<group>"; };
+		7D1B544B0687E12F018C3DC24338FD0B /* Pods-ZeusFramework-Zeus-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZeusFramework-Zeus-dummy.m"; sourceTree = "<group>"; };
 		81A84B15097DFFC3F345B3541B7DC095 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
-		91C86EF79D845E6626AB57BC333BE560 /* Pods-Zeus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Zeus-umbrella.h"; sourceTree = "<group>"; };
+		83E90E275D4F3692B869DDFC2A07D29E /* Pods_ZeusFramework_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZeusFramework_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9385412E5C171EF73D85364CA18D9420 /* BaseDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDestination.swift; path = sources/BaseDestination.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		95057BCB195E3BC5DD0ED27285879B91 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97532914C77E92AD3A038CD70645E101 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
-		9B3B0BBB998FB8B35F20DE5115DA4F43 /* Pods-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Zeus.release.xcconfig"; sourceTree = "<group>"; };
+		A049AC523AB07A98481639CA2CB54D9D /* SwiftyBeaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyBeaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C95CC603E09CD610AD3CDD3578438E /* FileDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileDestination.swift; path = sources/FileDestination.swift; sourceTree = "<group>"; };
+		A60D8DDE0C644AE4ED4F9DE5DCC5B701 /* Pods-ZeusFramework-Zeus-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZeusFramework-Zeus-resources.sh"; sourceTree = "<group>"; };
 		A730292BDD5221DD224B93946D3A8AFA /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
 		AD660DBE2827ACFBCE421DE2A4D895E9 /* SwiftyBeaver-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-prefix.pch"; sourceTree = "<group>"; };
 		AE0795F9AB69851632EC7A1CDCED8625 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
+		AE68C752EECF700BB1EFA2524B4419ED /* Pods-ZeusFramework-Zeus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZeusFramework-Zeus.release.xcconfig"; sourceTree = "<group>"; };
 		AEFEC0627FCD3D6FC3968D577227445D /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = sources/Filter.swift; sourceTree = "<group>"; };
 		B1C84FD9A0848651449877F8744876B5 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
 		B585B9E5EB43648A8226D1D9974D0335 /* SwiftyBeaver-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-umbrella.h"; sourceTree = "<group>"; };
 		BC2451F8EDB5F61672CFB627A0AD0DF1 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
-		BCDCFE6A106AA788F929809045F0A8AB /* Pods_Zeus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zeus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C89C148B60D6DC5C215E18FADDBABE /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
+		CA044532BF12F7AA53F075FA80553EF4 /* Pods-ZeusFramework-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZeusFramework-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		CD531E9F9C44E1FA4E55ED2389D452B2 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E47625D558D5B1F56CC1B3D6BFC1048E /* ConsoleDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsoleDestination.swift; path = sources/ConsoleDestination.swift; sourceTree = "<group>"; };
 		E69D91F8F299C4A64EBD3278F1270DAB /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
-		EB1063295C3C755A1FA50112759EB34D /* SwiftyBeaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyBeaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED60355E494B70059CEB1ACA5606C1A0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC7B146D798EDCD061FD481315FEDE08 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
-		FEDB9CC0D09815A271A9FBAD4EBAE9D8 /* Pods-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
 		FFEA2487A05BADB4EAC8D3A44FF72138 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9FAF0764659050006BDCBC0C352F920B /* Frameworks */ = {
+		0B9BB1A36C2EA7CCB548C6512456FFEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20631BFCA01B4CA24163ED9B2C537D32 /* Foundation.framework in Frameworks */,
+				18FA49AD15ABB32F58B6CB39836F46A9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3C738A1F93037E6A3A4CF50803D9CB4 /* Frameworks */ = {
+		3C165C8685AEC112FC3FF7CE7A80BAA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EE21826DDB5309DF4270F1F09B7329D /* Foundation.framework in Frameworks */,
+				9CCC4C838C225EF56CF63B320D44AE43 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +185,24 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		4C5F85EA9F8C29EBFE6FB812AA91F559 /* Pods-ZeusFramework-Zeus */ = {
+			isa = PBXGroup;
+			children = (
+				1138402C2C5AC4CF9A6CA461A2FD0827 /* Info.plist */,
+				2C1D7396AB8D27C44C20879FA4A59327 /* Pods-ZeusFramework-Zeus.modulemap */,
+				72217BFAB5BE50FAEE572DFC71767FE0 /* Pods-ZeusFramework-Zeus-acknowledgements.markdown */,
+				2E3B8321A453F365C5358B071475B477 /* Pods-ZeusFramework-Zeus-acknowledgements.plist */,
+				7D1B544B0687E12F018C3DC24338FD0B /* Pods-ZeusFramework-Zeus-dummy.m */,
+				5527EF2336DF886905B5810ACCD01AEC /* Pods-ZeusFramework-Zeus-frameworks.sh */,
+				A60D8DDE0C644AE4ED4F9DE5DCC5B701 /* Pods-ZeusFramework-Zeus-resources.sh */,
+				03596DD6A77EB706D89F8140C3C39D72 /* Pods-ZeusFramework-Zeus-umbrella.h */,
+				CA044532BF12F7AA53F075FA80553EF4 /* Pods-ZeusFramework-Zeus.debug.xcconfig */,
+				AE68C752EECF700BB1EFA2524B4419ED /* Pods-ZeusFramework-Zeus.release.xcconfig */,
+			);
+			name = "Pods-ZeusFramework-Zeus";
+			path = "Target Support Files/Pods-ZeusFramework-Zeus";
+			sourceTree = "<group>";
+		};
 		586D817B44FD84730F33E2A63EFC0668 /* SwiftyBeaver */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,43 +227,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		7C8C38221087FBEC7C397702692B6FE9 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C5F85EA9F8C29EBFE6FB812AA91F559 /* Pods-ZeusFramework-Zeus */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				6A7DD87A349D161111D0537F9FE7ABF3 /* Pods */,
-				97CA6A66D851E3090CE99C1C18D6E4B0 /* Products */,
-				C2F3085AB1367C2F1E6127C11916B1A7 /* Targets Support Files */,
+				EE9C835B1046F80C29D094D79B5C92E4 /* Products */,
+				7C8C38221087FBEC7C397702692B6FE9 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		7E31B09CC8D02B1F06CFF4AC4DA7A49E /* Pods-Zeus */ = {
-			isa = PBXGroup;
-			children = (
-				47EAEF916D367BAA9E9902E8820187FE /* Info.plist */,
-				70AFC0F01E2F7D08E265AFAFD8195C8B /* Pods-Zeus.modulemap */,
-				10AB80AC130298711531E60A649A9F34 /* Pods-Zeus-acknowledgements.markdown */,
-				6188B26B06DE6E22460228298CEA3926 /* Pods-Zeus-acknowledgements.plist */,
-				60767F6C4F91EDFB285CDCD7328F3531 /* Pods-Zeus-dummy.m */,
-				34C95EE7733092017E6E52D4F3E52C74 /* Pods-Zeus-frameworks.sh */,
-				51F253FFB646056999FD9526D260AED0 /* Pods-Zeus-resources.sh */,
-				91C86EF79D845E6626AB57BC333BE560 /* Pods-Zeus-umbrella.h */,
-				FEDB9CC0D09815A271A9FBAD4EBAE9D8 /* Pods-Zeus.debug.xcconfig */,
-				9B3B0BBB998FB8B35F20DE5115DA4F43 /* Pods-Zeus.release.xcconfig */,
-			);
-			name = "Pods-Zeus";
-			path = "Target Support Files/Pods-Zeus";
-			sourceTree = "<group>";
-		};
-		97CA6A66D851E3090CE99C1C18D6E4B0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				95057BCB195E3BC5DD0ED27285879B91 /* Alamofire.framework */,
-				BCDCFE6A106AA788F929809045F0A8AB /* Pods_Zeus.framework */,
-				EB1063295C3C755A1FA50112759EB34D /* SwiftyBeaver.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A9AA4DCF7EAC80B4CAB6D3E0A4111DAF /* Support Files */ = {
@@ -270,17 +268,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C2F3085AB1367C2F1E6127C11916B1A7 /* Targets Support Files */ = {
+		EE9C835B1046F80C29D094D79B5C92E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7E31B09CC8D02B1F06CFF4AC4DA7A49E /* Pods-Zeus */,
+				18F98A2943829B05A333A15370C996FA /* Alamofire.framework */,
+				83E90E275D4F3692B869DDFC2A07D29E /* Pods_ZeusFramework_Zeus.framework */,
+				A049AC523AB07A98481639CA2CB54D9D /* SwiftyBeaver.framework */,
 			);
-			name = "Targets Support Files";
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0979299AB960D0169C076698CD20FFD6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27416314CFEDF15C75FA4B5824ACC486 /* SwiftyBeaver-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2F24ACEB43D5505BEDE0C209B616E2D3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,40 +297,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4AE988A9D3559CC4DE773C0CB67DC607 /* Headers */ = {
+		8AB42B7A492B1A96A124B55E9A979CA4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ED0CF04AA0DBC303E722229D10B648A /* SwiftyBeaver-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B0B6F21310F45052264D3B6DC8046051 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				736733A482D104DD151CB681D4A69A84 /* Pods-Zeus-umbrella.h in Headers */,
+				465FAC9640728100D7C9EF53119FA6C6 /* Pods-ZeusFramework-Zeus-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5B4A857F944E5F779496634B9F3807CF /* SwiftyBeaver */ = {
+		6F9A9A28EF5E4926496E93022D3B069C /* Pods-ZeusFramework-Zeus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13691D15247E1A185DCF797C468A0BDF /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */;
+			buildConfigurationList = A183AE505BE6443E79B1B85EF3D0AFBE /* Build configuration list for PBXNativeTarget "Pods-ZeusFramework-Zeus" */;
 			buildPhases = (
-				B433B5954465B022BC8A13FCAD73E001 /* Sources */,
-				E3C738A1F93037E6A3A4CF50803D9CB4 /* Frameworks */,
-				4AE988A9D3559CC4DE773C0CB67DC607 /* Headers */,
+				F8BE2D56B064616425E2B935EAD1E4FB /* Sources */,
+				0B9BB1A36C2EA7CCB548C6512456FFEC /* Frameworks */,
+				8AB42B7A492B1A96A124B55E9A979CA4 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CD1A9081701C44BD4FEA0B0767492597 /* PBXTargetDependency */,
+				A5599EEDA901924F8D2861E5B65D6050 /* PBXTargetDependency */,
 			);
-			name = SwiftyBeaver;
-			productName = SwiftyBeaver;
-			productReference = EB1063295C3C755A1FA50112759EB34D /* SwiftyBeaver.framework */;
+			name = "Pods-ZeusFramework-Zeus";
+			productName = "Pods-ZeusFramework-Zeus";
+			productReference = 83E90E275D4F3692B869DDFC2A07D29E /* Pods_ZeusFramework_Zeus.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		7B6F52488EC10931E5A24414ECAE1BD4 /* Alamofire */ = {
@@ -339,26 +341,24 @@
 			);
 			name = Alamofire;
 			productName = Alamofire;
-			productReference = 95057BCB195E3BC5DD0ED27285879B91 /* Alamofire.framework */;
+			productReference = 18F98A2943829B05A333A15370C996FA /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FF8FF98DF103338D98D8C1FC754CCBDE /* Pods-Zeus */ = {
+		A06CFF4B898F4ADB70CEB76CCD541293 /* SwiftyBeaver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4209EC7B8ED762F5CA3B38E5E2BD5AB7 /* Build configuration list for PBXNativeTarget "Pods-Zeus" */;
+			buildConfigurationList = 3CC2709634854DDAE74A9B7DE49A895E /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */;
 			buildPhases = (
-				6A9FDFDBC85BFF3345EC99939A25953F /* Sources */,
-				9FAF0764659050006BDCBC0C352F920B /* Frameworks */,
-				B0B6F21310F45052264D3B6DC8046051 /* Headers */,
+				2EE71556EEE27552992E7463B96D6AEF /* Sources */,
+				3C165C8685AEC112FC3FF7CE7A80BAA7 /* Frameworks */,
+				0979299AB960D0169C076698CD20FFD6 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				38D0BC5A2FF6048F716EB770E1380D20 /* PBXTargetDependency */,
-				7AAA1E34DD075E7686178772079293CD /* PBXTargetDependency */,
 			);
-			name = "Pods-Zeus";
-			productName = "Pods-Zeus";
-			productReference = BCDCFE6A106AA788F929809045F0A8AB /* Pods_Zeus.framework */;
+			name = SwiftyBeaver;
+			productName = SwiftyBeaver;
+			productReference = A049AC523AB07A98481639CA2CB54D9D /* SwiftyBeaver.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -370,13 +370,13 @@
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				TargetAttributes = {
-					5B4A857F944E5F779496634B9F3807CF = {
+					6F9A9A28EF5E4926496E93022D3B069C = {
 						LastSwiftMigration = 0800;
 					};
 					7B6F52488EC10931E5A24414ECAE1BD4 = {
 						LastSwiftMigration = 0800;
 					};
-					FF8FF98DF103338D98D8C1FC754CCBDE = {
+					A06CFF4B898F4ADB70CEB76CCD541293 = {
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -389,13 +389,13 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 97CA6A66D851E3090CE99C1C18D6E4B0 /* Products */;
+			productRefGroup = EE9C835B1046F80C29D094D79B5C92E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				7B6F52488EC10931E5A24414ECAE1BD4 /* Alamofire */,
-				FF8FF98DF103338D98D8C1FC754CCBDE /* Pods-Zeus */,
-				5B4A857F944E5F779496634B9F3807CF /* SwiftyBeaver */,
+				6F9A9A28EF5E4926496E93022D3B069C /* Pods-ZeusFramework-Zeus */,
+				A06CFF4B898F4ADB70CEB76CCD541293 /* SwiftyBeaver */,
 			);
 		};
 /* End PBXProject section */
@@ -425,47 +425,78 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6A9FDFDBC85BFF3345EC99939A25953F /* Sources */ = {
+		2EE71556EEE27552992E7463B96D6AEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED7B307A64654CF570890E07E16F42E /* Pods-Zeus-dummy.m in Sources */,
+				539519CB6364E8941CF514A1C0CEB593 /* AES256CBC.swift in Sources */,
+				C6A87045806F4086CB595C900A84604D /* BaseDestination.swift in Sources */,
+				DCC00DC93AE6199D56024103E223568F /* ConsoleDestination.swift in Sources */,
+				390A3EFA5889DCF16BBA15F43D33B0B4 /* FileDestination.swift in Sources */,
+				6ACDA4668E85704B076BCD200A692146 /* Filter.swift in Sources */,
+				130072A510FAB54FC39765098894BC5F /* SBPlatformDestination.swift in Sources */,
+				F89007CC316B611D6313C0AC2C2D478F /* SwiftyBeaver-dummy.m in Sources */,
+				8BFD397890050CB591E97EF1FB96F4F2 /* SwiftyBeaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B433B5954465B022BC8A13FCAD73E001 /* Sources */ = {
+		F8BE2D56B064616425E2B935EAD1E4FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25B565E7C03D71E7A8D90DC7DF9B5243 /* AES256CBC.swift in Sources */,
-				AB4DC2AF84A9492932FAF97D737BE1C7 /* BaseDestination.swift in Sources */,
-				B373B7C94FF6024275F351F85819A863 /* ConsoleDestination.swift in Sources */,
-				821E6FA05E11E3E867613104AB650B08 /* FileDestination.swift in Sources */,
-				B0675BA950ED77779B6283F6559E48D0 /* Filter.swift in Sources */,
-				0CFEA871EDCED1765666CDC62F4B6F12 /* SBPlatformDestination.swift in Sources */,
-				E29697A0B03A27A926F071D7DDD83027 /* SwiftyBeaver-dummy.m in Sources */,
-				AF86644C298224D5926CB4F45FC94EC7 /* SwiftyBeaver.swift in Sources */,
+				97F3DA1D2EA0C878505E0FA5041F97E8 /* Pods-ZeusFramework-Zeus-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		38D0BC5A2FF6048F716EB770E1380D20 /* PBXTargetDependency */ = {
+		A5599EEDA901924F8D2861E5B65D6050 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyBeaver;
+			target = A06CFF4B898F4ADB70CEB76CCD541293 /* SwiftyBeaver */;
+			targetProxy = FF861F64761AEC541C9C4F9553EE5F16 /* PBXContainerItemProxy */;
+		};
+		CD1A9081701C44BD4FEA0B0767492597 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
 			target = 7B6F52488EC10931E5A24414ECAE1BD4 /* Alamofire */;
-			targetProxy = BB488843F629586CD9906A372F42F40D /* PBXContainerItemProxy */;
-		};
-		7AAA1E34DD075E7686178772079293CD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyBeaver;
-			target = 5B4A857F944E5F779496634B9F3807CF /* SwiftyBeaver */;
-			targetProxy = E0DA753661B24134AFE44745245CB669 /* PBXContainerItemProxy */;
+			targetProxy = CE7C2E697EE028A56429DEC85FE634E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		02F970D69ADCD0B9C75DC978666758DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C9F823F100DB3F8A338BD842020964D /* SwiftyBeaver.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyBeaver/SwiftyBeaver-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyBeaver/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SwiftyBeaver;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		034014829C1E4434983CF3A690C12017 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -538,36 +569,6 @@
 			};
 			name = Release;
 		};
-		46467DA08AC0480B8A5D0559E25781B7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C9F823F100DB3F8A338BD842020964D /* SwiftyBeaver.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyBeaver/SwiftyBeaver-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyBeaver/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SwiftyBeaver;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		4922D9F93FC212A883F63EED7C67F79B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 261E0421ADAF16771AA61128C5206A1F /* Alamofire.xcconfig */;
@@ -599,47 +600,13 @@
 			};
 			name = Debug;
 		};
-		562E46451DCF52203B253B1917FB5A71 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B3B0BBB998FB8B35F20DE5115DA4F43 /* Pods-Zeus.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Zeus/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Zeus/Pods-Zeus.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Zeus;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		93F324365E5BED3CC2A5718773A2DC79 /* Debug */ = {
+		941D070194E135D41BAD0B4206E410A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C9F823F100DB3F8A338BD842020964D /* SwiftyBeaver.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -652,17 +619,50 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = SwiftyBeaver;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
+		};
+		A5AD09C6A2895513079A31D7711C555C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE68C752EECF700BB1EFA2524B4419ED /* Pods-ZeusFramework-Zeus.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ZeusFramework-Zeus/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_ZeusFramework_Zeus;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		C7E474A03CAE21F1CB6046E7344C59BD /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -702,9 +702,9 @@
 			};
 			name = Release;
 		};
-		EACCA79B373DDDD5F685F3B236F6CA01 /* Debug */ = {
+		E3DDBD3D13D70B8BFAD1515F02350746 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FEDB9CC0D09815A271A9FBAD4EBAE9D8 /* Pods-Zeus.debug.xcconfig */;
+			baseConfigurationReference = CA044532BF12F7AA53F075FA80553EF4 /* Pods-ZeusFramework-Zeus.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -715,18 +715,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Zeus/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-ZeusFramework-Zeus/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Zeus/Pods-Zeus.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Zeus;
+				PRODUCT_NAME = Pods_ZeusFramework_Zeus;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -740,15 +740,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13691D15247E1A185DCF797C468A0BDF /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				93F324365E5BED3CC2A5718773A2DC79 /* Debug */,
-				46467DA08AC0480B8A5D0559E25781B7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -767,11 +758,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4209EC7B8ED762F5CA3B38E5E2BD5AB7 /* Build configuration list for PBXNativeTarget "Pods-Zeus" */ = {
+		3CC2709634854DDAE74A9B7DE49A895E /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EACCA79B373DDDD5F685F3B236F6CA01 /* Debug */,
-				562E46451DCF52203B253B1917FB5A71 /* Release */,
+				02F970D69ADCD0B9C75DC978666758DB /* Debug */,
+				941D070194E135D41BAD0B4206E410A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A183AE505BE6443E79B1B85EF3D0AFBE /* Build configuration list for PBXNativeTarget "Pods-ZeusFramework-Zeus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3DDBD3D13D70B8BFAD1515F02350746 /* Debug */,
+				A5AD09C6A2895513079A31D7711C555C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

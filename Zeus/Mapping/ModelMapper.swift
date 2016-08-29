@@ -50,25 +50,30 @@ internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
         return new
     }
 
-    internal func storeModel(_ json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
-        let managedObject = super.storeModel(json, withMapping: mapping, options: options)
+    internal override func storeModel(_ json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+        let storeModelResult = super.storeModel(json, withMapping: mapping, options: options)
 
-        if let managedObject = model as? NSManagedObject {
-            do {
-                try managedObject.validateForInsert()
-            } catch let error {
-                log.error("Error validating model: \(error)")
-                let result = Result(.coreDataValidation)
-                return result
+        switch storeModelResult {
+        case .success(let model):
+            if let managedObject = model as? NSManagedObject {
+                do {
+                    try managedObject.validateForInsert()
+                } catch let error {
+                    log.error("Error validating model: \(error)")
+                    let result = Result(.coreDataValidation)
+                    return result
+                }
+
+                //TODO: This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal!
+                if options?.persistEntities == true, let entityMapping = mapping as? EntityMappingProtocol {
+                    entityMapping.managedObjectContext.saveToPersistentStore()
+                }
             }
+        default:
+            break
         }
 
-        //TODO: This should be moved up the chain, now save is called for every object if receiving a JSON array... this is not optimal!
-        if options?.persistEntities == true, let entityMapping = mapping as? EntityMappingProtocol {
-            entityMapping.managedObjectContext.saveToPersistentStore()
-        }
-
-        return Result(managedObject)
+        return storeModelResult
     }
 
 }
@@ -93,7 +98,7 @@ internal class ModelMapper: ModelMapperProtocol {
         let mappedJson = map(json: json, withMapping: mapping)
         guard shouldStoreModel(mappedJson, withMapping: mapping) else {
             log.verbose("Not storing model with json: \(json) since it does not fulfill store condition")
-            return Result(.skippedDueToCondition)
+            return Result(.eventMappingSkipped)
         }
         let result = storeModel(mappedJson, withMapping: mapping, options: options)
         return result

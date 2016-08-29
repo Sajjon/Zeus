@@ -18,10 +18,3 @@ public var documentsFolder: URL? {
 public var documentsFolderPath: String? {
     return documentsFolder?.absoluteString
 }
-
-func err(_ error: ZeusError) -> NSError {
-    let userInfo = [NSLocalizedFailureReasonErrorKey: error.errorMessage]
-    let error = NSError(domain: "Zeus", code: error.rawValue, userInfo: userInfo)
-    return error
-}
-
