@@ -152,7 +152,7 @@ class Character: ManagedObject {
 You fetch your data using the `get:atPath:queryParams:options:done` method on the `ModelManagerProtocol`. If you want to fetch all the Game of Thrones houses from the [Example project](#Example) you can do that like this:
 ```swift
     func getHouses() {
-        modelManager.get(atPath: "houses", queryParameters: nil, options: nil) {
+        Zeus.HTTPClient.sharedInstance.get(atPath: "houses", queryParameters: nil, options: nil) {
             result in
             if let error = result.error {
                 print("Error fetching houses, error: \(error)")
