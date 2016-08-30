@@ -56,13 +56,6 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
     }
 
     internal func mapping(withJson json: JSON, fromPath path: String, options: Options?) -> Result {
-        for (key, value) in json {
-            if let string = value as? NSString {
-                if string.length == 0 {
-                    print("\(key) has zero length")
-                }
-            }
-        }
         guard let descriptor = responseDescriptor(forPath: path) else { return Result(.mappingNoResponseDescriptor) }
         let result = model(fromJson: json, withMapping: descriptor.mapping, options: options)
         return result

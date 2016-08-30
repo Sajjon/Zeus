@@ -71,7 +71,13 @@ public enum Result {
         let isManagedObject: Bool
         switch self {
         case .success(let value):
-            isManagedObject = (value is NSManagedObject)
+            if value is [NSManagedObject] {
+                isManagedObject = true
+            } else if value is NSManagedObject {
+                isManagedObject = true
+            } else {
+                isManagedObject = false
+            }
         default:
             isManagedObject = false
         }
