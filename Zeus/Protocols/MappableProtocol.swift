@@ -13,6 +13,9 @@ public protocol Mappable {
     static var destinationClass: NSObject.Type { get }
     static var idAttributeName: String { get }
     static var attributeMapping: AttributeMappingProtocol { get }
+
+    static func relationships(forMapping mapping: MappingProtocol) -> [RelationshipMappingProtocol]?
+
     static var transformers: [TransformerProtocol]? { get }
     static var cherryPickers: [CherryPickerProtocol]? { get }
     static var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? { get }
@@ -27,6 +30,14 @@ public protocol MappableEntity: Mappable {
 public extension Mappable {
     static func mapping(_ store: DataStoreProtocol) -> MappingProtocol {
         let mapping = Mapping(destinationClass: destinationClass, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
+
+        if let list = relationships(forMapping: mapping) {
+            var dictionary: Dictionary<String, RelationshipMappingProtocol> = [:]
+            for element in list {
+                dictionary[element.sourceKeyPath] = element
+            }
+            mapping.relationships = dictionary
+        }
 
         if let list = transformers {
             var dictionary: Dictionary<String, TransformerProtocol> = [:]

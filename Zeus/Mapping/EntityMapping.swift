@@ -35,6 +35,7 @@ open class EntityMapping: Mapping, EntityMappingProtocol {
         self.entityName = destinationClass.className
         self.managedObjectContext = managedObjectContext
         super.init(destinationClass: destinationClass, idAttributeName: mapping.idAttributeName, attributeMapping: mapping.attributeMapping)
+        self.relationships = mapping.relationships
         self.transformers = mapping.transformers
         self.futureConnections = mapping.futureConnections
         self.cherryPickers = mapping.cherryPickers

@@ -55,6 +55,13 @@
 			remoteGlobalIDString = 650124771D6609C3003BFFA6;
 			remoteInfo = Zeus;
 		};
+		654B0FD11D75B550005E7755 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 654B0FCD1D75B550005E7755 /* SpotifyAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 659AF20F1D75B4BC00667212;
+			remoteInfo = SpotifyAPI;
+		};
 		65D16EC51D746782006565CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */;
@@ -101,6 +108,7 @@
 		6529A1501D74714D00E46F9C /* InMemoryModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryModelMapper.swift; sourceTree = "<group>"; };
 		6529A1531D74716D00E46F9C /* ManagedObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectMapper.swift; sourceTree = "<group>"; };
 		6529A1551D7472B900E46F9C /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		654B0FCD1D75B550005E7755 /* SpotifyAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpotifyAPI.xcodeproj; path = Examples/SpotifyAPI/SpotifyAPI.xcodeproj; sourceTree = "<group>"; };
 		657945F01D746E750091B967 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		657945F21D746E7B0091B967 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
 		65864A44787980FE7BD8D63B /* Pods-ZeusFramework-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeusFramework-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +167,7 @@
 		6501246E1D6609C3003BFFA6 = {
 			isa = PBXGroup;
 			children = (
+				654B0FCD1D75B550005E7755 /* SpotifyAPI.xcodeproj */,
 				65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */,
 				6501247A1D6609C3003BFFA6 /* Zeus */,
 				650124861D6609C3003BFFA6 /* ZeusTests */,
@@ -254,6 +263,14 @@
 				65B9FABF1D706871008F9B99 /* Option.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		654B0FCE1D75B550005E7755 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				654B0FD21D75B550005E7755 /* SpotifyAPI.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		65D16EC21D746782006565CF /* Products */ = {
@@ -370,6 +387,10 @@
 					ProductGroup = 65D16EC21D746782006565CF /* Products */;
 					ProjectRef = 65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */;
 				},
+				{
+					ProductGroup = 654B0FCE1D75B550005E7755 /* Products */;
+					ProjectRef = 654B0FCD1D75B550005E7755 /* SpotifyAPI.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -380,6 +401,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		654B0FD21D75B550005E7755 /* SpotifyAPI.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SpotifyAPI.app;
+			remoteRef = 654B0FD11D75B550005E7755 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		65D16EC61D746782006565CF /* ApiOfIceAndFire.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;

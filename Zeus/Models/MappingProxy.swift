@@ -13,6 +13,7 @@ public struct MappingProxy {
     let mapping: MappingProtocol
 }
 
+@discardableResult
 public func ==(mappingProxy: MappingProxy, route: RouterProtocol) -> ResponseDescriptorProtocol {
     let descriptor = ResponseDescriptor(mapping: mappingProxy.mapping, route: route)
     mappingProxy.context.add(responseDescriptor: descriptor)

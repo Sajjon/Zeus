@@ -13,16 +13,19 @@ public protocol MappingProtocol {
     var idAttributeName: String { get }
     var attributeMapping: AttributeMappingProtocol { get }
 
+    var relationships: Dictionary<String, RelationshipMappingProtocol>? { get }
     var transformers: Dictionary<String, TransformerProtocol>? { get }
     var futureConnections: Dictionary<String, FutureConnectionProtocol>? { get }
     var shouldStoreConditions: Dictionary<String, ShouldStoreModelConditionProtocol>? { get }
     var cherryPickers: Dictionary<String, CherryPickerProtocol>? { get }
 
+    func add(relationship relationship: RelationshipMappingProtocol)
     func add(cherryPicker picker: CherryPickerProtocol)
     func add(shouldStoreCondition condition: ShouldStoreModelConditionProtocol)
     func add(transformer: TransformerProtocol)
     func add(futureConnection connection: FutureConnectionProtocol)
 
+    func relationship(forKey key: String) -> RelationshipMappingProtocol?
     func shouldStoreCondition(forAttributeName attributeName: String) -> ShouldStoreModelConditionProtocol?
     func cherryPicker(forAttributeName attributeName: String) -> CherryPickerProtocol?
     func transformer(forKey key: String) -> TransformerProtocol?
@@ -33,6 +36,8 @@ open class Mapping: MappingProtocol {
     open let destinationClass: NSObject.Type
     open let idAttributeName: String
     open let attributeMapping: AttributeMappingProtocol
+
+    open var relationships: Dictionary<String, RelationshipMappingProtocol>?
 
     open var transformers: Dictionary<String, TransformerProtocol>?
     open var futureConnections: Dictionary<String, FutureConnectionProtocol>?
@@ -47,6 +52,13 @@ open class Mapping: MappingProtocol {
         self.destinationClass = destinationClass
         self.idAttributeName = idAttributeName
         self.attributeMapping = attributeMapping
+    }
+
+    open func add(relationship relationship: RelationshipMappingProtocol) {
+        if relationships == nil {
+            relationships = [:]
+        }
+        relationships?[relationship.sourceKeyPath] = relationship
     }
 
     open func add(transformer: TransformerProtocol) {
@@ -75,6 +87,11 @@ open class Mapping: MappingProtocol {
             shouldStoreConditions = [:]
         }
         shouldStoreConditions?[condition.attributeName] = condition
+    }
+
+    open func relationship(forKey key: String) -> RelationshipMappingProtocol? {
+        let relationship = relationships?[key]
+        return relationship
     }
 
     open func shouldStoreCondition(forAttributeName attributeName: String) -> ShouldStoreModelConditionProtocol? {

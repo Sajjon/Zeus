@@ -1,0 +1,124 @@
+{
+  "album_type": "album",
+  "artists": [
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/762310PdDnwsDxAQxzQkfX"
+      },
+      "href": "https://api.spotify.com/v1/artists/762310PdDnwsDxAQxzQkfX",
+      "id": "762310PdDnwsDxAQxzQkfX",
+      "name": "Depeche Mode",
+      "type": "artist",
+      "uri": "spotify:artist:762310PdDnwsDxAQxzQkfX"
+    }
+  ],
+  "available_markets": [
+    "SE",
+    "CH",
+  ],
+  "copyrights": [
+    {
+      "text": "(P) 1986 Venusnote Ltd. under exclusive license to Sony Music Entertainment International Ltd",
+      "type": "P"
+    }
+  ],
+  "external_ids": {
+    "upc": "0724347386855"
+  },
+  "external_urls": {
+    "spotify": "https://open.spotify.com/album/1lvuzZydLlhw4tPIbriKDa"
+  },
+  "genres": [],
+  "href": "https://api.spotify.com/v1/albums/1lvuzZydLlhw4tPIbriKDa",
+  "id": "1lvuzZydLlhw4tPIbriKDa",
+  "images": [
+    {
+      "height": 640,
+      "url": "https://i.scdn.co/image/65d88ccc488f766ef49f3e3f5b134c1049b498a8",
+      "width": 640
+    },
+    {
+      "height": 300,
+      "url": "https://i.scdn.co/image/f6d1b022f12b74ddf13cf2949011c2c6335fd451",
+      "width": 300
+    }
+  ],
+  "name": "Black Celebration",
+  "popularity": 50,
+  "release_date": "1986-03-17",
+  "release_date_precision": "day",
+  "tracks": {
+    "href": "https://api.spotify.com/v1/albums/1lvuzZydLlhw4tPIbriKDa/tracks?offset=0&limit=50",
+    "items" : [
+      {
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/762310PdDnwsDxAQxzQkfX"
+            },
+            "href": "https://api.spotify.com/v1/artists/762310PdDnwsDxAQxzQkfX",
+            "id": "762310PdDnwsDxAQxzQkfX",
+            "name": "Depeche Mode",
+            "type": "artist",
+            "uri": "spotify:artist:762310PdDnwsDxAQxzQkfX"
+          }
+        ],
+        "available_markets": [
+          "SE",
+          "CH"
+        ],
+        "disc_number": 1,
+        "duration_ms": 297573,
+        "explicit": false,
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4sasOnxPZLjX5ecdAo3Nud"
+        },
+        "href": "https://api.spotify.com/v1/tracks/4sasOnxPZLjX5ecdAo3Nud",
+        "id": "4sasOnxPZLjX5ecdAo3Nud",
+        "name": "Black Celebration",
+        "preview_url": "https://p.scdn.co/mp3-preview/156ce96fe275e3c83db944210c10bb46f2270360",
+        "track_number": 1,
+        "type": "track",
+        "uri": "spotify:track:4sasOnxPZLjX5ecdAo3Nud"
+      },
+      {
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/762310PdDnwsDxAQxzQkfX"
+            },
+            "href": "https://api.spotify.com/v1/artists/762310PdDnwsDxAQxzQkfX",
+            "id": "762310PdDnwsDxAQxzQkfX",
+            "name": "Depeche Mode",
+            "type": "artist",
+            "uri": "spotify:artist:762310PdDnwsDxAQxzQkfX"
+          }
+        ],
+        "available_markets": [
+          "SE",
+          "CH"
+        ],
+        "disc_number": 1,
+        "duration_ms": 319333,
+        "explicit": false,
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/5FYhQVGvwzXYwDU0JEAo9z"
+        },
+        "href": "https://api.spotify.com/v1/tracks/5FYhQVGvwzXYwDU0JEAo9z",
+        "id": "5FYhQVGvwzXYwDU0JEAo9z",
+        "name": "Fly On The Windscream (Final)",
+        "preview_url": "https://p.scdn.co/mp3-preview/efba0a0c870ef1784c20c6d6429f0f599b5cad6b",
+        "track_number": 2,
+        "type": "track",
+        "uri": "spotify:track:5FYhQVGvwzXYwDU0JEAo9z"
+      }
+    ],
+    "limit": 50,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 14
+  },
+  "type": "album",
+  "uri": "spotify:album:1lvuzZydLlhw4tPIbriKDa"
+}

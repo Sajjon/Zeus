@@ -13,3 +13,15 @@ public protocol RelationshipMappingProtocol {
     var destinationKeyPath: String { get }
     var mapping: MappingProtocol { get }
 }
+
+open class RelationshipMapping: RelationshipMappingProtocol {
+    open let sourceKeyPath: String
+    open let destinationKeyPath: String
+    open let mapping: MappingProtocol
+
+    public init(sourceKeyPath: String, destinationKeyPath: String, mapping: MappingProtocol) {
+        self.sourceKeyPath = sourceKeyPath
+        self.destinationKeyPath = destinationKeyPath
+        self.mapping = mapping
+    }
+}

@@ -77,13 +77,6 @@ class House: ManagedObject {
 //    }
 }
 
-extension String {
-    func contains(_ find: String) -> Bool {
-        return self.range(of: find) != nil
-    }
-
-}
-
 extension House {
     var members: [Character]? {
         return membersSet?.allObjects as? [Character]

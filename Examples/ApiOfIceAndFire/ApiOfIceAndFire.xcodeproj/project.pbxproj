@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654B0FF41D75B6F2005E7755 /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654B0FF31D75B6F2005E7755 /* String_Extension.swift */; };
 		655F6CE41D6C62F40080FAA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F6CE31D6C62F40080FAA0 /* AppDelegate.swift */; };
 		655F6CE91D6C62F40080FAA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 655F6CE71D6C62F40080FAA0 /* Main.storyboard */; };
 		655F6CEB1D6C62F40080FAA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 655F6CEA1D6C62F40080FAA0 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		654B0FF31D75B6F2005E7755 /* String_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
 		655F6CE01D6C62F40080FAA0 /* ApiOfIceAndFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApiOfIceAndFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		655F6CE31D6C62F40080FAA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		655F6CE81D6C62F40080FAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		654B0FF21D75B6F2005E7755 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				654B0FF31D75B6F2005E7755 /* String_Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		655F6CD71D6C62F40080FAA0 = {
 			isa = PBXGroup;
 			children = (
@@ -93,16 +103,17 @@
 		655F6CE21D6C62F40080FAA0 /* ApiOfIceAndFire */ = {
 			isa = PBXGroup;
 			children = (
-				7BCD22791D6D7782008BE83C /* Views */,
-				65B9FAB11D6C8470008F9B99 /* ViewControllers */,
-				655F6D031D6C69220080FAA0 /* Network */,
-				655F6CF51D6C63860080FAA0 /* Models */,
-				655F6CE31D6C62F40080FAA0 /* AppDelegate.swift */,
-				655F6CE71D6C62F40080FAA0 /* Main.storyboard */,
-				655F6CEA1D6C62F40080FAA0 /* Assets.xcassets */,
-				655F6CEC1D6C62F40080FAA0 /* LaunchScreen.storyboard */,
-				655F6CEF1D6C62F40080FAA0 /* Info.plist */,
+				654B0FF21D75B6F2005E7755 /* Extensions */,
 				655F6D011D6C690A0080FAA0 /* APIClient.swift */,
+				655F6CE31D6C62F40080FAA0 /* AppDelegate.swift */,
+				655F6CEA1D6C62F40080FAA0 /* Assets.xcassets */,
+				655F6CEF1D6C62F40080FAA0 /* Info.plist */,
+				655F6CEC1D6C62F40080FAA0 /* LaunchScreen.storyboard */,
+				655F6CE71D6C62F40080FAA0 /* Main.storyboard */,
+				655F6CF51D6C63860080FAA0 /* Models */,
+				655F6D031D6C69220080FAA0 /* Network */,
+				65B9FAB11D6C8470008F9B99 /* ViewControllers */,
+				7BCD22791D6D7782008BE83C /* Views */,
 				655F6D081D6C697F0080FAA0 /* ZeusConfigurator.swift */,
 			);
 			path = ApiOfIceAndFire;
@@ -238,6 +249,7 @@
 				655F6D071D6C69480080FAA0 /* Router.swift in Sources */,
 				7BCD227C1D6D778E008BE83C /* HouseInfoTableViewCell.swift in Sources */,
 				655F6CFA1D6C63860080FAA0 /* Character.swift in Sources */,
+				654B0FF41D75B6F2005E7755 /* String_Extension.swift in Sources */,
 				655F6D0B1D6C69B50080FAA0 /* ManagedObject.swift in Sources */,
 				655F6D091D6C697F0080FAA0 /* ZeusConfigurator.swift in Sources */,
 				655F6CFC1D6C63860080FAA0 /* Model.xcdatamodeld in Sources */,

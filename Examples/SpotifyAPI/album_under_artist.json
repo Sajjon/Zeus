@@ -1,0 +1,32 @@
+{
+  "album_type": "album",
+  "available_markets": [
+    "ES",
+    "SE"
+  ],
+  "external_urls": {
+    "spotify": "https://open.spotify.com/album/1lvuzZydLlhw4tPIbriKDa"
+  },
+  "href": "https://api.spotify.com/v1/albums/1lvuzZydLlhw4tPIbriKDa",
+  "id": "1lvuzZydLlhw4tPIbriKDa",
+  "images": [
+    {
+      "height": 640,
+      "url": "https://i.scdn.co/image/65d88ccc488f766ef49f3e3f5b134c1049b498a8",
+      "width": 640
+    },
+    {
+      "height": 300,
+      "url": "https://i.scdn.co/image/f6d1b022f12b74ddf13cf2949011c2c6335fd451",
+      "width": 300
+    },
+    {
+      "height": 64,
+      "url": "https://i.scdn.co/image/eed259ed30297f1fc12848de53be8b9b67aa7a24",
+      "width": 64
+    }
+  ],
+  "name": "Black Celebration",
+  "type": "album",
+  "uri": "spotify:album:1lvuzZydLlhw4tPIbriKDa"
+}

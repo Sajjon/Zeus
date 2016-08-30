@@ -1,0 +1,40 @@
+{
+  "external_urls": {
+    "spotify": "https://open.spotify.com/artist/762310PdDnwsDxAQxzQkfX"
+  },
+  "followers": {
+    "href": null,
+    "total": 763162
+  },
+  "genres": [
+    "new wave"
+  ],
+  "href": "https://api.spotify.com/v1/artists/762310PdDnwsDxAQxzQkfX",
+  "id": "762310PdDnwsDxAQxzQkfX",
+  "images": [
+    {
+      "height": 1003,
+      "url": "https://i.scdn.co/image/daa05a88757233983bdb4c7122ebfb61caab73e2",
+      "width": 1000
+    },
+    {
+      "height": 642,
+      "url": "https://i.scdn.co/image/45aae4c8b8c1f53f868bd2f12374791c392d6af8",
+      "width": 640
+    },
+    {
+      "height": 201,
+      "url": "https://i.scdn.co/image/87bfa0c8005a8cd3636108568e65713ede897dcb",
+      "width": 200
+    },
+    {
+      "height": 64,
+      "url": "https://i.scdn.co/image/01bd32c6b5f81734b27b38247d2f832945e7440d",
+      "width": 64
+    }
+  ],
+  "name": "Depeche Mode",
+  "popularity": 70,
+  "type": "artist",
+  "uri": "spotify:artist:762310PdDnwsDxAQxzQkfX"
+}
