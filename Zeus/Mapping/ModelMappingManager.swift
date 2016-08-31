@@ -114,40 +114,9 @@ private extension ModelMappingManager {
             let relationshipMapping = mapping(forJson: json, at: source, fromAPIPath: path, options: options, specifiedMapping: relationship.mapping)
             switch relationshipMapping {
             case .success(let relationshipModel):
-                print("setting value for relationship")
                 if let sourceEntityMapping = theMapping as? EntityMappingProtocol {
                     guard let managedObject = model as? NSManagedObject else { log.error("not managed obj"); continue }
-                    let sourceEntityDescription = sourceEntityMapping.entityDescription
-                    let relationshipsByName = sourceEntityDescription.relationshipsByName
-                    guard let coreDataRelationship: NSRelationshipDescription = relationshipsByName[destination] else { log.error("no rel. by name"); continue }
-                    guard let inversedRelationship = coreDataRelationship.inverseRelationship else { log.error("no inverse"); continue }
-                    let type: RelationshipType
-                    switch (coreDataRelationship.isToMany, inversedRelationship.isToMany) {
-                    case (true, true):
-                        type = RelationshipType.manyToMany
-                    case (false, true):
-                        type = RelationshipType.oneToMany
-                    case (false, false):
-                        type = RelationshipType.oneToOne
-                    case (true, false):
-                        type = RelationshipType.manyToOne
-                    }
-
-                    switch type {
-                    case .oneToOne:
-                        print("one to one")
-                        break
-                    case .oneToMany:
-                        print("one to many")
-                        break
-                    case .manyToOne:
-                        print("many to one")
-                        break
-                    case .manyToMany:
-                        print("many to many")
-                        break
-                    }
-
+                    guard let coreDataRelationship = sourceEntityMapping.entityDescription.relationshipsByName[destination] else { log.error("no rel. by name"); continue }
                     if coreDataRelationship.isToMany {
                         guard let arrayOfObjects = relationshipModel as? [NSManagedObject] else { log.error("not mo array"); continue }
                         if coreDataRelationship.isOrdered {
