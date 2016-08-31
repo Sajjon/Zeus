@@ -10,48 +10,55 @@ import Foundation
 import Zeus
 
 let noId = "not_used"
-enum Router: RouterProtocol {
+enum APIPath: APIPathProtocol {
     case albumById(String)
+    case albumsByArtist(String)
     case artistById(String)
 
     var method: HTTPMethod {
         let method: HTTPMethod
         switch self {
         case .albumById: fallthrough
+        case .albumsByArtist: fallthrough
         case .artistById:
             method = .get
         }
         return method
     }
 
-    var pathMapping: String {
+    var mapping: String {
         let path: String
         switch self {
 
         case .albumById:
             path = "albums/:id"
         case .artistById:
-            path = "artist/:id"
+            path = "artists/:id"
+        case .albumsByArtist:
+            path = "artists/:id/albums"
         }
         return path
     }
 
-    var path: String {
+    func request(baseUrl: String) -> String {
         let path: String
         switch self {
         case .albumById(let id):
-            path = parameterize(path: pathMapping, withParameter: id)
+            path = parameterize(path: mapping, withParameter: id)
+        case .albumsByArtist(let id):
+            path = parameterize(path: mapping, withParameter: id)
         case .artistById(let id):
-            path = parameterize(path: pathMapping, withParameter: id)
+            path = parameterize(path: mapping, withParameter: id)
         default:
-            path = pathMapping
+            path = mapping
         }
-        return path
+        let fullPath = baseUrl + path
+        return fullPath
     }
 }
 
 //MARK: Private Methods
-private extension Router {
+private extension APIPath {
 
     func parameterize(path: String, withParameters parameters: Any?...) -> String {
         guard parameters.count > 0 else { return path }

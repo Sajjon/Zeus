@@ -14,7 +14,7 @@
     </entity>
     <entity name="Artist" representedClassName=".Artist" syncable="YES">
         <attribute name="artistId" attributeType="String" syncable="YES"/>
-        <attribute name="followersRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="followersRaw" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="genres" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="popularityRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -35,6 +35,7 @@
         <attribute name="href" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="streamUrl" attributeType="String" syncable="YES"/>
+        <attribute name="trackId" attributeType="String" syncable="YES"/>
         <attribute name="trackNumberRaw" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uri" attributeType="String" syncable="YES"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="tracksOrderedSet" inverseEntity="Album" syncable="YES"/>
@@ -43,6 +44,6 @@
         <element name="Album" positionX="-36" positionY="63" width="128" height="195"/>
         <element name="Artist" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="Image" positionX="-54" positionY="18" width="128" height="120"/>
-        <element name="Track" positionX="-18" positionY="108" width="128" height="165"/>
+        <element name="Track" positionX="-18" positionY="108" width="128" height="180"/>
     </elements>
 </model>

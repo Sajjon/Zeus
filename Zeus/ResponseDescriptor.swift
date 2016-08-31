@@ -9,24 +9,28 @@
 import Foundation
 import Alamofire
 
-public protocol ResponseDescriptorProtocol {
-    var mapping: MappingProtocol{get}
-    var route: RouterProtocol{get}
+public protocol APIPathProtocol {
+    var method: HTTPMethod { get }
+    var mapping: String { get }
+    func request(baseUrl: String) -> String
 }
 
-public protocol RouterProtocol {
-    var method: HTTPMethod{get}
-    var path: String{get}
-    var pathMapping: String{get}
+public protocol ResponseDescriptorProtocol {
+    var mapping: MappingProtocol { get }
+    var apiPath: APIPathProtocol { get }
+    var jsonKeyPath: String? { get }
 }
+
 
 public struct ResponseDescriptor: ResponseDescriptorProtocol {
 
     public let mapping: MappingProtocol
-    public let route: RouterProtocol
+    public let apiPath: APIPathProtocol
+    public let jsonKeyPath: String?
 
-    public init(mapping: MappingProtocol, route: RouterProtocol) {
+    public init(mapping: MappingProtocol, apiPath: APIPathProtocol, jsonKeyPath: String? = nil) {
         self.mapping = mapping
-        self.route = route
+        self.apiPath = apiPath
+        self.jsonKeyPath = jsonKeyPath
     }
 }

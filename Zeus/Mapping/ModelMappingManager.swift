@@ -11,8 +11,8 @@ import CoreData
 
 
 internal protocol ModelMappingManagerProtocol {
-    func mapping(withJson json: JSON, fromPath path: String, options: Options?) -> Result
-    func mapping(withJsonArray jsonArray: [JSON], fromPath path: String, options: Options?) -> Result
+    func mapping(withJsonOrArray json: JSON, fromPath path: APIPathProtocol, options: Options?) -> Result
+    func mapping(withJsonArray jsonArray: [JSON], fromPath path: APIPathProtocol, options: Options?) -> Result
     func addResponseDescriptors(fromContext context: MappingContext)
 }
 
@@ -29,7 +29,7 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         managedObjectMapper = ManagedObjectMapper(managedObjectStore: managedObjectStore)
     }
 
-    internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: String, options: Options?) -> Result {
+    internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: APIPathProtocol, options: Options?) -> Result {
         var models: [NSObject] = []
         var error: NSError?
         for json in jsonArray {
@@ -55,9 +55,15 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         return result
     }
 
-    internal func mapping(withJson json: JSON, fromPath path: String, options: Options?) -> Result {
-        guard let descriptor = responseDescriptor(forPath: path) else { return Result(.mappingNoResponseDescriptor) }
-        let result = model(fromJson: json, withMapping: descriptor.mapping, options: options)
+    internal func mapping(withJsonOrArray json: JSON, fromPath path: APIPathProtocol, options: Options?) -> Result {
+        guard let descriptor = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
+
+        let result: Result
+        if let jsonKeyPath = descriptor.jsonKeyPath {
+            result = mapping(forJson: json, at: jsonKeyPath, fromAPIPath: path, descriptor: descriptor, options: options)
+        } else {
+            result = mapping(withJson: json, fromPath: path, options: options)
+        }
         return result
     }
 
@@ -67,25 +73,34 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         }
     }
 
-    fileprivate var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
+//    fileprivate var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
 }
 
 //MARK: Private Methods
 private extension ModelMappingManager {
 
-    func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
-        pathToDescriptorMap[descriptor.route.pathMapping] = descriptor
-//        let mapping = descriptor.mapping
-//        if let futureConnections = mapping.futureConnections {
-//            for (_, futureConnection) in futureConnections {
-//                let relationship = futureConnection.relationship
-//                guard let targetEntityName = relationship.destinationEntity?.name else { continue }
-//                let existingConnections = inverseFutureConnectionMap[targetEntityName]
-//                var connectionsForEntity = existingConnections ?? []
-//                connectionsForEntity.append(futureConnection)
-//                inverseFutureConnectionMap[targetEntityName] = connectionsForEntity
-//            }
-//        }
+    func mapping(withJson json: JSON, fromPath path: APIPathProtocol, options: Options?) -> Result {
+        guard let descriptor = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
+        let result = model(fromJson: json, withMapping: descriptor.mapping, options: options)
+        return result
+    }
+
+    func mapping(forJson json: JSON, at keyPath: String, fromAPIPath apiPath: APIPathProtocol, descriptor: ResponseDescriptorProtocol, options: Options?) -> Result {
+        guard
+            let jsonKeyPath = descriptor.jsonKeyPath,
+            let subJson = json.valueFor(nestedKey: jsonKeyPath)
+            else {
+                return Result(.parsingJSON)
+        }
+
+        if let rawJsonArray = subJson as? [RawJSON] {
+            let jsonArray: [JSON] = rawJsonArray.map { return JSON($0) }
+            return mapping(withJsonArray: jsonArray, fromPath: apiPath, options: options)
+        } else if let rawJson = subJson as? RawJSON {
+            return mapping(withJson: JSON(rawJson), fromPath: apiPath, options: options)
+        }
+
+        return Result(.parsingJSON)
     }
 
     func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
@@ -98,23 +113,24 @@ private extension ModelMappingManager {
         return result
     }
 
-    func responseDescriptor(forPath path: String) -> ResponseDescriptorProtocol? {
-        let parsedPath = parse(path: path)
-        let descriptor = pathToDescriptorMap[parsedPath]
+    func responseDescriptor(forPath path: APIPathProtocol) -> ResponseDescriptorProtocol? {
+        let descriptor = pathToDescriptorMap[path.mapping]
         return descriptor
     }
 
-    //TODO: Fix class that understands that 'api/object/7' should match 'api/object/:objectid'
-    func parse(path: String) -> String {
-        guard let url = URL(string: path) else { return path }
-        let parsedPath: String
-        let lastPathComponent = url.lastPathComponent
-        if let _ = Int(lastPathComponent) {
-            parsedPath = url.absoluteString.replacingOccurrences(of: lastPathComponent, with: ":id")
-        } else {
-            parsedPath = path
-        }
-        return parsedPath
+    func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
+        pathToDescriptorMap[descriptor.apiPath.mapping] = descriptor
+        //        let mapping = descriptor.mapping
+        //        if let futureConnections = mapping.futureConnections {
+        //            for (_, futureConnection) in futureConnections {
+        //                let relationship = futureConnection.relationship
+        //                guard let targetEntityName = relationship.destinationEntity?.name else { continue }
+        //                let existingConnections = inverseFutureConnectionMap[targetEntityName]
+        //                var connectionsForEntity = existingConnections ?? []
+        //                connectionsForEntity.append(futureConnection)
+        //                inverseFutureConnectionMap[targetEntityName] = connectionsForEntity
+        //            }
+        //        }
     }
 }
 

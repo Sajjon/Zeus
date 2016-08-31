@@ -12,6 +12,7 @@ import Zeus
 protocol APIClientProtocol {
     func getAlbum(byId id: String, queryParams: QueryParameters?, done: Done?)
     func getArtist(byId id: String, queryParams: QueryParameters?, done: Done?)
+    func getAlbums(byArtist artistId: String, queryParams: QueryParameters?, done: Done?)
 }
 
 class APIClient: APIClientProtocol {
@@ -25,6 +26,10 @@ class APIClient: APIClientProtocol {
 
     func getAlbum(byId id: String, queryParams: QueryParameters?, done: Done?) {
         httpClient.get(atPath: .albumById(id), queryParams: queryParams, options: nil, done: done)
+    }
+
+    func getAlbums(byArtist artistId: String, queryParams: QueryParameters?, done: Done?) {
+        httpClient.get(atPath: .albumsByArtist(artistId), queryParams: queryParams, options: nil, done: done)
     }
 
     func getArtist(byId id: String, queryParams: QueryParameters?, done: Done?) {

@@ -20,8 +20,8 @@ public protocol ModelManagerProtocol {
     func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy) -> Void)
     func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
     func map(_ a: MappingProtocol, _ b: MappingProtocol, _ c: MappingProtocol, _ d: MappingProtocol, _ e: MappingProtocol, closure: (MappingProxy, MappingProxy, MappingProxy, MappingProxy, MappingProxy) -> Void)
-    func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?)
-    func post(model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?)
+    func get(atPath path: APIPathProtocol, queryParameters params: QueryParameters?, options: Options?, done: Done?)
+    func post(model: AnyObject?, toPath path: APIPathProtocol, queryParameters params: QueryParameters?, done: Done?)
 }
 
 open class ModelManager: ModelManagerProtocol {
@@ -40,8 +40,8 @@ open class ModelManager: ModelManagerProtocol {
         self.modelMappingManager = ModelMappingManager()
     }
 
-    open func get(atPath path: String, queryParameters params: QueryParameters?, options: Options?, done: Done?) {
-        let pathFull = fullPath(withPath: path)
+    open func get(atPath path: APIPathProtocol, queryParameters params: QueryParameters?, options: Options?, done: Done?) {
+        let pathFull = path.request(baseUrl: baseUrl)
         let options = options ?? Options(.persistEntitiesDuringMapping)
 
         httpClient.request(pathFull, withMethod: Alamofire.HTTPMethod.get, parameters: params)
@@ -52,7 +52,7 @@ open class ModelManager: ModelManagerProtocol {
         }
     }
 
-    open func post(model: AnyObject?, toPath path: String, queryParameters params: QueryParameters?, done: Done?) {
+    open func post(model: AnyObject?, toPath path: APIPathProtocol, queryParameters params: QueryParameters?, done: Done?) {
         log.error("post")
     }
 
@@ -140,7 +140,7 @@ private extension ModelManager {
         return fullPath
     }
 
-    func handle(jsonResponse response: Response<Any, NSError>, fromPath path: String, options: Options, done: Done?) {
+    func handle(jsonResponse response: Response<Any, NSError>, fromPath path: APIPathProtocol, options: Options, done: Done?) {
         switch response.result {
         case .success(let data):
             var result: Result!
@@ -148,7 +148,7 @@ private extension ModelManager {
                 let jsonArray: [JSON] = arrayOrRawJson.map { return JSON($0) }
                 result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
             } else if let json = data as? RawJSON {
-                result = modelMappingManager.mapping(withJson: JSON(json), fromPath: path, options: options)
+                result = modelMappingManager.mapping(withJsonOrArray: JSON(json), fromPath: path, options: options)
             }
             if let mappingResult = result {
                 if mappingResult.isManagedObject && options.persistEntities {

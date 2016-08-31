@@ -19,7 +19,8 @@ internal class ModelMapper: ModelMapperProtocol {
     var store: StoreProtocol { fatalError(mustOverride) }
 
     internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
-        let mappedJson = map(json: json, withMapping: mapping)
+        let flattned = flatten(json: json, withMapping: mapping)
+        let mappedJson = map(json: flattned, withMapping: mapping)
         guard shouldStoreModel(mappedJson, withMapping: mapping) else {
             log.verbose("Not storing model with json: \(json) since it does not fulfill store condition")
             return Result(.eventMappingSkipped)
@@ -104,11 +105,24 @@ internal class ModelMapper: ModelMapperProtocol {
 
 private extension ModelMapper {
 
-    func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
+    /*
+        This function filters out the interesting values that exists in the attributes mapping dictionary from the json.
+        Apart from that it also flattens out the json, for any nested keys (keys containing dots).
+     */
+    func flatten(json: JSON, withMapping mapping: MappingProtocol) -> FlattnedJSON {
+        var noDots = FlattnedJSON()
 
+        for (mapKey, jsonKey) in mapping.attributeMapping.mapping {
+            guard mapKey.contains("."), let value = json.valueFor(nestedKey: mapKey) else {
+                noDots[mapKey] = json[mapKey]
+                continue
+            }
+            noDots[mapKey] = value
+        }
+        return noDots
     }
 
-    func map(json: JSON, withMapping mapping: MappingProtocol) -> MappedJSON {
+    func map(json: FlattnedJSON, withMapping mapping: MappingProtocol) -> MappedJSON {
         var mappedJson: MappedJSON = MappedJSON()
         for (key, value) in json {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
@@ -118,12 +132,6 @@ private extension ModelMapper {
         return mappedJson
     }
 
-    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject? {
-        guard let transformers = mapping.transformers, let transformer = transformers[key] else { return value }
-        let transformedValue = transformer.transform(value: value)
-        return transformedValue
-    }
-
     func map(key: String, toAttributeWithMapping mapping: AttributeMappingProtocol) -> String? {
         var mappedKey: String?
         for (mappingKey, value) in mapping.mapping {
@@ -131,5 +139,15 @@ private extension ModelMapper {
             mappedKey = value
         }
         return mappedKey
+    }
+
+    func transform(value: NSObject, forKey key: String, withMapping mapping: MappingProtocol) -> NSObject? {
+        guard let transformers = mapping.transformers, let transformer = transformers[key] else { return value }
+        let transformedValue = transformer.transform(value: value)
+        return transformedValue
+    }
+
+    func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
+
     }
 }

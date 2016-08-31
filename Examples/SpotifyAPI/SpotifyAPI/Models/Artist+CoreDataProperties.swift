@@ -15,12 +15,14 @@ extension Artist {
         return NSFetchRequest<Artist>(entityName: "Artist");
     }
 
-    @NSManaged public var artistId: String?
-    @NSManaged public var name: String?
-    @NSManaged public var type: String?
-    @NSManaged public var popularityRaw: Int16
-    @NSManaged public var genres: NSObject?
-    @NSManaged public var followersRaw: Int16
+    @NSManaged public var artistId: String
+    @NSManaged public var name: String
+    @NSManaged public var type: String
+
+    @NSManaged public var followersRaw: NSNumber?
+    @NSManaged public var popularityRaw: NSNumber?
+    @NSManaged public var genres: [String]?
+
     @NSManaged public var imagesSet: NSSet?
     @NSManaged public var albumsSet: NSSet?
 

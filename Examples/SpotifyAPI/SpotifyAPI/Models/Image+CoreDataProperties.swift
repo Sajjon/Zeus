@@ -15,9 +15,10 @@ extension Image {
         return NSFetchRequest<Image>(entityName: "Image");
     }
 
-    @NSManaged public var url: String?
+    @NSManaged public var url: String
     @NSManaged public var heightRaw: Int16
     @NSManaged public var widthRaw: Int16
+
     @NSManaged public var artist: Artist?
     @NSManaged public var album: Album?
 

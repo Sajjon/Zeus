@@ -29,8 +29,10 @@ class Album: ManagedObject {
             ])
     }
 
-    override class func relationships(forMapping mapping: MappingProtocol) -> [RelationshipMappingProtocol]? {
-        let images = RelationshipMapping(sourceKeyPath: "images", destinationKeyPath: "imagesSet", mapping: Image.entityMapping(mapping))
+    override class func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]? {
+        let images = RelationshipMapping(sourceKeyPath: "images", destinationKeyPath: "imagesSet", mapping: Image.entityMapping(store))
+        let tracks = RelationshipMapping(sourceKeyPath: "tracks.items", destinationKeyPath: "tracksOrderedSet", mapping: Track.entityMapping(store))
+        return [images, tracks]
     }
 
     override class var transformers: [TransformerProtocol]? {

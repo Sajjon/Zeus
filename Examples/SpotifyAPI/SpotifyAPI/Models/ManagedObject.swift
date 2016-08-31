@@ -18,7 +18,7 @@ class ManagedObject: NSManagedObject, MappableEntity {
     }
     class var idAttributeName: String { fatalError(mustOverride) }
     class var attributeMapping: AttributeMappingProtocol { fatalError(mustOverride) }
-    class func relationships(forMapping mapping: MappingProtocol) -> [RelationshipMappingProtocol]? { return nil }
+    class func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]? { return nil }
     class var transformers: [TransformerProtocol]? { return nil }
     class var cherryPickers: [CherryPickerProtocol]? { return nil }
     class var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? { return nil }

@@ -8,8 +8,29 @@
 
 import Foundation
 import CoreData
-
+import Zeus
 
 class Image: ManagedObject {
 
+    override class var idAttributeName: String {
+        return "url"
+    }
+
+    override class var attributeMapping: AttributeMappingProtocol {
+        return AttributeMapping(mapping: [
+            "url": "url",
+            "width": "widthRaw",
+            "height": "heightRaw"
+            ])
+    }
+}
+
+extension Image {
+    var width: Int {
+        return Int(widthRaw)
+    }
+
+    var height: Int {
+        return Int(heightRaw)
+    }
 }

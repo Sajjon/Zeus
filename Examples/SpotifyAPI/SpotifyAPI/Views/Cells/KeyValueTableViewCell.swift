@@ -9,10 +9,13 @@
 import UIKit
 
 class KeyValueTableViewCell: UITableViewCell {
+
+    static let height: CGFloat = 60
+
     @IBOutlet weak var keyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
 
-    func configure(withKey key: String, value: String) {
+    func configure(withKey key: String?, value: String?) {
         self.keyLabel.text = key
         self.valueLabel.text = value
     }

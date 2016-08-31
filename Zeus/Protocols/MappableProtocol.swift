@@ -14,7 +14,7 @@ public protocol Mappable {
     static var idAttributeName: String { get }
     static var attributeMapping: AttributeMappingProtocol { get }
 
-    static func relationships(forMapping mapping: MappingProtocol) -> [RelationshipMappingProtocol]?
+    static func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]?
 
     static var transformers: [TransformerProtocol]? { get }
     static var cherryPickers: [CherryPickerProtocol]? { get }
@@ -31,7 +31,7 @@ public extension Mappable {
     static func mapping(_ store: DataStoreProtocol) -> MappingProtocol {
         let mapping = Mapping(destinationClass: destinationClass, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
 
-        if let list = relationships(forMapping: mapping) {
+        if let list = relationships(store: store) {
             var dictionary: Dictionary<String, RelationshipMappingProtocol> = [:]
             for element in list {
                 dictionary[element.sourceKeyPath] = element

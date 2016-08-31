@@ -39,8 +39,9 @@ class ZeusConfigurator {
     fileprivate func setupMapping() {
         modelManager.map(Artist.entityMapping(store), Album.entityMapping(store)) {
             artist, album in
-            artist == Router.artistById(noId)
-            album == Router.albumById(noId)
+            artist == APIPath.artistById(noId)
+            album == APIPath.albumById(noId)
+            album == APIPath.albumsByArtist(noId) << "items"
         }
     }
 }

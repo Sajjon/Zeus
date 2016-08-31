@@ -26,6 +26,7 @@
 		6529A1511D74714D00E46F9C /* InMemoryModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6529A1501D74714D00E46F9C /* InMemoryModelMapper.swift */; };
 		6529A1541D74716D00E46F9C /* ManagedObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6529A1531D74716D00E46F9C /* ManagedObjectMapper.swift */; };
 		6529A1561D7472B900E46F9C /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6529A1551D7472B900E46F9C /* JSON.swift */; };
+		657540B61D76F05900D90426 /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657540B51D76F05900D90426 /* String_Extension.swift */; };
 		657945F11D746E750091B967 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F01D746E750091B967 /* Alamofire.framework */; };
 		657945F31D746E7B0091B967 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F21D746E7B0091B967 /* SwiftyBeaver.framework */; };
 		657945F41D746E830091B967 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 657945F01D746E750091B967 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -109,6 +110,7 @@
 		6529A1531D74716D00E46F9C /* ManagedObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectMapper.swift; sourceTree = "<group>"; };
 		6529A1551D7472B900E46F9C /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		654B0FCD1D75B550005E7755 /* SpotifyAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpotifyAPI.xcodeproj; path = Examples/SpotifyAPI/SpotifyAPI.xcodeproj; sourceTree = "<group>"; };
+		657540B51D76F05900D90426 /* String_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
 		657945F01D746E750091B967 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		657945F21D746E7B0091B967 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
 		65864A44787980FE7BD8D63B /* Pods-ZeusFramework-Zeus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZeusFramework-Zeus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZeusFramework-Zeus/Pods-ZeusFramework-Zeus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				65195B4C1D6B273500813E59 /* NSObject_Extension.swift */,
+				657540B51D76F05900D90426 /* String_Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				7BCD22891D6F4C62008BE83C /* EntityMapping.swift in Sources */,
 				7BCD228E1D701AC0008BE83C /* MappableProtocol.swift in Sources */,
 				65195B431D6B268500813E59 /* DataStore.swift in Sources */,
+				657540B61D76F05900D90426 /* String_Extension.swift in Sources */,
 				65195B521D6B27A200813E59 /* Result.swift in Sources */,
 				7BCD22941D701B2E008BE83C /* ModelMapper.swift in Sources */,
 				65195B5D1D6B28C100813E59 /* MappingProxy.swift in Sources */,

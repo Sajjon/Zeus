@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol AttributeMappingProtocol {
-    var mapping: JSONMapping{get}
+    var mapping: JSONMapping { get }
 }
 
 public struct AttributeMapping: AttributeMappingProtocol {

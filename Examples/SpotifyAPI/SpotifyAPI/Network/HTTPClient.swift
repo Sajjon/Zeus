@@ -10,7 +10,7 @@ import Foundation
 import Zeus
 
 protocol HTTPClientProtocol {
-    func get(atPath path: Router, queryParams: QueryParameters?, options: Options?, done: Done?)
+    func get(atPath path: APIPath, queryParams: QueryParameters?, options: Options?, done: Done?)
 }
 
 class HTTPClient: HTTPClientProtocol {
@@ -22,7 +22,7 @@ class HTTPClient: HTTPClientProtocol {
         self.modelManager = ModelManager.sharedInstance
     }
 
-    func get(atPath path: Router, queryParams: QueryParameters?, options: Options?, done: Done?) {
-        modelManager.get(atPath: path.path, queryParameters: queryParams, options: options, done: done)
+    func get(atPath path: APIPath, queryParams: QueryParameters?, options: Options?, done: Done?) {
+        modelManager.get(atPath: path, queryParameters: queryParams, options: options, done: done)
     }
 }
