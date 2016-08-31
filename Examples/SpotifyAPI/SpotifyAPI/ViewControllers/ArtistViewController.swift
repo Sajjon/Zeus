@@ -34,7 +34,7 @@ class ArtistViewController: UIViewController {
 extension ArtistViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard artist != nil else { return 0 }
-        return 3
+        return 4
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,6 +44,8 @@ extension ArtistViewController: UITableViewDataSource {
         } else if section == 1 {
             rowCount = artist?.genres?.count ?? 0
         } else if section == 2 {
+            rowCount = artist?.images?.count ?? 0
+        } else if section == 3 {
             rowCount = artist?.albums?.count ?? 0
         }
         return rowCount
@@ -64,6 +66,8 @@ extension ArtistViewController: UITableViewDataSource {
         } else if section == 1 {
             title = "Genres"
         } else if section == 2 {
+            title = "Images"
+        } else if section == 3 {
             title = "Albums"
         }
         return title
@@ -135,6 +139,10 @@ private extension ArtistViewController {
             let genre = genres[row]
             pair = KeyValuePair(genre, nil)
         } else if section == 2 {
+            guard let images = artist.images, row < images.count else { return nil }
+            let image: Image = images[row]
+            pair = KeyValuePair("Image url", image.url)
+        } else if section == 3 {
             guard let albums = artist.albums, row < albums.count else { return nil }
             let album = albums[row]
             pair = KeyValuePair(album.name, nil)
