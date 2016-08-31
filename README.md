@@ -2,17 +2,17 @@
 REST Client with Core Data persistence in Swift. This project is inspired by the fantastic Objective-C framework [RestKit](https://github.com/RestKit/RestKit), but this project is written in Swift.
 
 
-- [x] ☁️➡📱 GET with JSON array without json key
-- [x] ☁️➡📱 GET with JSON object without json key
-- [x] ➡📱❓Condition for determining if incoming object should be stored
-- [x] 🍎➡🍏 Value transformer, converting e.g. a `String` to an `Int` 
-- [x] 🍒🍒🍒 _Cherry picker_ that enables to you chose between incoming value of existing per attribute
-- [ ] 3³³ Convert Swift 3.0 (**in progress**), **estimate: small**
-- [ ] 🔀🔀🔀 Nested objects, **estimate: large**
-- [ ] ☁️➡📱 GET with JSON object with json key, **estimate: small**
-- [ ] ☁️➡📱 GET with JSON object with json key, **estimate: small**
-- [ ] 📱➡☁️ POST **estimate: large**
-- [ ] 🤔💭💭 Enable in memory store (already prepared but not tested and needs more work), **estimate: large**
+- [x] ⬇ GET with JSON array without json key
+- [x] ⬇ GET with JSON object without json key
+- [x] ❓Condition for determining if incoming object should be stored
+- [x] 🔮 Value transformer, converting e.g. a `String` to an `Int` 
+- [x] 🍒 _Cherry picker_ that enables to you chose between incoming value of existing per attribute
+- [x] 3 Convert Swift 3.0 (**in progress**), **estimate: small**
+- [ ] 🔀 Nested objects, **estimate: large**
+- [x] 🔑 GET with JSON object with json key, **estimate: small**
+- [x] 🔑 GET with JSON array with json key, **estimate: small**
+- [ ] ⬆ POST **estimate: large**
+- [ ] 💭 Enable in memory store (already prepared but not tested and needs more work), **estimate: large**
 
 # Installation
 Cocoapods support coming soon... 
