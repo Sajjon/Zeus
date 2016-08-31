@@ -34,3 +34,18 @@ class Track: ManagedObject {
         return nil
     }
 }
+
+extension Track {
+
+    var discNumber: Int {
+        return Int(discNumberRaw)
+    }
+
+    var durationMs: Int {
+        return Int(durationMsRaw)
+    }
+
+    var number: Int {
+        return Int(trackNumberRaw)
+    }
+}

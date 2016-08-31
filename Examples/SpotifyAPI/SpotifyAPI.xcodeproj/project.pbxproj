@@ -34,6 +34,7 @@
 		659AF21D1D75B4BC00667212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659AF21B1D75B4BC00667212 /* LaunchScreen.storyboard */; };
 		65B2766D1D7729070081DC3E /* ExternalUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B2766B1D7729070081DC3E /* ExternalUrl.swift */; };
 		65B2766E1D7729070081DC3E /* ExternalUrl+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B2766C1D7729070081DC3E /* ExternalUrl+CoreDataProperties.swift */; };
+		65B276701D772D3A0081DC3E /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B2766F1D772D3A0081DC3E /* AlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +80,7 @@
 		659AF21E1D75B4BC00667212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65B2766B1D7729070081DC3E /* ExternalUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalUrl.swift; sourceTree = "<group>"; };
 		65B2766C1D7729070081DC3E /* ExternalUrl+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExternalUrl+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		65B2766F1D772D3A0081DC3E /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				654B10081D75C68B005E7755 /* ArtistViewController.swift */,
+				65B2766F1D772D3A0081DC3E /* AlbumViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				TargetAttributes = {
 					659AF20E1D75B4BC00667212 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -283,6 +287,7 @@
 				654B10031D75C2C4005E7755 /* Image+CoreDataProperties.swift in Sources */,
 				65B2766D1D7729070081DC3E /* ExternalUrl.swift in Sources */,
 				654B0FEA1D75B635005E7755 /* APIPath.swift in Sources */,
+				65B276701D772D3A0081DC3E /* AlbumViewController.swift in Sources */,
 				654B10001D75C2C4005E7755 /* Album.swift in Sources */,
 				654B10021D75C2C4005E7755 /* Image.swift in Sources */,
 				654B10091D75C68B005E7755 /* ArtistViewController.swift in Sources */,

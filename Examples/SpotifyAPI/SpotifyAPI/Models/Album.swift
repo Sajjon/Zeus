@@ -54,4 +54,31 @@ extension Album {
     var tracks: [Track]? {
         return tracksOrderedSet?.array as? [Track]
     }
+
+    var releaseDateString: String? {
+        guard let date = releaseDate as? Date else { return nil }
+        let string = date.shortDate
+        return string
+    }
+
+    var popularity: Int? {
+        return popularityRaw as? Int
+    }
+
+}
+
+extension DateFormatter {
+    convenience init(dateStyle: DateFormatter.Style) {
+        self.init()
+        self.dateStyle = dateStyle
+    }
+}
+
+extension Date {
+    struct Formatter {
+        static let shortDate = DateFormatter(dateStyle: .short)
+    }
+    var shortDate: String {
+        return Formatter.shortDate.string(from: self)
+    }
 }

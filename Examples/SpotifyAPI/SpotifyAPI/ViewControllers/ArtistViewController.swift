@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let cellIdentifier = "artistCellId"
+private let cellIdentifier = "cellId"
 private let depecheMode = "762310PdDnwsDxAQxzQkfX"
 class ArtistViewController: UIViewController {
 
@@ -80,6 +80,12 @@ extension ArtistViewController: UITableViewDelegate {
         let height = KeyValueTableViewCell.height
         return height
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let album = album(for: indexPath) else { return }
+        let albumVC = AlbumViewController.instantiate(withAlbum: album)
+        navigationController?.pushViewController(albumVC, animated: true)
+    }
 }
 
 //MARK: Private Methods
@@ -145,19 +151,32 @@ private extension ArtistViewController {
             let image: Image = images[row]
             pair = KeyValuePair("Image url", image.url)
         } else if section == 3 {
-            guard let albums = artist.albums, row < albums.count else { return nil }
-            let album = albums[row]
+            guard let album = album(for: indexPath) else { return nil }
             pair = KeyValuePair(album.name, nil)
         }
         return pair
+    }
+
+    func album(for indexPath: IndexPath) -> Album? {
+        guard let albums = artist?.albums, indexPath.row < albums.count else { return nil }
+        let album = albums[indexPath.row]
+        return album
     }
 }
 
 struct KeyValuePair {
     let key: String?
     let value: String?
-    init(_ key: String?, _ value: Any?) {
-        self.key = key
+    init(_ key: Any?, _ value: Any?) {
+
+        if let stringKey = key as? String {
+            self.key = stringKey
+        } else if let other = key {
+            self.key = "\(other)"
+        } else {
+            self.key = nil
+        }
+
         if let stringValue = value as? String {
             self.value = stringValue
         } else if let other = value {

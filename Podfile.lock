@@ -1,15 +1,20 @@
 PODS:
   - Alamofire (4.0.0-beta.1)
+  - DateParser (0.1.0)
   - SwiftyBeaver (0.6.1)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, commit `3cc5b4e`)
+  - DateParser (from `https://github.com/3lvis/DateParser`, branch `swift-3`)
   - SwiftyBeaver (from `https://github.com/SwiftyBeaver/SwiftyBeaver.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
   Alamofire:
     :commit: 3cc5b4e
     :git: https://github.com/Alamofire/Alamofire.git
+  DateParser:
+    :branch: swift-3
+    :git: https://github.com/3lvis/DateParser
   SwiftyBeaver:
     :branch: swift3
     :git: https://github.com/SwiftyBeaver/SwiftyBeaver.git
@@ -18,14 +23,18 @@ CHECKOUT OPTIONS:
   Alamofire:
     :commit: 3cc5b4e
     :git: https://github.com/Alamofire/Alamofire.git
+  DateParser:
+    :commit: ee6f5b4ae73d5a6edbc94cf7bdaee931d4b161a5
+    :git: https://github.com/3lvis/DateParser
   SwiftyBeaver:
     :commit: cf1bedc6b18a0e2e9f592a1b5be28c1867a683c2
     :git: https://github.com/SwiftyBeaver/SwiftyBeaver.git
 
 SPEC CHECKSUMS:
   Alamofire: 698bf56c9e48d3248168e4a3a90588ac2e23836a
+  DateParser: 0e342a05e91ccd72831e738b6fcc282bbaedfa11
   SwiftyBeaver: 3551cb9d5841d64de902f271adee5a503dd0ed13
 
-PODFILE CHECKSUM: a7eb68efe5ce8d133745f7700bd077e16552e1ee
+PODFILE CHECKSUM: effd75b57b75208b5fb710e305a4ea8308e3a71b
 
 COCOAPODS: 1.0.1

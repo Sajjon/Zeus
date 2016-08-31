@@ -61,5 +61,42 @@
             </objects>
             <point key="canvasLocation" x="140" y="792.95352323838085"/>
         </scene>
+        <!--Album View Controller-->
+        <scene sceneID="qYO-l0-RZn">
+            <objects>
+                <viewController storyboardIdentifier="album" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zG9-9X-UDA" customClass="AlbumViewController" customModule="SpotifyAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ePO-g4-YLa"/>
+                        <viewControllerLayoutGuide type="bottom" id="ME9-P3-LAz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0zv-Er-cj8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Czr-5J-rJP">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zG9-9X-UDA" id="TG2-EB-EAy"/>
+                                    <outlet property="delegate" destination="zG9-9X-UDA" id="QgE-Nq-M2P"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Czr-5J-rJP" firstAttribute="top" secondItem="ePO-g4-YLa" secondAttribute="bottom" id="95i-YH-U37"/>
+                            <constraint firstAttribute="trailing" secondItem="Czr-5J-rJP" secondAttribute="trailing" id="BRg-Ca-tC7"/>
+                            <constraint firstItem="ME9-P3-LAz" firstAttribute="top" secondItem="Czr-5J-rJP" secondAttribute="bottom" id="ElJ-kc-q93"/>
+                            <constraint firstItem="Czr-5J-rJP" firstAttribute="leading" secondItem="0zv-Er-cj8" secondAttribute="leading" id="cnW-NW-U1j"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ey5-2K-15x"/>
+                    <connections>
+                        <outlet property="tableView" destination="Czr-5J-rJP" id="ZyV-Fc-yhw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ShX-ym-1tp" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="139"/>
+        </scene>
     </scenes>
 </document>

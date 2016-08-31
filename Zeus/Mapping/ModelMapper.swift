@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import DateParser
 
 internal protocol ModelMapperProtocol {
     func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result
@@ -86,7 +87,7 @@ internal class ModelMapper: ModelMapperProtocol {
 
     internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {
         let cherryPicked = cherryPick(from: attributesJson, withMapping: mapping)
-        model.setValuesForKeys(cherryPicked.map)
+        model.setSafeValuesForKeys(json: cherryPicked.map)
     }
 
     internal func split(json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
@@ -126,6 +127,7 @@ private extension ModelMapper {
         var mappedJson: MappedJSON = MappedJSON()
         for (key, value) in json {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
+            
             let transformedValue = transform(value: value, forKey: key, withMapping: mapping)
             mappedJson[mappedKey] = transformedValue
         }
@@ -149,5 +151,23 @@ private extension ModelMapper {
 
     func makeConnections(withMapping mapping: MappingProtocol, forModel model: NSManagedObject) {
 
+    }
+}
+
+extension NSObject {
+    func setSafeValuesForKeys(json: RawJSON) {
+        let mirror = Mirror(reflecting: self)
+        mirror.children.forEach { (child: Mirror.Child) in
+            let type = Mirror(reflecting: child.value).subjectType
+            let label: String = child.label ?? "-"
+            print("'\(label)' is of type '\(type)' has value: '\(child.value)'")
+            if type is NSDate {
+                print("found date")
+            }
+        }
+        for (key, value) in json {
+        }
+
+        setValuesForKeys(json)
     }
 }
