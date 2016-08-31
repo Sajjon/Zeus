@@ -23,6 +23,8 @@ extension Artist {
     @NSManaged public var popularityRaw: NSNumber?
     @NSManaged public var genres: [String]?
 
+    @NSManaged public var externalUrl: ExternalUrl
+
     @NSManaged public var imagesSet: NSSet?
     @NSManaged public var albumsSet: NSSet?
 

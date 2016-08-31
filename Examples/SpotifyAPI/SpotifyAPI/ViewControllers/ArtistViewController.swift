@@ -40,7 +40,7 @@ extension ArtistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rowCount = 0
         if section == 0 {
-            rowCount = 5
+            rowCount = 6
         } else if section == 1 {
             rowCount = artist?.genres?.count ?? 0
         } else if section == 2 {
@@ -133,6 +133,8 @@ private extension ArtistViewController {
                 pair = KeyValuePair("Followers", artist.followers)
             } else if row == 4 {
                 pair = KeyValuePair("Popularity", artist.popularity)
+            } else if row == 5 {
+                pair = KeyValuePair("External url", artist.externalUrl.spotify)
             }
         } else if section == 1 {
             guard let genres = artist.genres, row < genres.count else { return nil }

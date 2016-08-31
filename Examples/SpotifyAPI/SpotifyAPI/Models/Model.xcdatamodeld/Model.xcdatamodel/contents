@@ -20,7 +20,12 @@
         <attribute name="popularityRaw" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" attributeType="String" syncable="YES"/>
         <relationship name="albumsSet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artistsSet" inverseEntity="Album" syncable="YES"/>
+        <relationship name="externalUrl" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExternalUrl" inverseName="artist" inverseEntity="ExternalUrl" syncable="YES"/>
         <relationship name="imagesSet" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="artist" inverseEntity="Image" syncable="YES"/>
+    </entity>
+    <entity name="ExternalUrl" representedClassName=".ExternalUrl" syncable="YES">
+        <attribute name="spotify" attributeType="String" syncable="YES"/>
+        <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="externalUrl" inverseEntity="Artist" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName=".Image" syncable="YES">
         <attribute name="heightRaw" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -42,8 +47,9 @@
     </entity>
     <elements>
         <element name="Album" positionX="-36" positionY="63" width="128" height="195"/>
-        <element name="Artist" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Artist" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="Image" positionX="-54" positionY="18" width="128" height="120"/>
         <element name="Track" positionX="-18" positionY="108" width="128" height="180"/>
+        <element name="ExternalUrl" positionX="-36" positionY="117" width="128" height="75"/>
     </elements>
 </model>

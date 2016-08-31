@@ -29,9 +29,10 @@ class Artist: ManagedObject {
     }
 
     override class func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]? {
+        let externalUrl = RelationshipMapping(sourceKeyPath: "external_urls", destinationKeyPath: "externalUrl", mapping: ExternalUrl.entityMapping(store))
         let images = RelationshipMapping(sourceKeyPath: "images", destinationKeyPath: "imagesSet", mapping: Image.entityMapping(store))
 
-        return [images]
+        return [externalUrl, images]
     }
 }
 
