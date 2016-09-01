@@ -156,18 +156,8 @@ private extension ModelMapper {
 
 extension NSObject {
     func setSafeValuesForKeys(json: RawJSON) {
-        let mirror = Mirror(reflecting: self)
-        mirror.children.forEach { (child: Mirror.Child) in
-            let type = Mirror(reflecting: child.value).subjectType
-            let label: String = child.label ?? "-"
-            print("'\(label)' is of type '\(type)' has value: '\(child.value)'")
-            if type is NSDate {
-                print("found date")
-            }
-        }
-        for (key, value) in json {
-        }
-
+        // This line makes app crash if the object contains a NSDate property. Because we have not parsed the date string from String -> NSDate...
+        // We wanna solve this by reflection somehow...?
         setValuesForKeys(json)
     }
 }
