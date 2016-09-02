@@ -14,6 +14,7 @@ class AlbumViewController: UIViewController {
     //MARK: Variables
     @IBOutlet weak var tableView: UITableView!
 
+    fileprivate var player: Player?
     var albumId: String!
 
     fileprivate var album: Album? {
@@ -92,6 +93,13 @@ extension AlbumViewController: UITableViewDelegate {
         let height = KeyValueTableViewCell.height
         return height
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 3, let track = track(for: indexPath.row) else { return }
+        player?.pause()
+        player = Player(stream: track.streamUrl)
+        player?.play()
+    }
 }
 
 //MARK: Private Methods
@@ -113,6 +121,11 @@ private extension AlbumViewController {
         }
     }
 
+    func track(for row: Int) -> Track? {
+        guard let tracks = album?.tracks, row < tracks.count else { return nil }
+        let track = tracks[row]
+        return track
+    }
 
     func keyValue(for indexPath: IndexPath) -> KeyValuePair? {
         guard let album = album else { return nil }
@@ -147,5 +160,26 @@ private extension AlbumViewController {
             pair = KeyValuePair(track.number, track.name)
         }
         return pair
+    }
+}
+
+import AVFoundation
+import AVKit
+private class Player {
+    var player: AVPlayer!
+    var item: AVPlayerItem!
+    init(stream: String) {
+        guard let streamUrl = URL(string: stream) else { return }
+        let asset = AVURLAsset(url: streamUrl)
+        item = AVPlayerItem(asset: asset)
+        player = AVPlayer(playerItem: item)
+    }
+
+    func play() {
+        player.play()
+    }
+
+    func pause() {
+        player.pause()
     }
 }
