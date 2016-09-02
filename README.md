@@ -7,12 +7,12 @@ REST Client with Core Data persistence in Swift. This project is inspired by the
 - [x] ❓Condition for determining if incoming object should be stored
 - [x] 🔮 Value transformer, converting e.g. a `String` to an `Int` 
 - [x] 🍒 _Cherry picker_ that enables to you chose between incoming value of existing per attribute
-- [x] 3 Convert Swift 3.0 (**in progress**), **estimate: small**
-- [ ] 🔀 Nested objects, **estimate: large**
-- [x] 🔑 GET with JSON object with json key, **estimate: small**
-- [x] 🔑 GET with JSON array with json key, **estimate: small**
+- [x] 3 Convert Swift 3.0
+- [x] 🔀 Nested objects
+- [x] 🔑 GET with JSON object with json key
+- [x] 🔑 GET with JSON array with json key
+- [ ] 💭 Enable in memory store (already prepared but not tested and needs more work), **In progress**
 - [ ] ⬆ POST **estimate: large**
-- [ ] 💭 Enable in memory store (already prepared but not tested and needs more work), **estimate: large**
 
 # Installation
 Cocoapods support coming soon... 
