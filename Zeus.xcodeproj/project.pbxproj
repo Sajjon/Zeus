@@ -39,6 +39,7 @@
 		65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABD1D6EFBB8008F9B99 /* RelationshipMapping.swift */; };
 		65B9FAC01D706871008F9B99 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FABF1D706871008F9B99 /* Option.swift */; };
 		65B9FAC21D7068E2008F9B99 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B9FAC11D7068E2008F9B99 /* Options.swift */; };
+		65E460991D79B7CB00C5BD26 /* SwiftReflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E460981D79B7CB00C5BD26 /* SwiftReflection.swift */; };
 		7BCD227E1D6D7CEC008BE83C /* FutureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */; };
 		7BCD22851D6F4BE7008BE83C /* CherryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */; };
 		7BCD22871D6F4BFD008BE83C /* ShouldStoreModelCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */; };
@@ -125,6 +126,7 @@
 		65B9FABF1D706871008F9B99 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		65B9FAC11D7068E2008F9B99 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		65D16EC11D746782006565CF /* ApiOfIceAndFire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApiOfIceAndFire.xcodeproj; path = Examples/ApiOfIceAndFire/ApiOfIceAndFire.xcodeproj; sourceTree = "<group>"; };
+		65E460981D79B7CB00C5BD26 /* SwiftReflection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReflection.swift; sourceTree = "<group>"; };
 		7BCD227D1D6D7CEC008BE83C /* FutureConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureConnection.swift; sourceTree = "<group>"; };
 		7BCD22841D6F4BE7008BE83C /* CherryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CherryPicker.swift; sourceTree = "<group>"; };
 		7BCD22861D6F4BFD008BE83C /* ShouldStoreModelCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldStoreModelCondition.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		6501247A1D6609C3003BFFA6 /* Zeus */ = {
 			isa = PBXGroup;
 			children = (
+				65E460981D79B7CB00C5BD26 /* SwiftReflection.swift */,
 				7BCD228A1D701A9D008BE83C /* Protocols */,
 				65195B421D6B268500813E59 /* DataStore.swift */,
 				65195B551D6B27E100813E59 /* Enums */,
@@ -489,6 +492,7 @@
 				65B9FAC21D7068E2008F9B99 /* Options.swift in Sources */,
 				65B9FABE1D6EFBB8008F9B99 /* RelationshipMapping.swift in Sources */,
 				6529A1511D74714D00E46F9C /* InMemoryModelMapper.swift in Sources */,
+				65E460991D79B7CB00C5BD26 /* SwiftReflection.swift in Sources */,
 				65195B451D6B26A200813E59 /* ResponseDescriptor.swift in Sources */,
 				65195B4D1D6B273500813E59 /* NSObject_Extension.swift in Sources */,
 				7BCD22901D701AD9008BE83C /* InMemoryStore.swift in Sources */,

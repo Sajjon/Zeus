@@ -87,7 +87,7 @@ internal class ModelMapper: ModelMapperProtocol {
 
     internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {
         let cherryPicked = cherryPick(from: attributesJson, withMapping: mapping)
-        model.setSafeValuesForKeys(json: cherryPicked.map)
+        model.setValuesForProperties(cherryPicked.map, for: mapping.destinationClass)
     }
 
     internal func split(json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
@@ -113,7 +113,7 @@ private extension ModelMapper {
     func flatten(json: JSON, withMapping mapping: MappingProtocol) -> FlattnedJSON {
         var noDots = FlattnedJSON()
 
-        for (mapKey, jsonKey) in mapping.attributeMapping.mapping {
+        for (mapKey, _) in mapping.attributeMapping.mapping {
             guard mapKey.contains("."), let value = json.valueFor(nestedKey: mapKey) else {
                 noDots[mapKey] = json[mapKey]
                 continue
@@ -154,10 +154,37 @@ private extension ModelMapper {
     }
 }
 
+protocol DateParserProtocol {
+    func parseDate(from dateString: String) -> Date?
+}
+
+class DateParser: DateParserProtocol {
+
+    func parseDate(from object: NSObject) -> Date? {
+        guard let dateString = object as? String else { return nil }
+        return parseDate(from: dateString)
+    }
+
+    func parseDate(from dateString: String) -> Date? {
+        let date = Date(dateString: dateString)
+        return date
+    }
+}
+
 extension NSObject {
-    func setSafeValuesForKeys(json: RawJSON) {
+    func setValuesForProperties(_ propertyValues: ValuesForPropertiesNamed, for clazz: NSObject.Type) {
         // This line makes app crash if the object contains a NSDate property. Because we have not parsed the date string from String -> NSDate...
         // We wanna solve this by reflection somehow...?
-        setValuesForKeys(json)
+
+        for (propertyName, value) in propertyValues {
+            let valueOfPropery: Any
+            if isProperty(named: propertyName, ofType: NSDate.self, in: clazz) {
+                guard let date = DateParser().parseDate(from: value) else { log.error("Failed to parse date"); return }
+                valueOfPropery = date
+            } else {
+                valueOfPropery = value
+            }
+            setValue(valueOfPropery, forKey: propertyName)
+        }
     }
 }

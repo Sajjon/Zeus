@@ -51,15 +51,15 @@ extension AlbumViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rowCount = 0
-        //        if section == 0 {
-        //            rowCount = 6
-        //        } else if section == 1 {
-        //            rowCount = artist?.genres?.count ?? 0
-        //        } else if section == 2 {
-        //            rowCount = artist?.images?.count ?? 0
-        //        } else if section == 3 {
-        //            rowCount = artist?.albums?.count ?? 0
-        //        }
+        if section == 0 {
+            rowCount = 6
+        } else if section == 1 {
+            rowCount = album?.images?.count ?? 0
+        } else if section == 2 {
+            rowCount = album?.availableMarkets.count ?? 0
+        } else if section == 3 {
+            rowCount = album?.tracks?.count ?? 0
+        }
         return rowCount
     }
 
@@ -80,7 +80,7 @@ extension AlbumViewController: UITableViewDataSource {
         } else if section == 2 {
             title = "Available markets"
         } else if section == 3 {
-            title = "Albums"
+            title = "Tracks"
         }
         return title
     }
@@ -108,7 +108,7 @@ private extension AlbumViewController {
                 guard let album = data as? Album else { break }
                 self.album = album
             case .failure(let error):
-                print("Failed to get artist, error: \(error)")
+                print("Failed to get album, error: \(error)")
             }
         }
     }

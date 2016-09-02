@@ -9,6 +9,7 @@
 import Foundation
 
 internal typealias RawJSON = Dictionary<String, NSObject>
+internal typealias ValuesForPropertiesNamed = Dictionary<String, NSObject>
 
 internal protocol JSONProtocol: Sequence {
     var map: RawJSON { get set }
