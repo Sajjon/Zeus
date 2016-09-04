@@ -3,7 +3,7 @@ Written in Swift 3, heaviliy inspired by [RestKit](https://github.com/RestKit/Re
 
 You can consume your RESTful API and persist the data in Core Data without having to write any Core Data or HTTP code. You just create classes (that has to inherit from `NSObject`) and add a couple of lines of code to descibe the model, implement a simple APIClient with a couple lines of code, and then you are all setup!
 
-
+## Road map
 - [x] ⬇ GET with JSON object or array with or without json key
 - [x] ❓Condition for determining if incoming object should be stored
 - [x] 🔮 Value transformer, converting e.g. a `String` to an `Int` 
