@@ -1,23 +1,21 @@
 # 🌩 Zeus 🌩
-REST Client with Core Data persistence in Swift. This project is inspired by the fantastic Objective-C framework [RestKit](https://github.com/RestKit/RestKit), but this project is written in Swift.
+Written in Swift 3, heaviliy inspired by [RestKit](https://github.com/RestKit/RestKit) and powered by [Alamofire](https://github.com/Alamofire/Alamofire) Zeus is a REST Client with Core Data persistence. 
+
+You can consume your RESTful API and persist the data in Core Data without having to write any Core Data or HTTP code. You just create classes (that has to inherit from `NSObject`) and add a couple of lines of code to descibe the model, implement a simple APIClient with a couple lines of code, and then you are all setup!
 
 
-- [x] ⬇ GET with JSON array without json key
-- [x] ⬇ GET with JSON object without json key
+- [x] ⬇ GET with JSON object or array with or without json key
 - [x] ❓Condition for determining if incoming object should be stored
 - [x] 🔮 Value transformer, converting e.g. a `String` to an `Int` 
 - [x] 🍒 _Cherry picker_ that enables to you chose between incoming value of existing per attribute
-- [x] 3 Convert Swift 3.0
 - [x] 🔀 Nested objects
-- [x] 🔑 GET with JSON object with json key
-- [x] 🔑 GET with JSON array with json key
 - [ ] 💭 Enable in memory store (already prepared but not tested and needs more work), **In progress**
 - [ ] ⬆ POST **estimate: large**
 
 # Installation
 Cocoapods support coming soon... 
 
-**Zeus will require Swift 3.0**
+**Zeus requires Swift 3.0**
 
 ## Configuration
 Create an instance of DataStore and ModelManager and setup your mappings. Preferably this can be put into some `ZeusConfigurator` class, e.g.
@@ -122,47 +120,56 @@ class ManagedObject: NSManagedObject, MappableEntity {
     class func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? {return nil}
 }
 ```
-Then it is super easy to create you model mappings, the `Character` class looks like this:
+Then it is super easy to create you model mappings, the `Album` class looks like this:
 ```swift
 import Foundation
 import CoreData
 import Zeus
 
 class Character: ManagedObject {
-    @NSManaged var characterId: String?
-    @NSManaged var name: String
-    @NSManaged var gender: String?
 
+    @NSManaged public var name: String
+    @NSManaged public var availableMarkets: [String]
+    @NSManaged public var albumId: String
+
+    // Optional
+    @NSManaged public var releaseDate: NSDate?
+
+    // Relationships
+    @NSManaged public var imagesSet: NSSet?
+    @NSManaged public var tracksOrderedSet: NSOrderedSet?
+
+    // Mapping
     override class var idAttributeName: String {
-        return "characterId"
+        return "albumId"
     }
 
     override class var attributeMapping: AttributeMappingProtocol {
         return AttributeMapping(mapping: [
-            "url" : "characterId",
+            "id": "albumId",
             "name": "name",
-            "gender": "gender"
-        ])
+            "available_markets": "availableMarkets",
+            "release_date" : "releaseDate",
+            ])
+    }
+
+    override class func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]? {
+        let images = RelationshipMapping(sourceKeyPath: "images", destinationKeyPath: "imagesSet", mapping: Image.entityMapping(store))
+        let tracks = RelationshipMapping(sourceKeyPath: "tracks.items", destinationKeyPath: "tracksOrderedSet", mapping: Track.entityMapping(store))
+        return [images, tracks]
     }
 }
 
 ```
 
 # Fetching data (HTTP GET)
-You fetch your data using the `get:atPath:queryParams:options:done` method on the `ModelManagerProtocol`. If you want to fetch all the Game of Thrones houses from the [Example project](#Example) you can do that like this:
+You fetch your data using the `get:atPath:queryParams:options:done` method on the `ModelManagerProtocol`. If you want to fetch an album from the [Example project](#Example) you can do that like this:
 ```swift
-    func getHouses() {
-        Zeus.HTTPClient.sharedInstance.get(atPath: "houses", queryParameters: nil, options: nil) {
-            result in
-            if let error = result.error {
-                print("Error fetching houses, error: \(error)")
-            } else if let houses = result.data as? [House] {
-                print("successfully fetched #\(houses.count) houses")
-            }
-        }
+     func getAlbum(byId id: String, queryParams: QueryParameters?, done: Done?) {
+        Zeus,HTTPClient.sharedInstance.get(atPath: .albumById(id), queryParams: queryParams, options: nil, done: done)
     }
 ```
 
 # Examples
-Test the ApiOfIceAndFire project included in this repo
+Test the SpotifyAPI or the ApiOfIceAndFire project included in this repo.
 
