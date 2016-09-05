@@ -8,17 +8,5 @@
 
 import Foundation
 import CoreData
-import Zeus
 
-class ExternalUrl: ManagedObject {
-
-    override class var idAttributeName: String {
-        return "spotify"
-    }
-
-    override class var attributeMapping: AttributeMappingProtocol {
-        return AttributeMapping(mapping: [
-            "spotify": "spotify"
-        ])
-    }
-}
+class ExternalUrl: NSManagedObject {}

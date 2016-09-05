@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		654B0FE41D75B635005E7755 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654B0FD31D75B635005E7755 /* APIClient.swift */; };
-		654B0FE71D75B635005E7755 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654B0FD71D75B635005E7755 /* ManagedObject.swift */; };
 		654B0FE91D75B635005E7755 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654B0FDB1D75B635005E7755 /* HTTPClient.swift */; };
 		654B0FEA1D75B635005E7755 /* APIPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654B0FDC1D75B635005E7755 /* APIPath.swift */; };
 		654B0FED1D75B635005E7755 /* KeyValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654B0FE21D75B635005E7755 /* KeyValueTableViewCell.swift */; };
@@ -28,6 +27,14 @@
 		657540B11D76D25600D90426 /* Zeus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657540B01D76D25600D90426 /* Zeus.framework */; };
 		657540B21D76D25A00D90426 /* Zeus.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 657540B01D76D25600D90426 /* Zeus.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		657540B41D76D2E100D90426 /* NSObject_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657540B31D76D2E100D90426 /* NSObject_Extension.swift */; };
+		6593A9C71D7D7A49007CC9F2 /* Album+Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9C61D7D7A49007CC9F2 /* Album+Zeus.swift */; };
+		6593A9C91D7D7AB8007CC9F2 /* NSDate_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9C81D7D7AB8007CC9F2 /* NSDate_Extension.swift */; };
+		6593A9CB1D7D7ACE007CC9F2 /* DateFormatter_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9CA1D7D7ACE007CC9F2 /* DateFormatter_Extension.swift */; };
+		6593A9CD1D7D7C39007CC9F2 /* Image+Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9CC1D7D7C39007CC9F2 /* Image+Zeus.swift */; };
+		6593A9CF1D7D7C71007CC9F2 /* Artist+Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9CE1D7D7C71007CC9F2 /* Artist+Zeus.swift */; };
+		6593A9D11D7D7CAD007CC9F2 /* ExternalUrl+Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9D01D7D7CAD007CC9F2 /* ExternalUrl+Zeus.swift */; };
+		6593A9D31D7D7CEF007CC9F2 /* Track+Zeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9D21D7D7CEF007CC9F2 /* Track+Zeus.swift */; };
+		6593A9D51D7D853D007CC9F2 /* Date_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593A9D41D7D853D007CC9F2 /* Date_Extension.swift */; };
 		659AF2131D75B4BC00667212 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659AF2121D75B4BC00667212 /* AppDelegate.swift */; };
 		659AF2181D75B4BC00667212 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659AF2161D75B4BC00667212 /* Main.storyboard */; };
 		659AF21A1D75B4BC00667212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 659AF2191D75B4BC00667212 /* Assets.xcassets */; };
@@ -53,7 +60,6 @@
 
 /* Begin PBXFileReference section */
 		654B0FD31D75B635005E7755 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		654B0FD71D75B635005E7755 /* ManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObject.swift; sourceTree = "<group>"; };
 		654B0FDB1D75B635005E7755 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		654B0FDC1D75B635005E7755 /* APIPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPath.swift; sourceTree = "<group>"; };
 		654B0FE21D75B635005E7755 /* KeyValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueTableViewCell.swift; sourceTree = "<group>"; };
@@ -72,6 +78,14 @@
 		654B100A1D75C6FE005E7755 /* KeyValueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyValueTableViewCell.xib; sourceTree = "<group>"; };
 		657540B01D76D25600D90426 /* Zeus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zeus.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Zeus-dlvdcnpxmjotttcvnukbokipkhpp/Build/Products/Debug-iphonesimulator/Zeus.framework"; sourceTree = "<group>"; };
 		657540B31D76D2E100D90426 /* NSObject_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject_Extension.swift; sourceTree = "<group>"; };
+		6593A9C61D7D7A49007CC9F2 /* Album+Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Album+Zeus.swift"; sourceTree = "<group>"; };
+		6593A9C81D7D7AB8007CC9F2 /* NSDate_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate_Extension.swift; sourceTree = "<group>"; };
+		6593A9CA1D7D7ACE007CC9F2 /* DateFormatter_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter_Extension.swift; sourceTree = "<group>"; };
+		6593A9CC1D7D7C39007CC9F2 /* Image+Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Zeus.swift"; sourceTree = "<group>"; };
+		6593A9CE1D7D7C71007CC9F2 /* Artist+Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Artist+Zeus.swift"; sourceTree = "<group>"; };
+		6593A9D01D7D7CAD007CC9F2 /* ExternalUrl+Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExternalUrl+Zeus.swift"; sourceTree = "<group>"; };
+		6593A9D21D7D7CEF007CC9F2 /* Track+Zeus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Track+Zeus.swift"; sourceTree = "<group>"; };
+		6593A9D41D7D853D007CC9F2 /* Date_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date_Extension.swift; sourceTree = "<group>"; };
 		659AF20F1D75B4BC00667212 /* SpotifyAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		659AF2121D75B4BC00667212 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		659AF2171D75B4BC00667212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,18 +112,22 @@
 		654B0FD41D75B635005E7755 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				65B2766B1D7729070081DC3E /* ExternalUrl.swift */,
-				65B2766C1D7729070081DC3E /* ExternalUrl+CoreDataProperties.swift */,
 				654B0FF81D75C2C4005E7755 /* Album.swift */,
 				654B0FF91D75C2C4005E7755 /* Album+CoreDataProperties.swift */,
-				654B0FFA1D75C2C4005E7755 /* Image.swift */,
-				654B0FFB1D75C2C4005E7755 /* Image+CoreDataProperties.swift */,
-				654B0FFC1D75C2C4005E7755 /* Track.swift */,
-				654B0FFD1D75C2C4005E7755 /* Track+CoreDataProperties.swift */,
+				6593A9C61D7D7A49007CC9F2 /* Album+Zeus.swift */,
 				654B0FFE1D75C2C4005E7755 /* Artist.swift */,
 				654B0FFF1D75C2C4005E7755 /* Artist+CoreDataProperties.swift */,
-				654B0FD71D75B635005E7755 /* ManagedObject.swift */,
+				6593A9CE1D7D7C71007CC9F2 /* Artist+Zeus.swift */,
+				65B2766B1D7729070081DC3E /* ExternalUrl.swift */,
+				65B2766C1D7729070081DC3E /* ExternalUrl+CoreDataProperties.swift */,
+				6593A9D01D7D7CAD007CC9F2 /* ExternalUrl+Zeus.swift */,
+				654B0FFA1D75C2C4005E7755 /* Image.swift */,
+				654B0FFB1D75C2C4005E7755 /* Image+CoreDataProperties.swift */,
+				6593A9CC1D7D7C39007CC9F2 /* Image+Zeus.swift */,
 				654B0FF51D75B72A005E7755 /* Model.xcdatamodeld */,
+				654B0FFC1D75C2C4005E7755 /* Track.swift */,
+				654B0FFD1D75C2C4005E7755 /* Track+CoreDataProperties.swift */,
+				6593A9D21D7D7CEF007CC9F2 /* Track+Zeus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -154,6 +172,9 @@
 			children = (
 				654B0FF01D75B6E0005E7755 /* String_Extension.swift */,
 				657540B31D76D2E100D90426 /* NSObject_Extension.swift */,
+				6593A9C81D7D7AB8007CC9F2 /* NSDate_Extension.swift */,
+				6593A9CA1D7D7ACE007CC9F2 /* DateFormatter_Extension.swift */,
+				6593A9D41D7D853D007CC9F2 /* Date_Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,25 +298,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6593A9D51D7D853D007CC9F2 /* Date_Extension.swift in Sources */,
 				654B10061D75C2C4005E7755 /* Artist.swift in Sources */,
+				6593A9D11D7D7CAD007CC9F2 /* ExternalUrl+Zeus.swift in Sources */,
 				659AF2131D75B4BC00667212 /* AppDelegate.swift in Sources */,
 				654B0FED1D75B635005E7755 /* KeyValueTableViewCell.swift in Sources */,
+				6593A9C71D7D7A49007CC9F2 /* Album+Zeus.swift in Sources */,
 				654B0FE91D75B635005E7755 /* HTTPClient.swift in Sources */,
 				654B0FF11D75B6E0005E7755 /* String_Extension.swift in Sources */,
 				654B10011D75C2C4005E7755 /* Album+CoreDataProperties.swift in Sources */,
-				654B0FE71D75B635005E7755 /* ManagedObject.swift in Sources */,
 				654B10031D75C2C4005E7755 /* Image+CoreDataProperties.swift in Sources */,
+				6593A9C91D7D7AB8007CC9F2 /* NSDate_Extension.swift in Sources */,
 				65B2766D1D7729070081DC3E /* ExternalUrl.swift in Sources */,
 				654B0FEA1D75B635005E7755 /* APIPath.swift in Sources */,
 				65B276701D772D3A0081DC3E /* AlbumViewController.swift in Sources */,
 				654B10001D75C2C4005E7755 /* Album.swift in Sources */,
+				6593A9D31D7D7CEF007CC9F2 /* Track+Zeus.swift in Sources */,
 				654B10021D75C2C4005E7755 /* Image.swift in Sources */,
 				654B10091D75C68B005E7755 /* ArtistViewController.swift in Sources */,
 				654B10071D75C2C4005E7755 /* Artist+CoreDataProperties.swift in Sources */,
+				6593A9CD1D7D7C39007CC9F2 /* Image+Zeus.swift in Sources */,
+				6593A9CF1D7D7C71007CC9F2 /* Artist+Zeus.swift in Sources */,
 				654B10051D75C2C4005E7755 /* Track+CoreDataProperties.swift in Sources */,
 				65B2766E1D7729070081DC3E /* ExternalUrl+CoreDataProperties.swift in Sources */,
 				654B10041D75C2C4005E7755 /* Track.swift in Sources */,
 				654B0FE41D75B635005E7755 /* APIClient.swift in Sources */,
+				6593A9CB1D7D7ACE007CC9F2 /* DateFormatter_Extension.swift in Sources */,
 				654B0FEE1D75B635005E7755 /* ZeusConfigurator.swift in Sources */,
 				657540B41D76D2E100D90426 /* NSObject_Extension.swift in Sources */,
 				654B0FF71D75B72A005E7755 /* Model.xcdatamodeld in Sources */,

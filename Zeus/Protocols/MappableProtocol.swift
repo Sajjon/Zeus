@@ -28,6 +28,15 @@ public protocol MappableEntity: Mappable {
 }
 
 public extension Mappable {
+
+    static func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]? { return nil }
+
+    static var transformers: [TransformerProtocol]? { return nil }
+    static var cherryPickers: [CherryPickerProtocol]? { return nil }
+    static var shouldStoreModelCondtions: [ShouldStoreModelConditionProtocol]? { return nil }
+    static func futureConnections(forMapping mapping: MappingProtocol) -> [FutureConnectionProtocol]? { return nil }
+
+
     static func mapping(_ store: DataStoreProtocol) -> MappingProtocol {
         let mapping = Mapping(destinationClass: destinationClass, idAttributeName: idAttributeName, attributeMapping: attributeMapping)
 

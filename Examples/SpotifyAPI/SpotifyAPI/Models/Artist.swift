@@ -8,33 +8,8 @@
 
 import Foundation
 import CoreData
-import Zeus
 
-class Artist: ManagedObject {
-
-
-    override class var idAttributeName: String {
-        return "artistId"
-    }
-
-    override class var attributeMapping: AttributeMappingProtocol {
-        return AttributeMapping(mapping: [
-            "id": "artistId",
-            "name": "name",
-            "type": "type",
-            "followers.total" : "followersRaw",
-            "genres" : "genres",
-            "popularity": "popularityRaw"
-            ])
-    }
-
-    override class func relationships(store: DataStoreProtocol) -> [RelationshipMappingProtocol]? {
-        let externalUrl = RelationshipMapping(sourceKeyPath: "external_urls", destinationKeyPath: "externalUrl", mapping: ExternalUrl.entityMapping(store))
-        let images = RelationshipMapping(sourceKeyPath: "images", destinationKeyPath: "imagesSet", mapping: Image.entityMapping(store))
-
-        return [externalUrl, images]
-    }
-}
+class Artist: NSManagedObject {}
 
 extension Artist {
     var popularity: Int? {
