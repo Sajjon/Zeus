@@ -11,6 +11,9 @@ import CoreData
 import Alamofire
 import SwiftyBeaver
 
+fileprivate typealias BackendResponse = Alamofire.Response<Any, NSError>
+fileprivate typealias BackendResult = Alamofire.Result<ValueType, ErrorType>
+
 public protocol ModelManagerProtocol {
     static var sharedInstance: ModelManagerProtocol! { get set }
     var managedObjectStore: DataStoreProtocol { get }
@@ -47,8 +50,8 @@ open class ModelManager: ModelManagerProtocol {
         httpClient.request(pathFull, withMethod: Alamofire.HTTPMethod.get, parameters: params)
             .validate()
             .responseJSON {
-                response in
-            self.handle(jsonResponse: response, fromPath: path, options: options, done: done)
+                (response: BackendResponse) in
+            self.handle(response: response, fromPath: path, options: options, done: done)
         }
     }
 
@@ -133,6 +136,19 @@ open class ModelManager: ModelManagerProtocol {
     }
 }
 
+
+protocol PayloadProtocol {
+    var json: JSON { get }
+    var path: APIPath { get }
+    var options: Options { get }
+}
+
+struct Payload: PayloadProtocol {
+    let json: JSON
+    let path: APIPath
+    let options: Options
+}
+
 //MARK: Private Methods
 private extension ModelManager {
     func fullPath(withPath path: String) -> String {
@@ -140,27 +156,41 @@ private extension ModelManager {
         return fullPath
     }
 
-    func handle(jsonResponse response: Response<Any, NSError>, fromPath path: APIPathProtocol, options: Options, done: Done?) {
+    func handle(response: BackendResponse, fromPath path: APIPathProtocol, options: Options, done: Done?) {
         switch response.result {
-        case .success(let data):
-            var result: Result!
-            if let arrayOrRawJson = data as? [RawJSON] {
-                let jsonArray: [JSON] = arrayOrRawJson.map { return JSON($0) }
-                result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
-            } else if let json = data as? RawJSON {
-                result = modelMappingManager.mapping(withJsonOrArray: JSON(json), fromPath: path, options: options)
-            }
-            if let mappingResult = result {
-                if mappingResult.isManagedObject && options.persistEntities {
-                    managedObjectStore.mainThreadManagedObjectContext.saveToPersistentStore()
-                }
-                done?(mappingResult)
-            } else {
-                done?(Result(.parsingJSON))
-            }
+        case .success(let result):
+            handle(result: result, fromPath: path, options: options, done: done)
         case .failure(let error):
             log.error("failed, error: \(error)")
             done?(Result(.parsingJSON))
+        }
+    }
+
+    func handle(result: BackendResult, fromPath path: APIPathProtocol, options: Options, done: Done?) {
+        guard let json = jsonFrom(result: result) else {
+            done?(Result(.parsingJSON))
+        }
+
+        let payload: PayloadProtocol = Payload(json: json, path: path, options: options)
+        let modelMappingResult = modelMappingManager.modelFrom(payload: payload)
+
+            switch modelMappingResult {
+            case .success(let model):
+                if modelMappingResult.isManagedObject && options.persistEntities {
+                    managedObjectStore.mainThreadManagedObjectContext.saveToPersistentStore()
+                }
+            default: break
+            }
+
+        done?(modelMappingResult)
+    }
+
+    func jsonFrom(result: BackendResult) -> JSON {
+        if let arrayOrRawJson = result as? [RawJSON] {
+            let jsonArray: [JSON] = arrayOrRawJson.map { return JSON($0) }
+            result = modelMappingManager.mapping(withJsonArray: jsonArray, fromPath: path, options: options)
+        } else if let json = result as? RawJSON {
+            result = modelMappingManager.mapping(withJsonOrArray: JSON(json), fromPath: path, options: options)
         }
     }
 

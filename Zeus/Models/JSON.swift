@@ -8,40 +8,27 @@
 
 import Foundation
 
-internal typealias RawJSON = Dictionary<String, NSObject>
-internal typealias ValuesForPropertiesNamed = Dictionary<String, NSObject>
-
-internal protocol JSONProtocol: Sequence {
-    var map: RawJSON { get set }
-    func valueFor(nestedKey: String) -> NSObject?
+enum JSON {
+    case object(JSONObject)
+    case array([JSONObject])
 }
 
-internal extension JSONProtocol {
+typealias RawJSON = Dictionary<String, NSObject>
+typealias ValuesForPropertiesNamed = Dictionary<String, NSObject>
 
-    func makeIterator() -> DictionaryIterator<String, NSObject> {
-        return map.makeIterator()
+
+struct JSONObject {
+
+    var map: RawJSON
+    init(_ map: RawJSON = [:]) {
+        self.map = map
     }
 
-    subscript(key: String) -> NSObject? {
-        get {
-            return map[key]
-        }
-        set(newValue) {
-            map[key] = newValue
-        }
-    }
-
-    func valueFor(nestedKey: String) -> NSObject? {
-        return valueFor(nestedKey: nestedKey, inJson: map)
-    }
-}
-
-private extension JSONProtocol {
     func valueFor(nestedKey: String, inJson rawJson: RawJSON?) -> NSObject? {
         let json = rawJson ?? map
 
         guard nestedKey.contains(".") else {
-            let finalValue = json[nestedKey] 
+            let finalValue = json[nestedKey]
             return finalValue
         }
 
@@ -61,32 +48,23 @@ private extension JSONProtocol {
 
         return valueFor(nestedKey: nestedKeyWithoutFirst, inJson: subJson)
     }
-}
 
-internal struct JSON: JSONProtocol {
-    internal var map: RawJSON
-    internal init(_ map: RawJSON = [:]) {
-        self.map = map
-    }
-}
 
-internal struct FlattnedJSON: JSONProtocol {
-    internal var map: RawJSON
-    internal init(_ json: JSON? = nil) {
-        self.map = json?.map ?? [:]
+    func makeIterator() -> DictionaryIterator<String, NSObject> {
+        return map.makeIterator()
     }
-}
 
-internal struct MappedJSON: JSONProtocol {
-    internal var map: RawJSON
-    internal init(_ json: FlattnedJSON? = nil) {
-        self.map = json?.map ?? [:]
+    subscript(key: String) -> NSObject? {
+        get {
+            return map[key]
+        }
+        set(newValue) {
+            map[key] = newValue
+        }
     }
-}
 
-internal struct CherryPickedJSON: JSONProtocol {
-    internal var map: RawJSON
-    internal init(_ mappedJson: MappedJSON? = nil) {
-        self.map = mappedJson?.map ?? [:]
+    func valueFor(nestedKey: String) -> NSObject? {
+        return valueFor(nestedKey: nestedKey, inJson: map)
     }
+    
 }

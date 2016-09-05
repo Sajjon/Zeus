@@ -23,7 +23,7 @@ internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
         return managedObjectStore
     }
 
-    override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    override internal func newModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject? {
         guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
         let new = newModel(fromJson: json, withEntityMapping: entityMapping)
         return new
@@ -31,7 +31,7 @@ internal class ManagedObjectMapper: ModelMapper, ManagedObjectMapperProtocol {
 }
 
 private extension ManagedObjectMapper {
-    func newModel(fromJson json: MappedJSON, withEntityMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
+    func newModel(fromJson json: JSONObject, withEntityMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
         let newModel = NSManagedObject(entity: mapping.entityDescription, insertInto: mapping.managedObjectContext)
         return newModel
     }

@@ -22,7 +22,7 @@ internal class InMemoryModelMapper: ModelMapper, InMemoryModelMapperProtocol {
         return inMemoryStore
     }
 
-    override internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    override internal func newModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject? {
         let newModel = mapping.destinationClass.init()
         return newModel
     }

@@ -16,7 +16,7 @@ internal protocol ManagedObjectStoreProtocol: StoreProtocol {
 internal class ManagedObjectStore: ManagedObjectStoreProtocol {
 
 
-    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    internal func existingModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject? {
         guard let entityMapping = mapping as? EntityMappingProtocol else { return nil }
         let existing = existingEntityObject(fromJson: json, withMapping: entityMapping)
         return existing
@@ -27,7 +27,7 @@ internal class ManagedObjectStore: ManagedObjectStoreProtocol {
 private extension ManagedObjectStore {
 
 
-    func existingEntityObject(fromJson json: MappedJSON, withMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
+    func existingEntityObject(fromJson json: JSONObject, withMapping mapping: EntityMappingProtocol) -> NSManagedObject? {
         let idAttributeName = mapping.idAttributeName
         guard let idAttributeValue = json[idAttributeName] else { return nil }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: mapping.entityName)

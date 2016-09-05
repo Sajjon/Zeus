@@ -9,6 +9,6 @@
 import Foundation
 
 internal protocol StoreProtocol {
-    func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject?
+    func existingModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject?
     func store(_ model: NSObject)
 }

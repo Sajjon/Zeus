@@ -11,7 +11,7 @@ import CoreData
 import DateParser
 
 internal protocol ModelMapperProtocol {
-    func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result
+    func model(fromJson json: JSONObject, withMapping mapping: MappingProtocol, options: Options?) -> Result
     var store: StoreProtocol { get }
 }
 
@@ -19,7 +19,7 @@ internal class ModelMapper: ModelMapperProtocol {
 
     var store: StoreProtocol { fatalError(mustOverride) }
 
-    internal func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+    internal func model(fromJson json: JSONObject, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let flattned = flatten(json: json, withMapping: mapping)
         let mappedJson = map(json: flattned, withMapping: mapping)
         guard shouldStoreModel(mappedJson, withMapping: mapping) else {
@@ -30,7 +30,7 @@ internal class ModelMapper: ModelMapperProtocol {
         return result
     }
 
-    internal func shouldStoreModel(_ json: MappedJSON, withMapping mapping: MappingProtocol) -> Bool {
+    internal func shouldStoreModel(_ json: JSONObject, withMapping mapping: MappingProtocol) -> Bool {
         guard let conditions = mapping.shouldStoreConditions else { return true }
 
         for (attributeName, attributeValue) in json {
@@ -42,7 +42,7 @@ internal class ModelMapper: ModelMapperProtocol {
         return true
     }
 
-    internal func currentValueFor<T: NSObject>(attributeNamed name: String, fromJson json: MappedJSON, withMapping mapping: MappingProtocol, forClazz clazz: T.Type) -> Attribute? {
+    internal func currentValueFor<T: NSObject>(attributeNamed name: String, fromJson json: JSONObject, withMapping mapping: MappingProtocol, forClazz clazz: T.Type) -> Attribute? {
         var maybeCurrentValue: Attribute?
         if let existing = store.existingModel(fromJson: json, withMapping: mapping) as? T {
             maybeCurrentValue = existing.value(forKey: name) as? Attribute
@@ -55,7 +55,7 @@ internal class ModelMapper: ModelMapperProtocol {
         return fullfills
     }
 
-    internal func cherryPick(from json: MappedJSON, withMapping mapping: MappingProtocol) -> CherryPickedJSON {
+    internal func cherryPick(from json: JSONObject, withMapping mapping: MappingProtocol) -> JSONObject {
         guard let cherryPickers = mapping.cherryPickers else { return CherryPickedJSON(json) }
         var cherryPickedValues = CherryPickedJSON(json)
         for (attributeName, attributeValue) in json {
@@ -69,7 +69,7 @@ internal class ModelMapper: ModelMapperProtocol {
         return cherryPickedValues
     }
 
-    internal func storeModel(_ json: MappedJSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+    internal func storeModel(_ json: JSONObject, withMapping mapping: MappingProtocol, options: Options?) -> Result {
         let jsonPair = split(json: json, withMapping: mapping)
         let relationshipJson = jsonPair.relationship
         let attributesJson = jsonPair.attributes
@@ -85,21 +85,21 @@ internal class ModelMapper: ModelMapperProtocol {
         return Result(model)
     }
 
-    internal func setValuesFor(attributes attributesJson: MappedJSON, inModel model: NSObject, withMapping mapping: MappingProtocol) {
+    internal func setValuesFor(attributes attributesJson: JSONObject, inModel model: NSObject, withMapping mapping: MappingProtocol) {
         let cherryPicked = cherryPick(from: attributesJson, withMapping: mapping)
         model.setValuesForProperties(cherryPicked.map, for: mapping.destinationClass)
     }
 
-    internal func split(json: MappedJSON, withMapping mapping: MappingProtocol) -> (relationship: MappedJSON, attributes: MappedJSON) {
+    internal func split(json: JSONObject, withMapping mapping: MappingProtocol) -> (relationship: JSONObject, attributes: JSONObject) {
         return (relationship: json, attributes: json)
     }
 
-    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    internal func existingModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject? {
         let existing = store.existingModel(fromJson: json, withMapping: mapping)
         return existing
     }
 
-    internal func newModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    internal func newModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject? {
         fatalError(mustOverride)
     }
 }
@@ -110,7 +110,7 @@ private extension ModelMapper {
         This function filters out the interesting values that exists in the attributes mapping dictionary from the json.
         Apart from that it also flattens out the json, for any nested keys (keys containing dots).
      */
-    func flatten(json: JSON, withMapping mapping: MappingProtocol) -> FlattnedJSON {
+    func flatten(json: JSONObject, withMapping mapping: MappingProtocol) -> JSONObject {
         var noDots = FlattnedJSON()
 
         for (mapKey, _) in mapping.attributeMapping.mapping {
@@ -123,8 +123,8 @@ private extension ModelMapper {
         return noDots
     }
 
-    func map(json: FlattnedJSON, withMapping mapping: MappingProtocol) -> MappedJSON {
-        var mappedJson: MappedJSON = MappedJSON()
+    func map(json: JSONObject, withMapping mapping: MappingProtocol) -> JSONObject {
+        var mappedJson: JSONObject = MappedJSON()
         for (key, value) in json {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
             

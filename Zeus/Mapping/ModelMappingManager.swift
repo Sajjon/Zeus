@@ -11,8 +11,7 @@ import CoreData
 
 
 internal protocol ModelMappingManagerProtocol {
-    func mapping(withJsonArray jsonArray: [JSON], fromPath path: APIPathProtocol, options: Options?) -> Result
-    func mapping(withJsonOrArray json: JSON, fromPath path: APIPathProtocol, options: Options?) -> Result
+    func modelFrom(payload: Payload) -> Result
     func addResponseDescriptors(fromContext context: MappingContext)
 }
 
@@ -29,11 +28,15 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         managedObjectMapper = ManagedObjectMapper(managedObjectStore: managedObjectStore)
     }
 
-    internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: APIPathProtocol, options: Options?) -> Result {
+    func modelFrom(payload: Payload) -> Result {
+        fatalError()
+    }
+
+    internal func mapping(withJsonArray jsonArray: [JSONObject], fromPath path: APIPathProtocol, options: Options?) -> Result {
         return mapping(withJsonArray: jsonArray, fromPath: path, options: options, specifiedMapping: nil)
     }
 
-    internal func mapping(withJsonArray jsonArray: [JSON], fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+    internal func mapping(withJsonArray jsonArray: [JSONObject], fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
         var models: [NSObject] = []
         var error: NSError?
         for json in jsonArray {
@@ -59,11 +62,11 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
         return result
     }
 
-    internal func mapping(withJsonOrArray json: JSON, fromPath path: APIPathProtocol, options: Options?) -> Result {
+    internal func mapping(withJsonOrArray json: JSONObject, fromPath path: APIPathProtocol, options: Options?) -> Result {
         return mapping(withJsonOrArray: json, fromPath: path, options: options, specifiedMapping: nil)
     }
 
-    internal func mapping(withJsonOrArray json: JSON, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+    internal func mapping(withJsonOrArray json: JSONObject, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
         guard let descriptor = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
 
         let result: Result
@@ -87,7 +90,7 @@ internal class ModelMappingManager: ModelMappingManagerProtocol {
 //MARK: Private Methods
 private extension ModelMappingManager {
 
-    func mapping(withJson json: JSON, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+    func mapping(withJson json: JSONObject, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
         let theMappingUsed: MappingProtocol
         if let didSpecifyMapping = specifiedMapping {
             theMappingUsed = didSpecifyMapping
@@ -106,7 +109,7 @@ private extension ModelMappingManager {
         return result
     }
 
-    func setRelationshipValuesFor(model: NSObject, json: JSON, mapping theMapping: MappingProtocol, fromAPIPath path: APIPathProtocol, options: Options?) {
+    func setRelationshipValuesFor(model: NSObject, json: JSONObject, mapping theMapping: MappingProtocol, fromAPIPath path: APIPathProtocol, options: Options?) {
         guard let relationships = theMapping.relationships else { return }
         for (_, relationship) in relationships {
             let source = relationship.sourceKeyPath
@@ -140,7 +143,7 @@ private extension ModelMappingManager {
         }
     }
 
-    func mapping(forJson json: JSON, at keyPath: String, fromAPIPath apiPath: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+    func mapping(forJson json: JSONObject, at keyPath: String, fromAPIPath apiPath: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
         guard
             let subJson = json.valueFor(nestedKey: keyPath)
             else {
@@ -189,7 +192,7 @@ private extension ModelMappingManager {
 }
 
 private extension NSManagedObject {
-    func update(withJson json: MappedJSON) {
+    func update(withJson json: JSONObject) {
         setValuesForKeys(json.map)
     }
 }
