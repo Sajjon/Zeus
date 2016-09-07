@@ -33,7 +33,7 @@ internal class ModelMapper: ModelMapperProtocol {
     internal func shouldStoreModel(_ json: JSONObject, withMapping mapping: MappingProtocol) -> Bool {
         guard let conditions = mapping.shouldStoreConditions else { return true }
 
-        for (attributeName, attributeValue) in json {
+        for (attributeName, attributeValue) in json.map {
             guard let condition = conditions[attributeName] else { continue }
             let currentValue: Attribute? = currentValueFor(attributeNamed: attributeName, fromJson: json, withMapping: mapping, forClazz: mapping.destinationClass)
             guard incomingAttribute(attributeValue, fullfillsCondition: condition, compareTo: currentValue) else { return false }
@@ -56,9 +56,9 @@ internal class ModelMapper: ModelMapperProtocol {
     }
 
     internal func cherryPick(from json: JSONObject, withMapping mapping: MappingProtocol) -> JSONObject {
-        guard let cherryPickers = mapping.cherryPickers else { return CherryPickedJSON(json) }
-        var cherryPickedValues = CherryPickedJSON(json)
-        for (attributeName, attributeValue) in json {
+        guard let cherryPickers = mapping.cherryPickers else { return json }
+        var cherryPickedValues: RawJSON = json.map
+        for (attributeName, attributeValue) in json.map {
             guard let
                 cherryPicker = cherryPickers[attributeName],
                 let currentValue = currentValueFor(attributeNamed: attributeName, fromJson: json, withMapping: mapping, forClazz: mapping.destinationClass)
@@ -66,7 +66,7 @@ internal class ModelMapper: ModelMapperProtocol {
             let cherryPickedValue = cherryPicker.valueToStore(attributeValue, currentValue)
             cherryPickedValues[attributeName] = cherryPickedValue
         }
-        return cherryPickedValues
+        return JSONObject(cherryPickedValues)
     }
 
     internal func storeModel(_ json: JSONObject, withMapping mapping: MappingProtocol, options: Options?) -> Result {
@@ -111,7 +111,7 @@ private extension ModelMapper {
         Apart from that it also flattens out the json, for any nested keys (keys containing dots).
      */
     func flatten(json: JSONObject, withMapping mapping: MappingProtocol) -> JSONObject {
-        var noDots = FlattnedJSON()
+        var noDots: RawJSON = [:]
 
         for (mapKey, _) in mapping.attributeMapping.mapping {
             guard mapKey.contains("."), let value = json.valueFor(nestedKey: mapKey) else {
@@ -120,18 +120,18 @@ private extension ModelMapper {
             }
             noDots[mapKey] = value
         }
-        return noDots
+        return JSONObject(noDots)
     }
 
     func map(json: JSONObject, withMapping mapping: MappingProtocol) -> JSONObject {
-        var mappedJson: JSONObject = MappedJSON()
-        for (key, value) in json {
+        var mappedJson: RawJSON = [:]
+        for (key, value) in json.map {
             guard let mappedKey = map(key: key, toAttributeWithMapping: mapping.attributeMapping) else { continue }
             
             let transformedValue = transform(value: value, forKey: key, withMapping: mapping)
             mappedJson[mappedKey] = transformedValue
         }
-        return mappedJson
+        return JSONObject(mappedJson)
     }
 
     func map(key: String, toAttributeWithMapping mapping: AttributeMappingProtocol) -> String? {

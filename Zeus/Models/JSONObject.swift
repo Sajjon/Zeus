@@ -8,22 +8,53 @@
 
 import Foundation
 
-enum JSON {
-    case object(JSONObject)
-    case array([JSONObject])
-}
-
 typealias RawJSON = Dictionary<String, NSObject>
 typealias ValuesForPropertiesNamed = Dictionary<String, NSObject>
 
-
-struct JSONObject {
+/**
+ It is super important that the JSONObject is a class and not a struct. Becuase the mapper uses recursion to manipulate this object and we want to change the only instance of the JSON, i.e. manipulate by reference and not by value.
+ */
+class JSONObject {
 
     var map: RawJSON
     init(_ map: RawJSON = [:]) {
         self.map = map
     }
 
+    func makeIterator() -> DictionaryIterator<String, NSObject> {
+        return map.makeIterator()
+    }
+
+    subscript(key: String) -> NSObject? {
+        get {
+            return map[key]
+        }
+        set(newValue) {
+            map[key] = newValue
+        }
+    }
+
+    func json(for nestedKey: String) -> JSON? {
+        guard let nestedValue = valueFor(nestedKey: nestedKey) else { return nil }
+
+        var json: JSON?
+        if let rawJsonArray = nestedValue as? [RawJSON] {
+            let jsonArray: [JSONObject] = rawJsonArray.map { return JSONObject($0) }
+            json = JSON(jsonArray)
+        } else if let rawJson = nestedValue as? RawJSON {
+            let jsonObject = JSONObject(rawJson)
+            json = JSON(jsonObject)
+        }
+        return json
+    }
+
+    func valueFor(nestedKey: String) -> NSObject? {
+        return valueFor(nestedKey: nestedKey, inJson: map)
+    }
+    
+}
+
+private extension JSONObject {
     func valueFor(nestedKey: String, inJson rawJson: RawJSON?) -> NSObject? {
         let json = rawJson ?? map
 
@@ -48,23 +79,4 @@ struct JSONObject {
 
         return valueFor(nestedKey: nestedKeyWithoutFirst, inJson: subJson)
     }
-
-
-    func makeIterator() -> DictionaryIterator<String, NSObject> {
-        return map.makeIterator()
-    }
-
-    subscript(key: String) -> NSObject? {
-        get {
-            return map[key]
-        }
-        set(newValue) {
-            map[key] = newValue
-        }
-    }
-
-    func valueFor(nestedKey: String) -> NSObject? {
-        return valueFor(nestedKey: nestedKey, inJson: map)
-    }
-    
 }

@@ -11,7 +11,7 @@ import Foundation
 internal protocol InMemoryStoreProtocol: StoreProtocol {}
 
 internal class InMemoryStore: InMemoryStoreProtocol {
-    internal func existingModel(fromJson json: MappedJSON, withMapping mapping: MappingProtocol) -> NSObject? {
+    internal func existingModel(fromJson json: JSONObject, withMapping mapping: MappingProtocol) -> NSObject? {
         return nil
     }
 

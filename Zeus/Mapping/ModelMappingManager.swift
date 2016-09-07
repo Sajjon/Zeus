@@ -9,174 +9,191 @@
 import Foundation
 import CoreData
 
+typealias Descriptors = Dictionary<String, ResponseDescriptorProtocol>
 
 internal protocol ModelMappingManagerProtocol {
-    func modelFrom(payload: Payload) -> Result
+    func model(from payload: PayloadProtocol) -> Result
     func addResponseDescriptors(fromContext context: MappingContext)
 }
 
-internal class ModelMappingManager: ModelMappingManagerProtocol {
+internal class ModelMappingManager {
 
-    fileprivate var pathToDescriptorMap: Dictionary<String, ResponseDescriptorProtocol> = [:]
-    fileprivate let inMemoryModelMapper: InMemoryModelMapperProtocol
-    fileprivate let managedObjectMapper: ManagedObjectMapperProtocol
+    fileprivate var descriptors: Descriptors = [:]
+}
 
-    internal init() {
-        let inMemoryStore = InMemoryStore()
-        let managedObjectStore = ManagedObjectStore()
-        inMemoryModelMapper = InMemoryModelMapper(inMemoryStore: inMemoryStore)
-        managedObjectMapper = ManagedObjectMapper(managedObjectStore: managedObjectStore)
-    }
-
-    func modelFrom(payload: Payload) -> Result {
-        fatalError()
-    }
-
-    internal func mapping(withJsonArray jsonArray: [JSONObject], fromPath path: APIPathProtocol, options: Options?) -> Result {
-        return mapping(withJsonArray: jsonArray, fromPath: path, options: options, specifiedMapping: nil)
-    }
-
-    internal func mapping(withJsonArray jsonArray: [JSONObject], fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
-        var models: [NSObject] = []
-        var error: NSError?
-        for json in jsonArray {
-            let result = mapping(withJson: json, fromPath: path, options: options, specifiedMapping: specifiedMapping)
-            switch result {
-            case .success(let model):
-                models.append(model)
-            case .failure(let mappingError):
-                guard mappingError.isEvent else {
-                    error = mappingError.error
-                    break
-                }
-                log.info(error)
-            }
-        }
-
-        let result: Result
-        if let error = error {
-            result = Result(error)
-        } else {
-            result = Result(NSArray(array: models))
-        }
-        return result
-    }
-
-    internal func mapping(withJsonOrArray json: JSONObject, fromPath path: APIPathProtocol, options: Options?) -> Result {
-        return mapping(withJsonOrArray: json, fromPath: path, options: options, specifiedMapping: nil)
-    }
-
-    internal func mapping(withJsonOrArray json: JSONObject, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
-        guard let descriptor = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
-
-        let result: Result
-        if let jsonKeyPath = descriptor.jsonKeyPath {
-            result = mapping(forJson: json, at: jsonKeyPath, fromAPIPath: path, options: options, specifiedMapping: specifiedMapping)
-        } else {
-            result = mapping(withJson: json, fromPath: path, options: options, specifiedMapping: specifiedMapping)
-        }
-        return result
-    }
-
+//MARK: - ModelMappingManagerProtocol Methods
+extension ModelMappingManager: ModelMappingManagerProtocol {
     internal func addResponseDescriptors(fromContext context: MappingContext) {
         for descriptor in context.responseDescriptors {
             add(responseDescriptor: descriptor)
         }
     }
 
-//    fileprivate var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
+    func model(from payload: PayloadProtocol) -> Result {
+        guard let descriptor = descriptor(for: payload.path) else { return Result(.mappingNoResponseDescriptor) }
+        let processor = JsonProcessor(descriptor: descriptor)
+        let processedResult = processor.process(payload)
+        let result: Result
+        switch processedResult {
+        case .success(let processed):
+            result = model(from: processed as! ProcessedPayloadProtocol)
+        case .failure(let error):
+            result = Result(error)
+        }
+        return result
+    }
 }
+
+//    internal func mapping(withJsonArray jsonArray: [JSONObject], fromPath path: APIPathProtocol, options: Options?) -> Result {
+//        return mapping(withJsonArray: jsonArray, fromPath: path, options: options, specifiedMapping: nil)
+//    }
+//
+//    internal func mapping(withJsonArray jsonArray: [JSONObject], fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+//        var models: [NSObject] = []
+//        var error: NSError?
+//        for json in jsonArray {
+//            let result = mapping(withJson: json, fromPath: path, options: options, specifiedMapping: specifiedMapping)
+//            switch result {
+//            case .success(let model):
+//                models.append(model)
+//            case .failure(let mappingError):
+//                guard mappingError.isEvent else {
+//                    error = mappingError.error
+//                    break
+//                }
+//                log.info(error)
+//            }
+//        }
+//
+//        let result: Result
+//        if let error = error {
+//            result = Result(error)
+//        } else {
+//            result = Result(NSArray(array: models))
+//        }
+//        return result
+//    }
+//
+//    internal func mapping(withJsonOrArray json: JSONObject, fromPath path: APIPathProtocol, options: Options?) -> Result {
+//        return mapping(withJsonOrArray: json, fromPath: path, options: options, specifiedMapping: nil)
+//    }
+//
+//    internal func mapping(withJsonOrArray json: JSONObject, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+//        guard let descriptor = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
+//
+//        let result: Result
+//        if let jsonKeyPath = descriptor.jsonKeyPath {
+//            result = mapping(forJson: json, at: jsonKeyPath, fromAPIPath: path, options: options, specifiedMapping: specifiedMapping)
+//        } else {
+//            result = mapping(withJson: json, fromPath: path, options: options, specifiedMapping: specifiedMapping)
+//        }
+//        return result
+//    }
+//    fileprivate var inverseFutureConnectionMap: Dictionary<String, [FutureConnectionProtocol]> = [:]
+
 
 //MARK: Private Methods
 private extension ModelMappingManager {
 
-    func mapping(withJson json: JSONObject, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
-        let theMappingUsed: MappingProtocol
-        if let didSpecifyMapping = specifiedMapping {
-            theMappingUsed = didSpecifyMapping
-        } else {
-            guard let descriptorX = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
-            theMappingUsed = descriptorX.mapping
-        }
-
-        let result = model(fromJson: json, withMapping: theMappingUsed, options: options)
-        switch result {
-        case .success(let model):
-            setRelationshipValuesFor(model: model, json: json, mapping: theMappingUsed, fromAPIPath: path, options: options)
-        default:
-            break
-        }
-        return result
+    func model(from process: ProcessedPayloadProtocol) -> Result {
+        fatalError()
     }
 
-    func setRelationshipValuesFor(model: NSObject, json: JSONObject, mapping theMapping: MappingProtocol, fromAPIPath path: APIPathProtocol, options: Options?) {
-        guard let relationships = theMapping.relationships else { return }
-        for (_, relationship) in relationships {
-            let source = relationship.sourceKeyPath
-            let destination = relationship.destinationKeyPath
-            let relationshipMapping = mapping(forJson: json, at: source, fromAPIPath: path, options: options, specifiedMapping: relationship.mapping)
-            switch relationshipMapping {
-            case .success(let relationshipModel):
-                if let sourceEntityMapping = theMapping as? EntityMappingProtocol {
-                    guard let managedObject = model as? NSManagedObject else { log.error("not managed obj"); continue }
-                    guard let coreDataRelationship = sourceEntityMapping.entityDescription.relationshipsByName[destination] else { log.error("no rel. by name"); continue }
-                    if coreDataRelationship.isToMany {
-                        guard let arrayOfObjects = relationshipModel as? [NSManagedObject] else { log.error("not mo array"); continue }
-                        if coreDataRelationship.isOrdered {
-                            let objectsAsOrderedSet = NSOrderedSet(array: arrayOfObjects)
-                            managedObject.setValue(objectsAsOrderedSet, forKey: destination)
-                        } else {
-                            let objectsAsSet = NSSet(array: arrayOfObjects)
-                            managedObject.setValue(objectsAsSet, forKey: destination)
-                        }
-                    } else {
-                        managedObject.setValue(relationshipModel, forKey: destination)
-                    }
-
-                } else {
-                    model.setValue(relationshipModel, forKey: destination)
-                }
-            case .failure(let error):
-                print("fail, error: \(error)")
-                continue
-            }
-        }
-    }
-
-    func mapping(forJson json: JSONObject, at keyPath: String, fromAPIPath apiPath: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
-        guard
-            let subJson = json.valueFor(nestedKey: keyPath)
-            else {
-                return Result(.parsingJSON)
-        }
-
-        if let rawJsonArray = subJson as? [RawJSON] {
-            let jsonArray: [JSON] = rawJsonArray.map { return JSON($0) }
-            return mapping(withJsonArray: jsonArray, fromPath: apiPath, options: options, specifiedMapping: specifiedMapping)
-        } else if let rawJson = subJson as? RawJSON {
-            return mapping(withJson: JSON(rawJson), fromPath: apiPath, options: options, specifiedMapping: specifiedMapping)
-        }
-
-        return Result(.parsingJSON)
-    }
-
-    func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
-        let result: Result
-        if mapping is EntityMappingProtocol {
-            result = managedObjectMapper.model(fromJson: json, withMapping: mapping, options: options)
-        } else {
-            result = inMemoryModelMapper.model(fromJson: json, withMapping: mapping, options: options)
-        }
-        return result
-    }
-
-    func responseDescriptor(forPath path: APIPathProtocol) -> ResponseDescriptorProtocol? {
-        let descriptor = pathToDescriptorMap[path.mapping]
+    func descriptor(for path: APIPathProtocol) -> ResponseDescriptorProtocol? {
+        let descriptor = descriptors[path.mapping]
         return descriptor
     }
 
+    func mapper(for payload: ProcessedPayloadProtocol) -> ModelMapperProtocol {
+        let inMemoryStore = InMemoryStore()
+        let managedObjectStore = ManagedObjectStore()
+        let inMemoryModelMapper = InMemoryModelMapper(inMemoryStore: inMemoryStore)
+        let managedObjectMapper = ManagedObjectMapper(managedObjectStore: managedObjectStore)
+        fatalError()
+    }
+
+//    func mapping(withJson json: JSONObject, fromPath path: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+//        let theMappingUsed: MappingProtocol
+//        if let didSpecifyMapping = specifiedMapping {
+//            theMappingUsed = didSpecifyMapping
+//        } else {
+//            guard let descriptorX = responseDescriptor(forPath: path) else { let error = ZeusError.mappingNoResponseDescriptor; log.error(error.errorMessage); return Result(error) }
+//            theMappingUsed = descriptorX.mapping
+//        }
+//
+//        let result = model(fromJson: json, withMapping: theMappingUsed, options: options)
+//        switch result {
+//        case .success(let model):
+//            setRelationshipValuesFor(model: model, json: json, mapping: theMappingUsed, fromAPIPath: path, options: options)
+//        default:
+//            break
+//        }
+//        return result
+//    }
+
+    func setRelationshipValuesFor(model: NSObject, json: JSONObject, mapping theMapping: MappingProtocol, fromAPIPath path: APIPathProtocol, options: Options?) {
+//        guard let relationships = theMapping.relationships else { return }
+//        for (_, relationship) in relationships {
+//            let source = relationship.sourceKeyPath
+//            let destination = relationship.destinationKeyPath
+//            let relationshipMapping = mapping(forJson: json, at: source, fromAPIPath: path, options: options, specifiedMapping: relationship.mapping)
+//            switch relationshipMapping {
+//            case .success(let relationshipModel):
+//                if let sourceEntityMapping = theMapping as? EntityMappingProtocol {
+//                    guard let managedObject = model as? NSManagedObject else { log.error("not managed obj"); continue }
+//                    guard let coreDataRelationship = sourceEntityMapping.entityDescription.relationshipsByName[destination] else { log.error("no rel. by name"); continue }
+//                    if coreDataRelationship.isToMany {
+//                        guard let arrayOfObjects = relationshipModel as? [NSManagedObject] else { log.error("not mo array"); continue }
+//                        if coreDataRelationship.isOrdered {
+//                            let objectsAsOrderedSet = NSOrderedSet(array: arrayOfObjects)
+//                            managedObject.setValue(objectsAsOrderedSet, forKey: destination)
+//                        } else {
+//                            let objectsAsSet = NSSet(array: arrayOfObjects)
+//                            managedObject.setValue(objectsAsSet, forKey: destination)
+//                        }
+//                    } else {
+//                        managedObject.setValue(relationshipModel, forKey: destination)
+//                    }
+//
+//                } else {
+//                    model.setValue(relationshipModel, forKey: destination)
+//                }
+//            case .failure(let error):
+//                print("fail, error: \(error)")
+//                continue
+//            }
+//        }
+    }
+
+//    func mapping(forJson json: JSONObject, at keyPath: String, fromAPIPath apiPath: APIPathProtocol, options: Options?, specifiedMapping: MappingProtocol?) -> Result {
+//        guard
+//            let subJson = json.valueFor(nestedKey: keyPath)
+//            else {
+//                return Result(.parsingJSON)
+//        }
+//
+//        if let rawJsonArray = subJson as? [RawJSON] {
+//            let jsonArray: [JSON] = rawJsonArray.map { return JSON($0) }
+//            return mapping(withJsonArray: jsonArray, fromPath: apiPath, options: options, specifiedMapping: specifiedMapping)
+//        } else if let rawJson = subJson as? RawJSON {
+//            return mapping(withJson: JSON(rawJson), fromPath: apiPath, options: options, specifiedMapping: specifiedMapping)
+//        }
+//
+//        return Result(.parsingJSON)
+//    }
+//
+//    func model(fromJson json: JSON, withMapping mapping: MappingProtocol, options: Options?) -> Result {
+//        let result: Result
+//        if mapping is EntityMappingProtocol {
+//            result = managedObjectMapper.model(fromJson: json, withMapping: mapping, options: options)
+//        } else {
+//            result = inMemoryModelMapper.model(fromJson: json, withMapping: mapping, options: options)
+//        }
+//        return result
+//    }
+
     func add(responseDescriptor descriptor: ResponseDescriptorProtocol) {
-        pathToDescriptorMap[descriptor.apiPath.mapping] = descriptor
+        descriptors[descriptor.apiPath.mapping] = descriptor
         //        let mapping = descriptor.mapping
         //        if let futureConnections = mapping.futureConnections {
         //            for (_, futureConnection) in futureConnections {

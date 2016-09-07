@@ -1,18 +1,20 @@
 {
 	"id" : 237,
-	"inner" : {
+	"tracks" : {
 		"items" : [
 			{
-				"name" : "saveMe"
-				"value" : "79.5"
+				"id" : 123,
+				"name" : "A great song"
+				"duration" : "180"
 			},
 			{
-				"name" : "ignoreMe",
-				"value" : "123.7"
+				"id" : 124,
+				"name" : "A bad song",
+				"duration" : "240"
 			}
 		],
-		"createdAt" : "2016-09-06",
-		"numberOfItems" : "200"
+		"release_date" : "2016-09-06",
+		"numberOfTracks" : "200" //pagination
 	},
 	"images" : [
 		{
@@ -24,67 +26,73 @@
 			"highRes" : "http://....2.large.png"
 		}
 	],
-	"fibSeq" : [1, 2, 3, 5],
-	"keyForIrrelevantValue" : "This value is irrelevant"
+	"available_markets" : ["SE", "EN"],
+	"record_company" : "A prehistoric institute" // We dont want to store this
 }
 
-class MyModel {
-	
-	var modelId: Int
-	var createdAt: NSDate
-	var itemServerCount: Int
-	var fibonacci: [Int] // Transformable
-	//relations
-	var images: [Image]
-	var items: [Inner]
+class Album {
+	//MARK: Attributes
+	var albumId: Int
+	var releaseDate: NSDate
+	var trackCount: Int
+	var availableMarkets: [String] // Transformable
 
-	var idAttributeNamed: String { return "modelId" }
+	//MARK: Relationships
+	var images: [Image]
+	var tracks: [Track]
+
+	//MARK: Mapping
+	var idAttributeNamed: String { return "albumId" }
 
 	var attributes: AttributeMappingJson {
 		return [
-			"id" : "modelId",
-			"inner.createdAt" : "createdAt",
-			"inner.numberOfItems" : "itemServerCount",
-			"fibSeq" : "fibonacci"
+			"id" : "albumId",
+			"tracks.release_date" : "releaseDate",
+			"tracks.numberOfTracks" : "trackCount",
+			"available_markets" : "availableMarkets"
 		]
 	}
 
-	var relations: [Relationship] {
+	var relationships: [Relationship] {
 		return [
-			Relationship(source: "images", destination: "images", mapping: Images.mapping),
-			Relationship(source: "inner.items", destination: "items", mapping: Inner.mapping)
+			Relationship<Image>(named: "images", jsonKey: "images"),
+			Relationship<Track>(named: "tracks", jsonKey: "tracks.items")
 		]
 	}
 
 	// NSDate should implicitly transform...
 	var transformers: [Transformer] {
-		return [ToFloat(attributeName: "value"), ToInt(attributeName: "itemServerCount")]
+		return [ToInt(attributeName: "trackCount")]
 	}
 
 	var cherryPickers: [cherryPicker] {
-		return [cherryPicker(attributeName: "fibonacci") {
+		return [cherryPicker(attributeName: "availableMarkets") {
 			incoming: NSObject, current: NSObject?
 			return  (incoming.count > current.count) ? incoming : current 
 		}]
 	}
 }
 
-class Inner {
+class Track {
+	var trackId: Int
 	var name: String
-	var value: Double
+	var duration: Float
+	
+	//MARK: Mapping
+	var idAttributeNamed: String { return "trackId" }
 
 	var attributes: AttributeMappingJson {
-		return ["name" : "name", "value" : "value"]
+		return ["id" : "trackId"," name" : "name", "duration" : "duration"]
 	}
 
 	var transformers: [Transformer] {
-		return [ToFloat(attributeName: "value")]
+		return [ToFloat(attributeName: "duration")]
 	}
 
 	var storeConditions: [StoreModelCondition] {
 		return [Condition(attributeName: "name") {
 			value in
-			return value != "ignoreMe"
+			return value.contains("bad")
 		}]
 	}
 }
@@ -93,26 +101,31 @@ class Image {
 	var small: String
 	var large: String
 
+	//MARK: Mapping
+	var idAttributeNamed: String { return "small" }
+
 	var attributes: AttributeMappingJson {
 		return ["lowRes" : "small", "highRes" : "large"]
 	}
 }
 
-/// Prune, flatten and translate keys to property keys
+/// Prune and flatten JSON. Translate JSON keys to attribute/property names/keys
 {
-	"id" : 237,
-	"items" : [
+	"albumId" : 237,
+	"tracks" : [
 		{
-			"name" : "saveMe"
-			"value" : "79.5"
+			"trackId" : 123,
+			"name" : "A great song"
+			"duration" : "180"
 		},
 		{
-			"name" : "ignoreMe",
-			"value" : "123.7"
+			"trackId" : 124,
+			"name" : "A bad song",
+			"duration" : "240"
 		}
 	],
-	"createdAt" : "2016-09-06",
-	"itemServerCount" : "200"
+	"releaseDate" : "2016-09-06",
+	"numberOfTracks" : "200" //pagination
 	"images" : [
 		{
 			"small" : "http://....1.small.png"
@@ -123,28 +136,28 @@ class Image {
 			"large" : "http://....2.large.png"
 		}
 	],
-	"fibonacci" : [1, 2, 3, 5]
+	"availableMarkets" : ["SE", "EN", "GE", "FI"] // Longer found in DB
 }
-relationships: [
-	Relationship(source: "images", destination: "images", mapping: Images.mapping),
-	Relationship(source: "items", destination: "items", mapping: Inner.mapping)	
-]
+Relationship<Image>(named: "images", jsonKey: "images"),
+Relationship<Track>(named: "tracks", jsonKey: "tracks")
 
 /// Apply implicit and explicit tranformations
 {
-	"id" : 237,
-	"items" : [
+	"albumId" : 237,
+	"tracks" : [
 		{
-			"name" : "saveMe"
-			"value" : 79.5
+			"trackId" : 123,
+			"name" : "A great song"
+			"duration" : 180.0
 		},
 		{
-			"name" : "ignoreMe",
-			"value" : 123.7
+			"trackId" : 124,
+			"name" : "A bad song",
+			"duration" : 240.0
 		}
 	],
-	"createdAt" : 12345,
-	"itemServerCount" : 200
+	"releaseDate" : 432892318,
+	"numberOfTracks" : 200 //pagination
 	"images" : [
 		{
 			"small" : "http://....1.small.png"
@@ -155,24 +168,26 @@ relationships: [
 			"large" : "http://....2.large.png"
 		}
 	],
-	"fibonacci" : [1, 2, 3, 5]
+	"availableMarkets" : ["SE", "EN"]
 }
 
 /// Cherry Pick
 {
-	"id" : 237,
-	"items" : [
+	"albumId" : 237,
+	"tracks" : [
 		{
-			"name" : "saveMe"
-			"value" : 79.5
+			"trackId" : 123,
+			"name" : "A great song"
+			"duration" : 180.0
 		},
 		{
-			"name" : "ignoreMe",
-			"value" : 123.7
+			"trackId" : 124,
+			"name" : "A bad song",
+			"duration" : 240.0
 		}
 	],
-	"createdAt" : 12345,
-	"itemServerCount" : 200
+	"releaseDate" : 432892318,
+	"numberOfTracks" : 200 //pagination
 	"images" : [
 		{
 			"small" : "http://....1.small.png"
@@ -183,56 +198,5 @@ relationships: [
 			"large" : "http://....2.large.png"
 		}
 	],
-	"fibonacci" : [1, 2, 3, 5, 8, 13, 21] // Longer found in DB
-}
-relationships: [
-	Relationship(source: "images", destination: "images", mapping: Images.mapping),
-	Relationship(source: "items", destination: "items", mapping: Inner.mapping)	
-]
-
-/// Perform mapping
-func performMapping(mapping, parsedJson?) -> Result {
-	guard let parsedJson = parsedJson else { return  }
-	switch parsedJson {}
-	case .array(let array):
-		return model(fromArray: array)
-	case .object(let object):
-		return model(fromObject object)
-	}
-}
-
-func mapChild(in model: Model, forRelationship: relationship) {
-	let child = performMapping(mapping, parsedJson)
-	model.setValue(relationship.name, child)
-}
-
-func model(fromArray: [JSON]) -> Result {
-	var models = []
-	for json in array {
-		let model = model(fromObject: json)
-		switch model {
-		case .succes(let model):
-			models.append(model)
-		case .failulre(let error):
-			break
-		}
-	}
-	return Result
-}
-
-func model(fromObject: JSON) -> Result {
-	let result = mapperWorker.model(json)
-	switch result {
-		case .success(let model):
-			mapChildren(model)
-		default: break
-	}
-	return result
-}
-
-func mapChildren(in model: Model, json) {
-	guard if let relationships = mapping.relationships else { return }
-	for relationship in relationships {
-		mapChild(in: model, forRelationship: relationship)
-	}
+	"availableMarkets" : ["SE", "EN"],
 }
